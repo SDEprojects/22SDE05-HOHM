@@ -1,8 +1,10 @@
 {
     "Hallway": {
         "description": {
-            "objectivesComplete" : "", 
-            "objectiveIncomplete" : ""
+            "bucket": "The door is firmly shut behind you, no way out!! Three rooms lie ahead of you, The Kitchen, Dining Room and Living Room. Smoke is billowing from the Kitchen",
+            "coffee mug": "The door remains firmly shut and the smoke has vanished, from the Dining room you hear the sounds of a grumpy tired muppet.",
+            "Cat-Nip": "You hear a loud MEEOWW from the Living Room.",
+            "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
         },
         "exit": ["Kitchen", "Living Room", "Dining Room"],
         "complete": false
@@ -18,7 +20,7 @@
                 "item": "bucket",
                 "completed":"You toss the watery contents of the bucket on the flames and watch as they flicker and sizzle away. The dog smiles at you and tips his hat, as his apparition dissapears his hat falls to the ground and his coffee mug sits on the table unattended",
                 "incomplete":"",
-                "complete": "false"
+                "complete": false
             }
         },
         "items":{
@@ -93,7 +95,7 @@
     },
     "Sketchy Basement" : {
         "items": {
-            "doorLock": 7238
+            "doorLock": 723
         }
     }
 } 
