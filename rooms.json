@@ -1,0 +1,99 @@
+{
+    "Hallway": {
+        "description": {
+            "objectivesComplete" : "", 
+            "objectiveIncomplete" : ""
+        },
+        "exit": ["Kitchen", "Living Room", "Dining Room"],
+        "complete": false
+    },
+    
+    "Kitchen":{
+        "description": {
+            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here, nothing is left but the door... taunting you to open and enter into the basement to discover the mysteries within...", 
+            "memeIncomplete" : "You enter the kitchen and see flames, flames everywhere, In the middle of the room sits a dog in a chair. He rocks back and forth muttering to himself 'This is fine, this is fine'"
+        },
+        "objectives":{
+            "extinguish fire":{
+                "item": "bucket",
+                "completed":"You toss the watery contents of the bucket on the flames and watch as they flicker and sizzle away. The dog smiles at you and tips his hat, as his apparition dissapears his hat falls to the ground and his coffee mug sits on the table unattended",
+                "incomplete":"",
+                "complete": "false"
+            }
+        },
+        "items":{
+            "coffee mug":{
+                "prereq": "extinguish fire",
+                "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away, it is half full of piping hot coffee.",
+                "prereqMet":"You reach out and grab the mug, you carefully stash it in your bag and notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it", 
+                "prereqNotMet":"The flames seem to get more angry. As you reach out for the mug the dog stands, with anger in his eyes he whispers 'Everything is not okay', you are filled with an existential dread that leads you to slowly expire surrounded by etherial flames"
+            }
+        },
+        "exit": ["Hallway", "Basement"],
+        "complete": false
+    },
+
+    "Living Room": {
+        "description": {
+            "memeComplete" : "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat", 
+            "memeIncomplete" : "You enter and feel a presence slightly judging you. \n I had fun once.. it was awful.\n -Cat"
+        },
+        "objectives": {
+            "Happy Cat": {
+                "item" : "Cat-Nip",
+                "completed": "You give the cat catnip, he seems to be less grumpy.",
+                "incomplete": "I think this grumpy cat needs something, we should get cat-nip for the cat!",
+                "complete" : false
+            },
+            "clueFound":{
+                "completed" : "There's a sticky note with \"Password = *23*\".",
+                "incomplete" : "I should search the desk to find some clues.",
+                "complete" : false
+            }
+        },
+        "items": {
+            "Dice": {
+                "prereq": "Cat-Nip",
+                "description": "My dice don't jiggle jiggle they roll.",
+                "prereqMet": "You got the dices off the desk, we should look around to see what we can use them for.",
+                "prereqNotMet": "Maybe we should look around to please the cat."
+            }
+        },
+        "exit": "Hallway",
+        "complete": false
+    },
+
+    "Dining Room": {
+        "description": {
+            "memeIncomplete": "You enter the dining room and see at the head of the table you see Kermit the Frog. Kermit seems groggy and turns to give you a blank stare while waiting for your next action",
+            "memeComplete": "Kermit is no longer here all you see is the dining table and chandelier"
+        },
+        "objectives": {
+            "placateKermit": {
+                "completed":"Kermit accepts your offering, sips his coffee and leaves the room",
+                "incomplete": "At the foot of the table you notice a small bowl with something inside of it, and chandelier with an odd number of dangling jewels.",
+                "complete": false
+            },
+            "clueFound": {
+                "completed": "There are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7",
+                "incomplete": "Have a closer look at the chandelier",
+                "complete": false
+            }
+        },
+        "items": {
+            "catnip": {
+                "prereq": "Appease Kermit",
+                "description": "The most exquisite, finely plated catnip to exist in the metaverse",
+                "prereqMet": "You carefully grab the plate so as to not disturb the aesthetics of the catnip and place it into your inventory.",
+                "prereqNotMet": "You reach for the plate of exquisite catnip when Kermit stares at you... Kermit starts to mumble and your hands stops before reaching the plate... 'You... G... Succeed...' Kermit continues to stare into your soul and speaks clearly, 'Really breh? It seems you wont go too far in life. How you gonna get stuck in a haunted house and not even consider breaking the walls or windows first? Can you even think? You probably a B rated student at best, B for BELOW AVERAGE. Get gud kid. You die from emotional damage."            
+            }
+        },
+        "exit": ["Hallway"],
+        "complete": false
+    },
+    "Sketchy Basement" : {
+        "items": {
+            "doorLock": 7238
+        }
+    }
+} 
