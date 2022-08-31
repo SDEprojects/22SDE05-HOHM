@@ -12,10 +12,10 @@ public class GameRunner {
         while(true){
             System.out.print("Would you like to start a new game (y/n)?: ");
             String confirm = reader.readLine();
-            if(confirm.toLowerCase().equals("y") || confirm.toLowerCase().equals("yes")){
+            if(confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")){
                 GameRunner.run();
                 break;
-            }else if(confirm.toLowerCase().equals("n") || confirm.toLowerCase().equals("no")){
+            }else if(confirm.equalsIgnoreCase("n") || confirm.equalsIgnoreCase("no")){
                 System.out.println("That's unfortunate, we hope to see you again soon!");
                 break;
             }else{
@@ -26,20 +26,23 @@ public class GameRunner {
 
     public static void run() throws IOException {
 
+
         //Initiating the game loop
         while (true){
             System.out.println("Game Running");
             System.out.print("What would you like to do?\n>");
-            String userInput = reader.readLine();
+            String userInput = reader.readLine().toLowerCase();
+
 
             //TODO move this logic to a text parser
-            if(userInput.toLowerCase().equals("quit")){
+            if(userInput.equalsIgnoreCase("quit")){
                 System.out.println("Thanks for playing come back soon!!");
                 break;
-            }else if(userInput.toLowerCase().equals("help")){
-                UtilLoader.help();
-            }else{
-                System.out.println("Please enter a valid command");
+            }else if(userInput.equalsIgnoreCase("help")){
+                com.hohm.UtilLoader.help();
+            }
+            else {
+                UtilLoader.commands(userInput);
             }
         }
 
