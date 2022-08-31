@@ -1,4 +1,4 @@
-package main.java.com.hohm;
+package com.hohm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,8 +37,7 @@ public class GameRunner {
                 System.out.println("Thanks for playing come back soon!!");
                 break;
             }else if(userInput.toLowerCase().equals("help")){
-                System.out.println("Help information goes here");
-                //UtilityLoader.help();
+                UtilLoader.help();
             }else{
                 System.out.println("Please enter a valid command");
             }

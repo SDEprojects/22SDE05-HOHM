@@ -1,4 +1,4 @@
-package main.java.com.hohm;
+package com.hohm;
 // UtilLoader will be used
 public final class UtilLoader {
     // UtilLoader will be used from the user to call the help functions.

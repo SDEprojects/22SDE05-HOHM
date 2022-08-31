@@ -1,0 +1,4 @@
+{
+  "intro": "Welcome to the thrilling game House of Haunted Memes!\nThe objective of the game is to leave the house but you will be obstructed by memes!\nUse your wit to find your way through the house and past the memes.",
+  "help": "Go: This command will take you to different rooms\nGet: Get an item that's available in the room\nUse: Allows an item to be used\nQuit: Quits the game, #EmotionalDamage\nWhereAmI: Tells you what room you are in, and the exits available"
+}
