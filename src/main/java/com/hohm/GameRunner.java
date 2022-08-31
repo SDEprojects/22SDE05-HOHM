@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class GameRunner {
+
+    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static void gameInit() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
         while(true){
             System.out.print("Would you like to start a new game (y/n)?: ");
             String confirm = reader.readLine();
@@ -22,11 +24,24 @@ public class GameRunner {
         }
     }
 
-    public static void run(){
+    public static void run() throws IOException {
 
+        //Initiating the game loop
         while (true){
             System.out.println("Game Running");
-            break;
+            System.out.print("What would you like to do?\n>");
+            String userInput = reader.readLine();
+
+            //TODO move this logic to a text parser
+            if(userInput.toLowerCase().equals("quit")){
+                System.out.println("Thanks for playing come back soon!!");
+                break;
+            }else if(userInput.toLowerCase().equals("help")){
+                System.out.println("Help information goes here");
+                //UtilityLoader.help();
+            }else{
+                System.out.println("Please enter a valid command");
+            }
         }
 
     }
