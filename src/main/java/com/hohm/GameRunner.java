@@ -1,10 +1,19 @@
 package com.hohm;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hohm.models.MemeRoom;
+import com.hohm.models.Player;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class GameRunner {
+    static String[] startingItems = {"bucket"};
+    public static Player player = new Player("noob",startingItems, "hallway");
 
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static void gameInit() throws IOException {
@@ -16,10 +25,10 @@ public class GameRunner {
                 GameRunner.run();
                 break;
             }else if(confirm.toLowerCase().equals("n") || confirm.toLowerCase().equals("no")){
-                System.out.println("That's unfortunate, we hope to see you again soon!");
+                System.out.println("That's unfortunate, we hope to meme with you again soon!");
                 break;
             }else{
-                System.out.println("That wasn't valid input... \nWould you like to start a new game(y/n)?:");
+                System.out.println("That wasn't valid input... \n");
             }
         }
     }
@@ -28,20 +37,86 @@ public class GameRunner {
 
         //Initiating the game loop
         while (true){
-            System.out.println("Game Running");
-            System.out.print("What would you like to do?\n>");
+            //TODO Figure out how to clear the console
+            MemeRoom currentRoom = generateRoom(player.getRoom());
+
+            //Check room and check user inventory if hallway
+            if(currentRoom.getTitle().equals("hallway")){
+                String[] currentItem = player.getItems();
+                System.out.println(currentRoom.getDescription().get(currentItem[0]));
+            }else{
+                if(!currentRoom.getComplete()){
+                    System.out.println(currentRoom.getDescription().get("memeIncomplete"));
+                }else{
+                    System.out.println(currentRoom.getDescription().get("memeComplete"));
+                }
+
+            }
+
+            System.out.print(">");
+
+            //Wait for user input and then act based on what the user types
             String userInput = reader.readLine();
 
-            //TODO move this logic to a text parser
+            //handle logic based on user input
             if(userInput.toLowerCase().equals("quit")){
                 System.out.println("Thanks for playing come back soon!!");
                 break;
-            }else if(userInput.toLowerCase().equals("help")){
-                UtilLoader.help();
             }else{
-                System.out.println("Please enter a valid command");
+                parseText(userInput, currentRoom);
             }
         }
 
+    }
+
+    public static MemeRoom generateRoom(String roomName) throws IOException {
+        String pathName = String.format("src/main/resources/%s.json",roomName);
+        ObjectMapper objectMapper = new ObjectMapper();
+        MemeRoom room = objectMapper.readValue(new File(pathName), MemeRoom.class);
+        return room;
+    }
+
+    public static void parseText(String input, MemeRoom currentRoom) throws IOException {
+       if(input.toLowerCase().equals("help")){
+            UtilLoader.help();
+        }
+        else if(input.toLowerCase().contains("go")){
+            go(input, currentRoom);
+        }
+        else if(input.toLowerCase().contains("get")){
+            //TODO create a way to examine items
+       }
+        else if(input.toLowerCase().contains("use")){
+            //TODO create a method that lets you use items
+       }
+        else if(input.toLowerCase().contains("where am i")){
+           System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
+           System.out.printf("Your available exits are:%s%n", Arrays.toString(currentRoom.getExit()));
+       }
+        else{
+            System.out.println("Please enter a valid command");
+        }
+    }
+
+    public static void go(String input, MemeRoom currentRoom){
+        if(input.toLowerCase().contains("kitchen")){
+            System.out.println("Going to the Kitchen");
+            player.setRoom("kitchen");
+        }
+        else if(input.toLowerCase().contains("living room")){
+            System.out.println("Going to the Living Room");
+            player.setRoom("livingroom");
+        }
+        else if(input.toLowerCase().contains("dining room")){
+            System.out.println("Going to the Dining Room");
+            player.setRoom("diningroom");
+        }
+        else if(input.toLowerCase().contains("hallway")){
+            System.out.println("Going to the Hallway");
+            player.setRoom("hallway");
+        }
+        else{
+            System.out.println("You can't really go there, must be in your head");
+        }
     }
 }

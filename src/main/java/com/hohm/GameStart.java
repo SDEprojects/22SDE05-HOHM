@@ -1,20 +1,5 @@
 package com.hohm;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Locale;
-import java.util.Map;
-
-
 public class GameStart {
 
     public static void main(String[] args) throws Exception {
@@ -39,8 +24,8 @@ public class GameStart {
             System.out.print(title.charAt(i));
         }
         UtilLoader.intro();
+        UtilLoader.help();
         GameRunner.gameInit();
-
 
     }
 }
