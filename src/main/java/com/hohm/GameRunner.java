@@ -110,6 +110,7 @@ public class GameRunner {
         }
         else{
             System.out.println("Please enter a valid command");
+            UtilLoader.help();
         }
     }
 
