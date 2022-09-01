@@ -1,5 +1,6 @@
 package com.hohm;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
@@ -8,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class GameRunner {
@@ -77,22 +77,32 @@ public class GameRunner {
     }
 
     public static void parseText(String input, MemeRoom currentRoom) throws IOException {
-       if(input.toLowerCase().equals("help")){
+        JsonNode node = Json.parse( new File("src/main/resources/utils.json"));
+        node = node.get("commands");
+        String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]","");
+        String lookAt = String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]","");
+        String [] inputArr = input.toLowerCase().strip().split(" ");
+
+        if(input.equalsIgnoreCase("help")){
             UtilLoader.help();
         }
-        else if(input.toLowerCase().contains("go")){
+        else if(goTo.contains(inputArr[0])){
+            System.out.println(input);
             go(input, currentRoom);
         }
-        else if(input.toLowerCase().contains("get")){
+        else if(lookAt.contains(inputArr[0])){
+            System.out.println(input);
+        }
+        else if(input.contains("get")){
             //TODO create a way to examine items
-       }
-        else if(input.toLowerCase().contains("use")){
+        }
+        else if(input.contains("use")){
             //TODO create a method that lets you use items
-       }
-        else if(input.toLowerCase().contains("where am i")){
-           System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
-           System.out.printf("Your available exits are:%s%n", Arrays.toString(currentRoom.getExit()));
-       }
+        }
+        else if(input.contains("where am i")){
+            System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
+            System.out.printf("Your available exits are:%s%n", Arrays.toString(currentRoom.getExit()));
+        }
         else{
             System.out.println("Please enter a valid command");
         }
