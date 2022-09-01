@@ -1,5 +1,5 @@
 {
-    "Hallway": {
+    "hallway": {
         "title": "hallway",
         "description": {
             "bucket": "The door is firmly shut behind you, no way out!! Three rooms lie ahead of you, The Kitchen, Dining Room and Living Room. Smoke is billowing from the Kitchen",
@@ -11,7 +11,7 @@
         "complete": false
     },
     
-    "Kitchen":{
+    "kitchen":{
         "title": "kitchen",
         "objectives":{
             "extinguish fire":{
@@ -37,7 +37,8 @@
         "complete": false
     },
 
-    "Living Room": {
+    "livingroom": {
+        "title": "living room",
         "description": {
             "memeComplete" : "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat", 
             "memeIncomplete" : "You enter and feel a presence slightly judging you. \n I had fun once.. it was awful.\n -Cat"
@@ -63,11 +64,12 @@
                 "prereqNotMet": "Maybe we should look around to please the cat."
             }
         },
-        "exit": "Hallway",
+        "exit": ["Hallway"],
         "complete": false
     },
 
-    "Dining Room": {
+    "diningroom": {
+        "title": "dining room",
         "description": {
             "memeIncomplete": "You enter the dining room and see at the head of the table you see Kermit the Frog. Kermit seems groggy and turns to give you a blank stare while waiting for your next action",
             "memeComplete": "Kermit is no longer here all you see is the dining table and chandelier"
@@ -94,10 +96,5 @@
         },
         "exit": ["Hallway"],
         "complete": false
-    },
-    "Sketchy Basement" : {
-        "items": {
-            "doorLock": 723
-        }
     }
 } 
