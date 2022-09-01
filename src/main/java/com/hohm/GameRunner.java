@@ -1,21 +1,33 @@
 package com.hohm;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Map;
 
 public class GameRunner {
+    //Creating game objects to reference during game play
     static String[] startingItems = {"bucket"};
     public static Player player = new Player("noob",startingItems, "hallway");
 
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public static Map<String, MemeRoom> rooms;
+
+    static {
+        try {
+            rooms = Json.generateRooms();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }public GameRunner() throws IOException {
+    }
+
     public static void gameInit() throws IOException {
 
         while(true){
@@ -37,8 +49,8 @@ public class GameRunner {
 
         //Initiating the game loop
         while (true){
-            //TODO Figure out how to clear the console
-            MemeRoom currentRoom = generateRoom(player.getRoom());
+            //Current room starts as the hallway
+            MemeRoom currentRoom = rooms.get(player.getRoom());
 
             //Check room and check user inventory if hallway
             if(currentRoom.getTitle().equals("hallway")){
@@ -67,13 +79,6 @@ public class GameRunner {
             }
         }
 
-    }
-
-    public static MemeRoom generateRoom(String roomName) throws IOException {
-        String pathName = String.format("src/main/resources/%s.json",roomName);
-        ObjectMapper objectMapper = new ObjectMapper();
-        MemeRoom room = objectMapper.readValue(new File(pathName), MemeRoom.class);
-        return room;
     }
 
     public static void parseText(String input, MemeRoom currentRoom) throws IOException {
