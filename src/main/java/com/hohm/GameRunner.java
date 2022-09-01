@@ -3,6 +3,7 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -56,13 +57,6 @@ public class GameRunner {
             if(currentRoom.getTitle().equals("hallway")){
                 String[] currentItem = player.getItems();
                 System.out.println(currentRoom.getDescription().get(currentItem[0]));
-            }else{
-                if(!currentRoom.getComplete()){
-                    System.out.println(currentRoom.getDescription().get("memeIncomplete"));
-                }else{
-                    System.out.println(currentRoom.getDescription().get("memeComplete"));
-                }
-
             }
 
             System.out.print(">");
@@ -92,11 +86,10 @@ public class GameRunner {
             UtilLoader.help();
         }
         else if(goTo.contains(inputArr[0])){
-            System.out.println(input);
             go(input, currentRoom);
         }
         else if(lookAt.contains(inputArr[0])){
-            System.out.println(input);
+            look(input);
         }
         else if(input.contains("get")){
             //TODO create a way to examine items
@@ -106,7 +99,7 @@ public class GameRunner {
         }
         else if(input.contains("where am i")){
             System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
-            System.out.printf("Your available exits are:%s%n", Arrays.toString(currentRoom.getExit()));
+            System.out.printf("Your available exits are:%s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]",""));
         }
         else{
             System.out.println("Please enter a valid command");
@@ -133,6 +126,27 @@ public class GameRunner {
         }
         else{
             System.out.println("You can't really go there, must be in your head");
+        }
+    }
+    public static void look(String input) throws IOException {
+        JsonNode node = Json.parse( new File("src/main/resources/rooms.json"));
+        JsonNode itemJson = Json.parse( new File("src/main/resources/utils.json"));
+        String itemDes = Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", "");
+        if (input.contains("room")){
+            if (player.getRoom().equals("hallway")){
+                System.out.println(node.get("hallway").get("description").get(itemDes));
+            }
+            else if(String.valueOf(node.get(player.getRoom()).get("objectives").get("check complete").get("complete")).equals("false")){
+                System.out.println(node.get(player.getRoom()).get("objectives").get("check complete").get("incomplete"));
+            }
+            else{
+                System.out.println(node.get(player.getRoom()).get("objectives").get("complete"));
+            }
+
+        } else if (input.contains(itemDes)) {
+            System.out.println(itemJson.get(itemDes));
+        } else{
+            System.out.println("invalid choice, see help");
         }
     }
 }

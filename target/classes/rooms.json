@@ -14,10 +14,10 @@
     "kitchen":{
         "title": "kitchen",
         "objectives":{
-            "extinguish fire":{
+            "check complete":{
                 "item": "bucket",
                 "completed":"You toss the watery contents of the bucket on the flames and watch as they flicker and sizzle away. The dog smiles at you and tips his hat, as his apparition dissapears his hat falls to the ground and his coffee mug sits on the table unattended",
-                "incomplete":"",
+                "incomplete":"You should try using the bucket of water on the enraging flames!!",
                 "complete": false
             }
         },
@@ -44,7 +44,7 @@
             "memeIncomplete" : "You enter and feel a presence slightly judging you. \n I had fun once.. it was awful.\n -Cat"
         },
         "objectives": {
-            "Happy Cat": {
+            "check complete": {
                 "item" : "Cat-Nip",
                 "completed": "You give the cat catnip, he seems to be less grumpy.",
                 "incomplete": "I think this grumpy cat needs something, we should get cat-nip for the cat!",
@@ -75,7 +75,8 @@
             "memeComplete": "Kermit is no longer here all you see is the dining table and chandelier"
         },
         "objectives": {
-            "placateKermit": {
+            "check complete": {
+                "useItem": "coffee mug",
                 "completed":"Kermit accepts your offering, sips his coffee and leaves the room",
                 "incomplete": "At the foot of the table you notice a small bowl with something inside of it, and chandelier with an odd number of dangling jewels.",
                 "complete": false
