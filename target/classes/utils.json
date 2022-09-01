@@ -4,5 +4,9 @@
     "look": ["check", "examine", "look"]
   },
   "intro": "Welcome to the thrilling game House of Haunted Memes!\nThe objective of the game is to leave the house but you will be obstructed by memes!\nUse your wit to find your way through the house and past the memes.",
-  "help": "Go: This command will take you to different rooms\nGet: Get an item that's available in the room\nUse: Allows an item to be used\nQuit: Quits the game, #EmotionalDamage\nWhere Am I: Tells you what room you are in, and the exits available"
+  "help": "Go: This command will take you to different rooms\nGet: Get an item that's available in the room\nUse: Allows an item to be used\nQuit: Quits the game, #EmotionalDamage\nWhere Am I: Tells you what room you are in, and the exits available",
+  "bucket" : "Bucket full of water, we should use it on the fire!",
+  "coffee mug": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away, it is half full of piping hot coffee.",
+  "catnip" : "The most exquisite, finely plated catnip to exist in the metaverse",
+  "dice" : "My dice don't jiggle jiggle they roll."
 }
