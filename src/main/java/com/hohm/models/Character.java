@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public abstract class Character {
     private String name;
-    private ArrayList<Object> items;
+    private String[] items;
     private String room;
 
-    public Character(String name, ArrayList<Object> items, String room) {
+    public Character(String name, String[] items, String room) {
         this.name = name;
         this.items = items;
         this.room = room;
@@ -21,11 +21,11 @@ public abstract class Character {
         this.name = name;
     }
 
-    public ArrayList<Object> getItems() {
+    public String[] getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Object> items) {
+    public void setItems(String[] items) {
         this.items = items;
     }
 

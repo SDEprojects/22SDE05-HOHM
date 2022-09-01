@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Meme extends Character{
 
-    public Meme(String name, ArrayList<Object> items, String room) {
+    public Meme(String name, String[] items, String room) {
         super(name, items, room);
     }
 }
