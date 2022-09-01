@@ -1,9 +1,10 @@
 {
     "Hallway": {
+        "title": "hallway",
         "description": {
             "bucket": "The door is firmly shut behind you, no way out!! Three rooms lie ahead of you, The Kitchen, Dining Room and Living Room. Smoke is billowing from the Kitchen",
             "coffee mug": "The door remains firmly shut and the smoke has vanished, from the Dining room you hear the sounds of a grumpy tired muppet.",
-            "Cat-Nip": "You hear a loud MEEOWW from the Living Room.",
+            "cat-nip": "You hear a loud MEEOWW from the Living Room.",
             "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
         },
         "exit": ["Kitchen", "Living Room", "Dining Room"],
@@ -11,10 +12,7 @@
     },
     
     "Kitchen":{
-        "description": {
-            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here, nothing is left but the door... taunting you to open and enter into the basement to discover the mysteries within...", 
-            "memeIncomplete" : "You enter the kitchen and see flames, flames everywhere, In the middle of the room sits a dog in a chair. He rocks back and forth muttering to himself 'This is fine, this is fine'"
-        },
+        "title": "kitchen",
         "objectives":{
             "extinguish fire":{
                 "item": "bucket",
@@ -22,6 +20,10 @@
                 "incomplete":"",
                 "complete": false
             }
+        },
+        "description": {
+            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here, nothing is left but the door... taunting you to open and enter into the basement to discover the mysteries within...", 
+            "memeIncomplete" : "You enter the kitchen and see flames, flames everywhere, In the middle of the room sits a dog in a chair. He rocks back and forth muttering to himself 'This is fine, this is fine'"
         },
         "items":{
             "coffee mug":{

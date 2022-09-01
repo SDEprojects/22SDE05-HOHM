@@ -8,16 +8,20 @@ public class MemeRoom {
     private String title;
     private Map<String, Map<String, String>> objectives;
     private Map<String, String> description;
-    private ArrayList<Object> items;
-    private Array exit;
-    private Boolean complete = false;
+    private Map<String, Map<String, String>> items;
+    private String[] exit;
+    private Boolean complete;
 
-    public MemeRoom(String title, Map<String, Map<String, String>> objectives, Map<String, String> description, ArrayList<Object> items, Array exit) {
+    public MemeRoom(){
+
+    }
+    public MemeRoom(String title, Map<String, Map<String, String>> objectives, Map<String, String> description, Map<String, Map<String, String>> items, String[] exit, boolean complete) {
         this.title = title;
         this.objectives = objectives;
         this.description = description;
         this.items = items;
         this.exit = exit;
+        this.complete = complete;
     }
 
     public String getTitle() {
@@ -44,19 +48,19 @@ public class MemeRoom {
         this.description = description;
     }
 
-    public ArrayList<Object> getItems() {
+    public Map<String, Map<String, String>> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Object> items) {
+    public void setItems(Map<String, Map<String, String>> items) {
         this.items = items;
     }
 
-    public Array getExit() {
+    public String[] getExit() {
         return exit;
     }
 
-    public void setExit(Array exit) {
+    public void setExit(String[] exit) {
         this.exit = exit;
     }
 

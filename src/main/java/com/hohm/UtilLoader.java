@@ -18,7 +18,8 @@ public final class UtilLoader {
 
     public static void help() throws IOException {
         JsonNode node = Json.parse(file);
-        System.out.println("\n" + node.get("help").textValue() + "\n");
+        System.out.println("THINGS YOU SHOULD KNOW:");
+        System.out.println(node.get("help").textValue() + "\n");
     }
     public static void commands(String input) throws IOException {
         JsonNode node = Json.parse(file);
