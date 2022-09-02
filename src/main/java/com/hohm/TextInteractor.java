@@ -97,7 +97,6 @@ public class TextInteractor {
 
         String[] key = input.split(" ", 2);
         try{
-
             String chkObj = currentRoom.getObjectives().get("check complete").get("useItem");
             if(Arrays.asList(player.getItems()).contains(key[1]) && chkObj.equals(player.getItems()[0])){
                 System.out.println(currentRoom.getObjectives().get("check complete").get("completed"));
