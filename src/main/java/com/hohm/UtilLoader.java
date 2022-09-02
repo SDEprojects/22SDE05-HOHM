@@ -24,4 +24,10 @@ public final class UtilLoader {
         System.out.println(node.get("help").textValue() + "\n");
     }
 
+    public static void startText() throws IOException {
+        InputStream file = classLoader.getResourceAsStream("utils.json");
+        JsonNode node = Json.parse(file);
+        System.out.println("\n" + node.get("begin story").textValue() + "\n");
+    }
+
 }
