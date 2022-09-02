@@ -34,9 +34,6 @@ public class GameRunner {
 
     }
 
-    public GameRunner() throws IOException {
-    }
-
     public static void gameInit() throws IOException {
 
         while (true) {
@@ -56,17 +53,24 @@ public class GameRunner {
     }
 
     public static void run() throws IOException {
+        boolean newGame = false;
         UtilLoader.startText();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
             if (player.getRoom().equals("dead")) {
-                System.out.println("Seems you have died... how very unfortunate");
-                break;
+                System.out.println("Seems you have died... how very unfortunate. Would you like to play again (y/n)?");
+                System.out.print(">");
+                String playAgain = reader.readLine();
+                if(playAgain.equals("y") || playAgain.equals("yes")){
+                    newGame = true;
+                    break;
+                }else{
+                    break;
+                }
+
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
-
-
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
@@ -84,8 +88,17 @@ public class GameRunner {
                     break;
                 } else {
                     parseText(userInput, currentRoom);
+                    System.out.println(printSeparator);
                 }
             }
+        }
+        if(newGame){
+            player.setRoom("hallway");
+            player.setItems(startingItems);
+            newGame = false;
+            run();
+        }else{
+            System.out.println("Thanks for playing, we hope to meme with you again soon!");
         }
     }
 
@@ -111,7 +124,7 @@ public class GameRunner {
             //TODO create a method that lets you use items
         } else if (input.contains("where am i")) {
             System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
-            System.out.printf("Your available exits are:%s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]", ""));
+            System.out.printf("Your available exits are: %s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]", ""));
         } else {
             System.out.println("Please enter a valid command");
             UtilLoader.help();
