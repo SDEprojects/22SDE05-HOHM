@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -76,8 +73,11 @@ public class GameRunner {
     }
 
     public static void parseText(String input, MemeRoom currentRoom) throws IOException {
-        JsonNode node = Json.parse( new File("src/main/resources/utils.json"));
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream utils = classLoader.getResourceAsStream("utils.json");
+        JsonNode node = Json.parse( utils);
         node = node.get("commands");
+
         String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]","");
         String lookAt = String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]","");
         String [] inputArr = input.toLowerCase().strip().split(" ");
@@ -127,10 +127,18 @@ public class GameRunner {
         else{
             System.out.println("You can't really go there, must be in your head");
         }
+        if(!rooms.get(player.getRoom()).getComplete()){
+            System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
+        }else{
+            System.out.println(rooms.get(player.getRoom()).getDescription().get("memeComplete"));
+        }
     }
     public static void look(String input) throws IOException {
-        JsonNode node = Json.parse( new File("src/main/resources/rooms.json"));
-        JsonNode itemJson = Json.parse( new File("src/main/resources/utils.json"));
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream utils = classLoader.getResourceAsStream("utils.json");
+        InputStream rooms = classLoader.getResourceAsStream("rooms.json");
+        JsonNode node = Json.parse( utils);
+        JsonNode itemJson = Json.parse(rooms);
         String itemDes = Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", "");
         if (input.contains("room")){
             if (player.getRoom().equals("hallway")){

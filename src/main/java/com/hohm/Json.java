@@ -1,15 +1,13 @@
 package com.hohm;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +20,7 @@ public class Json {
         return defaultObjectMapper;
     }
 
-    public static JsonNode parse(File file) throws IOException {
+    public static JsonNode parse(InputStream file) throws IOException {
         return  objectMapper.readTree(file);
     }
 
