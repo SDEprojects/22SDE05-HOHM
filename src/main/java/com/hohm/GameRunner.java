@@ -11,9 +11,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Map;
 
-import static com.hohm.TextInteractor.go;
-import static com.hohm.TextInteractor.look;
-import static com.hohm.TextInteractor.get;
+import static com.hohm.TextInteractor.*;
 
 
 public class GameRunner {
@@ -121,7 +119,7 @@ public class GameRunner {
         } else if (input.contains("get")) {
             get(input, currentRoom);
         } else if (input.contains("use")) {
-            //TODO create a method that lets you use items
+            use(input, currentRoom);
         } else if (input.contains("where am i")) {
             System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
             System.out.printf("Your available exits are: %s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]", ""));
