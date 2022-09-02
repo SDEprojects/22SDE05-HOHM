@@ -78,7 +78,7 @@ public class TextInteractor {
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     String[] items = {key[1]};
                     player.setItems(items);
-                    System.out.println(Arrays.toString(player.getItems()));
+                    System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
                 } else {
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqNotMet"));
                     player.setRoom("dead");
@@ -91,5 +91,24 @@ public class TextInteractor {
             System.out.printf("You are unable to get the %s... whatever that is%n%n", key[1]);
         }
 
+    }
+
+    public static void use(String input, MemeRoom currentRoom){
+
+        String[] key = input.split(" ", 2);
+        try{
+            String chkObj = currentRoom.getObjectives().get("check complete").get("useItem");
+            if(Arrays.asList(player.getItems()).contains(key[1]) && chkObj.equals(player.getItems()[0])){
+                System.out.println(currentRoom.getObjectives().get("check complete").get("completed"));
+                currentRoom.getObjectives().get("check complete").put("complete", String.valueOf(true));
+            }else if(Arrays.asList(player.getItems()).contains(key[1])){
+                System.out.printf("That's a nice thought to use the %s... won't do anything..%n", key[1]);
+            }else{
+                System.out.printf("Might be nice to use the %s, but... you don't even have that!%n",key[1]);
+            }
+
+        }catch (NullPointerException e){
+            System.out.println("You can't use that...");
+        }
     }
 }
