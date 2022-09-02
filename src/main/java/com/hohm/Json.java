@@ -30,9 +30,10 @@ public class Json {
         String[] rooms = {"hallway", "kitchen", "livingroom", "diningroom", "basement" };
 
         //Reading the rooms.json file and generating a list of rooms
-        byte[] jsonData = Files.readAllBytes(Paths.get("src/main/resources/rooms.json"));
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream file = classLoader.getResourceAsStream("rooms.json");
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(jsonData);
+        JsonNode rootNode = objectMapper.readTree(file);
         Map<String, MemeRoom> roomMap = new HashMap<>();
 
         //Populating the arraylist with the room objects
