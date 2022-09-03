@@ -9,16 +9,15 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static com.hohm.GameRunner.player;
-import static com.hohm.GameRunner.rooms;
+import static com.hohm.GameRunner.*;
 
 public class TextInteractor {
 
 
     public static void go(String input, MemeRoom currentRoom) throws IOException {
         if (input.toLowerCase().contains("kitchen") && Arrays.asList(currentRoom.getExit()).contains("kitchen")) {
-            System.out.println("\n--------Going to the Kitchen-----------");
             player.setRoom("kitchen");
+            printSeparator();
         } else if (input.toLowerCase().contains("living room") && Arrays.asList(currentRoom.getExit()).contains("living room")) {
             System.out.println("\n----------Going to the Living Room--------");
             player.setRoom("livingroom");
@@ -110,5 +109,15 @@ public class TextInteractor {
         }catch (NullPointerException e){
             System.out.println("You can't use that...");
         }
+    }
+    public static void printSeparator(){
+        String dash = "- - ".repeat(29);
+        String printSeparator = String.format("Current Room: %s %25sInventory: %s %25sObjectives Complete: %s"
+                , player.getRoom().toUpperCase()
+                , "", player.getItems()[0].toUpperCase()
+                , "", String.valueOf(objectiveCount));
+        System.out.println(dash);
+        System.out.println(printSeparator);
+        System.out.println(dash);
     }
 }
