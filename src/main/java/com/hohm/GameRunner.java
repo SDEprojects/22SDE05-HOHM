@@ -17,9 +17,8 @@ import static com.hohm.TextInteractor.*;
 public class GameRunner {
     //Creating game objects to reference during game play
     static String[] startingItems = {"bucket"};
+    public static int objectiveCount = 0;
     public static Player player = new Player("noob", startingItems, "hallway");
-    public static final String printSeparator = "--------------------------------------------------------";
-
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static Map<String, MemeRoom> rooms;
 
@@ -38,7 +37,8 @@ public class GameRunner {
             System.out.print("Would you like to start a new game (y/n)?: ");
             String confirm = reader.readLine();
             if (confirm.toLowerCase().equals("y") || confirm.toLowerCase().equals("yes")) {
-                System.out.println(printSeparator);
+                System.out.println();
+                printSeparator();
                 GameRunner.run();
                 break;
             } else if (confirm.toLowerCase().equals("n") || confirm.toLowerCase().equals("no")) {
@@ -62,10 +62,8 @@ public class GameRunner {
                 String playAgain = reader.readLine();
                 if(playAgain.equals("y") || playAgain.equals("yes")){
                     newGame = true;
-                    break;
-                }else{
-                    break;
                 }
+                break;
 
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
@@ -82,11 +80,9 @@ public class GameRunner {
 
                 //handle logic based on user input
                 if (userInput.toLowerCase().equals("quit")) {
-                    System.out.println("Thanks for playing come back soon!!");
                     break;
                 } else {
                     parseText(userInput, currentRoom);
-                    System.out.println(printSeparator);
                 }
             }
         }
