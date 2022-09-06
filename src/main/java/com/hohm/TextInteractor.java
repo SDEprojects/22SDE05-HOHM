@@ -27,13 +27,12 @@ public class TextInteractor {
         } else if (input.toLowerCase().contains("hallway") && Arrays.asList(currentRoom.getExit()).contains("hallway")) {
             player.setRoom("hallway");
             printSeparator();
-
         } else {
             printSeparator();
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
 
-        //Checking the
+        //Checking the current room status and printing based on current room status
         if (!Objects.equals(rooms.get(player.getRoom()).getTitle(), "hallway")) {
             if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
                 System.out.println(rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
@@ -125,6 +124,7 @@ public class TextInteractor {
 
     //TODO change objectives complete to clues found and increment based on clues found rather than objectives completed
     public static void printSeparator(){
+        ClearScreen.ClearConsole();
         String dash = "- - ".repeat(29);
         String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sObjectives Complete: %s"
                 , player.getRoom().toUpperCase()
