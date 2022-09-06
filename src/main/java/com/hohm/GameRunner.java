@@ -80,7 +80,6 @@ public class GameRunner {
 
                 //handle logic based on user input
                 if (userInput.toLowerCase().equals("quit")) {
-                    System.out.println("Thanks for playing come back soon!!");
                     break;
                 } else {
                     parseText(userInput, currentRoom);
