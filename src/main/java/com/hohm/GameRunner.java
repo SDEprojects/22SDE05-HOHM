@@ -70,7 +70,12 @@ public class GameRunner {
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
-                    System.out.println(currentRoom.getDescription().get(currentItem[0]));
+                    if(currentItem.equals(null)){
+                        System.out.println(currentRoom.getDescription().get(currentItem[0]));
+                    }else{
+                        System.out.println(currentRoom.getDescription().get("nullHallway"));
+                    }
+
                 }
 
                 System.out.print(">");
