@@ -32,7 +32,6 @@ public class TextInteractor {
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
 
-        //TODO - this needs to be fixed based on current completed objective
         if (!Objects.equals(rooms.get(player.getRoom()).getTitle(), "hallway")) {
             if (rooms.get(player.getRoom()).getComplete()) {
                 System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
@@ -116,6 +115,7 @@ public class TextInteractor {
         }
     }
     public static void printSeparator(){
+        ClearScreen.ClearConsole();
         String dash = "- - ".repeat(29);
         String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sObjectives Complete: %s"
                 , player.getRoom().toUpperCase()
