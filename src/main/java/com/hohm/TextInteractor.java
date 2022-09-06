@@ -27,6 +27,7 @@ public class TextInteractor {
         } else if (input.toLowerCase().contains("hallway") && Arrays.asList(currentRoom.getExit()).contains("hallway")) {
             player.setRoom("hallway");
             printSeparator();
+
         } else {
             printSeparator();
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
