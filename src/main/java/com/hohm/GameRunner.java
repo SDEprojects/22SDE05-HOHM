@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -67,6 +67,7 @@ public class GameRunner {
 
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
+                GameRunner.musicPlayer();
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
@@ -98,6 +99,20 @@ public class GameRunner {
             run();
         }else{
             System.out.println("Thanks for playing, we hope to meme with you again soon!");
+        }
+    }
+
+    public static void musicPlayer(){
+        try{
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/background.wav"));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.setMicrosecondPosition(0);
+            clip.start();
+            System.out.println("should be playing music");
+        }
+        catch(Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
