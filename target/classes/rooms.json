@@ -19,10 +19,15 @@
                 "completed":"You toss the watery contents of the bucket on the flames.\nThe yellow light flickers and sizzles away.\nThe dog smiles at you and tips his hat, as his apparition disappears.\nHis hat falls to the ground and his coffee mug sits on the table unattended",
                 "incomplete":"As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them",
                 "complete": false
+            },
+            "clueFound":{
+                "completed" : "You look and see a faint scribble on the inner brim of the fedora, 'MR....'\nSome of the other numbers have faded..",
+                "incomplete" : "The dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
+                "complete" : false
             }
         },
         "description": {
-            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here, nothing is left but the door... taunting you to open and enter into the basement to discover the mysteries within...", 
+            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here\n Nothing is left but the basement door... taunting you to open and discover the mysteries within...",
             "memeIncomplete" : "You enter the kitchen and see flames, flames everywhere!!\nIn the middle of the room sits a dog wearing a sweet fedora sitting in a chair.\nNext to him is a piping hot mug of coffee.\nHe rocks back and forth muttering to himself 'This is fine, this is fine'"
         },
         "items":{
