@@ -7,6 +7,7 @@ import com.hohm.models.MemeRoom;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.hohm.GameRunner.*;
@@ -33,12 +34,19 @@ public class TextInteractor {
         }
 
         if (!Objects.equals(rooms.get(player.getRoom()).getTitle(), "hallway")) {
-            if (rooms.get(player.getRoom()).getComplete()) {
-                System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
-            } else {
+            if(rooms.get(player.getRoom()).getComplete()){
                 System.out.println(rooms.get(player.getRoom()).getDescription().get("memeComplete"));
             }
+            if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
+                System.out.println(rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
+            } else if(!rooms.get(player.getRoom()).getComplete()){
+                System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
+            }
+            else {
+
+            }
         }
+
 
     }
 
@@ -73,13 +81,23 @@ public class TextInteractor {
 
                 String objective = currentRoom.getItems().get(key[1]).get("prereq");
                 boolean objComplete = Boolean.parseBoolean(currentRoom.getObjectives().get(objective).get("complete"));
+                String objType = currentRoom.getItems().get(key[1]).get("type");
 
-                if (objComplete) {
+                if (objComplete && objType.equals("misc")) {
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
+                    rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
                     String[] items = {key[1]};
+                    checkComplete(currentRoom);
                     player.setItems(items);
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
-                } else {
+                } else if(objComplete && objType.equals("clue")){
+                    clueCount++;
+                    rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
+                    checkComplete(currentRoom);
+                    printSeparator();
+                    System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
+                }
+                else {
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqNotMet"));
                     player.setRoom("dead");
                 }
@@ -99,31 +117,22 @@ public class TextInteractor {
             String chkObj = currentRoom.getObjectives().get("check complete").get("useItem");
             if(Arrays.asList(player.getItems()).contains(key[1]) && chkObj.equals(player.getItems()[0])){
                 currentRoom.getObjectives().get("check complete").put("complete", String.valueOf(true));
-                objectiveCount++;
                 String[] temp = {"[]"};
                 player.setItems(temp);
                 printSeparator();
                 System.out.println(currentRoom.getObjectives().get("check complete").get("completed"));
 
             }else if(Arrays.asList(player.getItems()).contains(key[1])){
+                printSeparator();
                 System.out.printf("That's a nice thought to use the %s... won't do anything..%n", key[1]);
             }else{
+                printSeparator();
                 System.out.printf("Might be nice to use the %s, but... you don't even have that!%n",key[1]);
             }
         }catch (NullPointerException e){
-            System.out.println("You can't use that...");
+            printSeparator();
+            System.out.println("You can't use that here...");
         }
-    }
-    public static void printSeparator(){
-        ClearScreen.ClearConsole();
-        String dash = "- - ".repeat(29);
-        String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sObjectives Complete: %s"
-                , player.getRoom().toUpperCase()
-                , "", player.getItems()[0].toUpperCase()
-                , "", String.valueOf(objectiveCount));
-        System.out.println(dash);
-        System.out.println(printSeparator);
-        System.out.println(dash);
     }
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -152,5 +161,24 @@ public class TextInteractor {
         }catch (NullPointerException e){
             System.out.println("You can't talk to that person...");
         }
+    }
+
+    public static void checkComplete(MemeRoom currentRoom){
+        Map<String, Map<String, String>> objectives = rooms.get(currentRoom.getTitle()).getObjectives();
+        if(objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")){
+            rooms.get(currentRoom.getTitle()).setComplete(true);
+            System.out.println(rooms.get(currentRoom.getTitle()).getComplete());
+        }
+    }
+    public static void printSeparator(){
+        ClearScreen.ClearConsole();
+        String dash = "- - ".repeat(29);
+        String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sClues Found: %s"
+                , player.getRoom().toUpperCase()
+                , "", player.getItems()[0].toUpperCase()
+                , "", String.valueOf(clueCount));
+        System.out.println(dash);
+        System.out.println(printSeparator);
+        System.out.println(dash);
     }
 }

@@ -21,8 +21,11 @@
                 "incomplete":"As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them",
                 "complete": false
             },
+            "itemFound": {
+                "incomplete": "On the table sits the half full coffee mug.\nThe sweet aroma reminds you of grandma's coffee.",
+                "complete": false
+            },
             "clueFound":{
-                "completed" : "You look and see a faint scribble on the inner brim of the fedora, 'MR....'\nSome of the other numbers have faded..",
                 "incomplete" : "The flames are gone, and you look around the charred kitchen\nThe dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
                 "complete" : false
             }
@@ -34,9 +37,17 @@
         "items":{
             "coffee mug":{
                 "prereq": "check complete",
+                "type": "misc",
                 "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away, it is half full of piping hot coffee.",
                 "prereqMet":"You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...",
                 "prereqNotMet":"The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire..."
+            },
+            "fedora": {
+                "prereq": "check complete",
+                "type": "clue",
+                "description": "That's one cool cap!\nIt may fit you but you would have to get it to check out the tag for the size.",
+                "prereqMet":"You look and see a faint scribble on the inner brim of the fedora, 'Door Code: MR....'\nSome of the other characters have faded..",
+                "prereqNotMet": "You try to yank the fedora off the dog.\nLooks like that was the straw that broke the camel's back\n'NOT OKAY DUDE' he yells... your people pleasing heart is broken, you die from that heartbreaking emotional damage"
             }
         },
         "exit": ["hallway", "basement"],
