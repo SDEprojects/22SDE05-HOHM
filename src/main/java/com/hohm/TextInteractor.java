@@ -27,16 +27,20 @@ public class TextInteractor {
         } else if (input.toLowerCase().contains("hallway") && Arrays.asList(currentRoom.getExit()).contains("hallway")) {
             player.setRoom("hallway");
             printSeparator();
+
         } else {
             printSeparator();
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
 
-        //TODO - this needs to be fixed based on current completed objective
+        //Checking the
         if (!Objects.equals(rooms.get(player.getRoom()).getTitle(), "hallway")) {
-            if (rooms.get(player.getRoom()).getComplete()) {
+            if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
+                System.out.println(rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
+            } else if(!rooms.get(player.getRoom()).getComplete()){
                 System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
-            } else {
+            }
+            else {
                 System.out.println(rooms.get(player.getRoom()).getDescription().get("memeComplete"));
             }
         }
@@ -76,9 +80,10 @@ public class TextInteractor {
                 boolean objComplete = Boolean.parseBoolean(currentRoom.getObjectives().get(objective).get("complete"));
 
                 if (objComplete) {
-                    System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     String[] items = {key[1]};
                     player.setItems(items);
+                    printSeparator();
+                    System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
                 } else {
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqNotMet"));
@@ -117,6 +122,8 @@ public class TextInteractor {
             System.out.println("You can't use that...");
         }
     }
+
+    //TODO change objectives complete to clues found and increment based on clues found rather than objectives completed
     public static void printSeparator(){
         String dash = "- - ".repeat(29);
         String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sObjectives Complete: %s"

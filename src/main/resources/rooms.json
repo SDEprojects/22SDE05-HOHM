@@ -2,8 +2,9 @@
     "hallway": {
         "title": "hallway",
         "description": {
+            "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.",
             "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nThree rooms lie ahead of you, The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.",
-            "coffee mug": "The door remains firmly shut and the smoke has vanished.\n You hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.",
+            "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.",
             "cat-nip": "You hear a loud MEEOWW from the Living Room.",
             "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
         },
@@ -19,10 +20,15 @@
                 "completed":"You toss the watery contents of the bucket on the flames.\nThe yellow light flickers and sizzles away.\nThe dog smiles at you and tips his hat, as his apparition disappears.\nHis hat falls to the ground and his coffee mug sits on the table unattended",
                 "incomplete":"As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them",
                 "complete": false
+            },
+            "clueFound":{
+                "completed" : "You look and see a faint scribble on the inner brim of the fedora, 'MR....'\nSome of the other numbers have faded..",
+                "incomplete" : "The flames are gone, and you look around the charred kitchen\nThe dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
+                "complete" : false
             }
         },
         "description": {
-            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here, nothing is left but the door... taunting you to open and enter into the basement to discover the mysteries within...", 
+            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here\n Nothing is left but the basement door... taunting you to open and discover the mysteries within...",
             "memeIncomplete" : "You enter the kitchen and see flames, flames everywhere!!\nIn the middle of the room sits a dog wearing a sweet fedora sitting in a chair.\nNext to him is a piping hot mug of coffee.\nHe rocks back and forth muttering to himself 'This is fine, this is fine'"
         },
         "items":{
