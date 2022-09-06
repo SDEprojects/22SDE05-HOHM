@@ -115,6 +115,16 @@ public class TextInteractor {
             System.out.println("You can't use that...");
         }
     }
+    public static void printSeparator(){
+        String dash = "- - ".repeat(29);
+        String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sObjectives Complete: %s"
+                , player.getRoom().toUpperCase()
+                , "", player.getItems()[0].toUpperCase()
+                , "", String.valueOf(objectiveCount));
+        System.out.println(dash);
+        System.out.println(printSeparator);
+        System.out.println(dash);
+    }
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         JsonNode dialogue =  Json.parse(classLoader.getResourceAsStream("dialogue.json"));
@@ -142,17 +152,5 @@ public class TextInteractor {
         }catch (NullPointerException e){
             System.out.println("You can't talk to that person...");
         }
-    }
-
-
-    public static void printSeparator(){
-        String dash = "- - ".repeat(29);
-        String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sObjectives Complete: %s"
-                , player.getRoom().toUpperCase()
-                , "", player.getItems()[0].toUpperCase()
-                , "", String.valueOf(objectiveCount));
-        System.out.println(dash);
-        System.out.println(printSeparator);
-        System.out.println(dash);
     }
 }
