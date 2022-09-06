@@ -125,6 +125,10 @@ public class GameRunner {
         else if (input.contains("talk")) {
             talk(input,currentRoom);
         }
+        else if (input.contains("save")) {
+            Save.save(rooms);
+            System.out.println("You have saved the room state");
+        }
         else if (input.contains("where am i")) {
             System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
             System.out.printf("Your available exits are: %s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]", ""));
