@@ -104,9 +104,12 @@ public class TextInteractor {
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
-                } else if (objComplete && objType.equals("clue")) {
-                    player.incrementClues();
-                    GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
+                }
+                else if (objComplete && objType.equals("clue")) {
+                    if(GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").get("complete").equals("false")){
+                        player.incrementClues();
+                        GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
+                    }
                     checkComplete(currentRoom);
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
