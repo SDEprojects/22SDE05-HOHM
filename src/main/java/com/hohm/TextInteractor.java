@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hohm.models.MemeRoom;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -38,13 +36,14 @@ public class TextInteractor {
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
 
-        if (!Objects.equals(rooms.get(player.getRoom()).getTitle(), "hallway")) {
-            if (rooms.get(player.getRoom()).getComplete()) {
-                System.out.println(rooms.get(player.getRoom()).getDescription().get("memeComplete"));
-            } else if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
-                System.out.println(rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
+        if (!Objects.equals(GameInit.rooms.get(player.getRoom()).getTitle(), "hallway")) {
+            if(GameInit.rooms.get(player.getRoom()).getComplete()){
+                System.out.println(GameInit.rooms.get(player.getRoom()).getDescription().get("memeComplete"));
+            }
+            else if (GameInit.rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
+                System.out.println(GameInit.rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
             } else {
-                System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
+                System.out.println(GameInit.rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
             }
         }
     }
@@ -99,14 +98,14 @@ public class TextInteractor {
                 if (objComplete && objType.equals("misc")) {
                     String[] items = {key[1]};
                     player.setItems(items);
-                    rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
+                    GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
                     checkComplete(currentRoom);
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
                 } else if (objComplete && objType.equals("clue")) {
                     player.incrementClues();
-                    rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
+                    GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
                     checkComplete(currentRoom);
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
@@ -178,9 +177,9 @@ public class TextInteractor {
     }
 
     public static void checkComplete(MemeRoom currentRoom) {
-        Map<String, Map<String, String>> objectives = rooms.get(currentRoom.getTitle()).getObjectives();
+        Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();
         if (objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")) {
-            rooms.get(currentRoom.getTitle()).setComplete(true);
+            GameInit.rooms.get(currentRoom.getTitle()).setComplete(true);
         }
     }
 

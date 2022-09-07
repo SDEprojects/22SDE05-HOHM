@@ -3,22 +3,13 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Json {
 
-    private static ObjectMapper objectMapper = getDefaultObjectMapper();
-
-    private static ObjectMapper getDefaultObjectMapper(){
-        ObjectMapper defaultObjectMapper = new ObjectMapper();
-        return defaultObjectMapper;
-    }
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static JsonNode parse(InputStream file) throws IOException {
         return  objectMapper.readTree(file);
@@ -27,19 +18,23 @@ public class Json {
     //allows you to parse a JSON file and create an object from the information in the JSON file
     public static Map<String, MemeRoom> generateRooms() throws IOException {
         //String pathName = String.format("src/main/resources/%s.json",roomName);
-        String[] rooms = {"hallway", "kitchen", "livingroom", "diningroom", "basement" };
+        // Dynamically create String array/map from JSON instead
+
+        List<String> rooms = new ArrayList<>();
 
         //Reading the rooms.json file and generating a list of rooms
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream file = classLoader.getResourceAsStream("rooms.json");
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(file);
+        Iterator<String> iterator = rootNode.fieldNames();
+        iterator.forEachRemaining(rooms::add);
         Map<String, MemeRoom> roomMap = new HashMap<>();
 
         //Populating the arraylist with the room objects
-        for (int i = 0; i< rooms.length;i++) {
-            JsonNode roomNode = rootNode.path(rooms[i]);
-            roomMap.put(rooms[i], objectMapper.convertValue(roomNode, MemeRoom.class));
+        for (String room : rooms) {
+            JsonNode roomNode = rootNode.path(room);
+            roomMap.put(room, objectMapper.convertValue(roomNode, MemeRoom.class));
         }
         return roomMap;
     }
