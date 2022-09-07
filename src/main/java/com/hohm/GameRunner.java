@@ -2,19 +2,15 @@ package com.hohm;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
-import com.hohm.models.Player;
 
-import javax.sound.sampled.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Map;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.*;
 import java.util.Objects;
 
-import static com.hohm.MusicPlayer.musicPlayer;
 import static com.hohm.GameInit.player;
 import static com.hohm.GameInit.startingItems;
+import static com.hohm.MusicPlayer.musicPlayer;
 import static com.hohm.TextInteractor.*;
 
 
@@ -25,7 +21,6 @@ public class GameRunner {
     public static void run() throws IOException {
         boolean newGame = false;
         UtilLoader.startText();
-        GameRunner.musicPlayer();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
