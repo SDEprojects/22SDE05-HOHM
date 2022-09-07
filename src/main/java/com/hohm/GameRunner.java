@@ -10,6 +10,7 @@ import javax.sound.sampled.Clip;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.hohm.TextInteractor.*;
 
@@ -17,7 +18,7 @@ import static com.hohm.TextInteractor.*;
 public class GameRunner {
     //Creating game objects to reference during game play
     static String[] startingItems = {"bucket"};
-    public static int objectiveCount = 0;
+    public static int clueCount = 0;
     public static Player player = new Player("noob", startingItems, "hallway");
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static Map<String, MemeRoom> rooms;
@@ -53,6 +54,7 @@ public class GameRunner {
     public static void run() throws IOException {
         boolean newGame = false;
         UtilLoader.startText();
+        GameRunner.musicPlayer();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
@@ -67,14 +69,13 @@ public class GameRunner {
 
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
-                GameRunner.musicPlayer();
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
-                    if(currentItem != null){
-                        System.out.println(currentRoom.getDescription().get(currentItem[0]));
-                    }else{
+                    if(Objects.equals(currentItem[0], "[]")){
                         System.out.println(currentRoom.getDescription().get("nullHallway"));
+                    }else{
+                        System.out.println(currentRoom.getDescription().get(currentItem[0]));
                     }
 
                 }
@@ -104,12 +105,14 @@ public class GameRunner {
 
     public static void musicPlayer(){
         try{
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/background.wav"));
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream musicStream = classLoader.getResourceAsStream("background.wav");
+            InputStream bufferedMusic = new BufferedInputStream(musicStream);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedMusic);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.setMicrosecondPosition(0);
             clip.start();
-            System.out.println("should be playing music");
         }
         catch(Exception e) {
             throw new RuntimeException(e);
@@ -145,8 +148,8 @@ public class GameRunner {
             System.out.println("You have saved the room state");
         }
         else if (input.contains("where am i")) {
-            System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
-            System.out.printf("Your available exits are: %s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]", ""));
+            printSeparator();
+            UtilLoader.houseMap(currentRoom.getTitle());
         } else {
             System.out.println("Please enter a valid command");
             UtilLoader.help();
