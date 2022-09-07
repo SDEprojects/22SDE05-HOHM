@@ -3,6 +3,9 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
+import com.hohm.models.Player;
+
+import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -37,5 +40,16 @@ public class Json {
             roomMap.put(room, objectMapper.convertValue(roomNode, MemeRoom.class));
         }
         return roomMap;
+    }
+
+    public static Player generatePlayer() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream file = classLoader.getResourceAsStream("characters.json");
+        JsonNode rootNode = objectMapper.readTree(file);
+        JsonNode playerNode = rootNode.get("player");
+        Player player = objectMapper.convertValue(playerNode,Player.class);
+
+        return player;
     }
 }

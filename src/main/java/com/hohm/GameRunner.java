@@ -9,13 +9,13 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.util.Objects;
 
+import static com.hohm.GameInit.player;
+import static com.hohm.GameInit.startingItems;
 import static com.hohm.TextInteractor.*;
 
 
 public class GameRunner {
     //Creating game objects to reference during game play
-    static String[] startingItems = {"bucket"};
-    public static Player player = new Player("noob", startingItems, "hallway",0);
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void run() throws IOException {

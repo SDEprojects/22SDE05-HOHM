@@ -3,6 +3,7 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
+import com.hohm.models.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class Loader {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static Map<String, MemeRoom> load() throws IOException {
+    public static Map<String, MemeRoom> loadRooms() throws IOException {
 
         File data = new File("saved_data/saved_Rooms.json");
         JsonNode rootNode = objectMapper.readTree(data);
@@ -27,5 +28,13 @@ public class Loader {
         }
 
         return roomMap;
+    }
+
+    public static Player loadPlayer() throws IOException{
+        File data = new File("saved_data/saved_Characters.json");
+        JsonNode rootNode = objectMapper.readTree(data);
+        Player player = objectMapper.convertValue(rootNode, Player.class);
+
+        return player;
     }
 }
