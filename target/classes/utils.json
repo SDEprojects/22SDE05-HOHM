@@ -1,7 +1,9 @@
 {
   "commands": {
     "go" : ["go", "move", "walk"],
-    "look": ["check", "examine", "look"]
+    "look": ["look", "examine", "check"],
+    "get": ["get", "grab", "snatch", "catch", "have", "obtain", "pick up"],
+    "use": ["use", "utilize", "exploit"]
   },
   "intro": "Welcome to the thrilling game House of Haunted Memes!\nThe objective of the game is to leave the house but you will be obstructed by memes!\nUse your wit to find your way through the house and past the memes.",
   "help": "Go <room name>: This command will take you to different rooms\nGet <item name>: Get an item that's available in the room\nUse <item name>: Allows an item to be used\nLook room OR Look <item name>: gives you further detail about the room or the item.\nSave:Saves the current game status\nQuit: Quits the game, #EmotionalDamage\nWhere Am I: Shows you a map of the room with a visual of exits available",
