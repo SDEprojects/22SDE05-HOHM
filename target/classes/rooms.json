@@ -145,5 +145,11 @@
       "hallway"
     ],
     "complete": false
-  }
+  },
+  "basement": {
+    "title": "basement",
+    "description": {
+      "memeIncomplete": ""
+      }
+    }
 }
