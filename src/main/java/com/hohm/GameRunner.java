@@ -107,7 +107,8 @@ public class GameRunner {
         try{
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream musicStream = classLoader.getResourceAsStream("background.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicStream);
+            InputStream bufferedMusic = new BufferedInputStream(musicStream);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedMusic);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.setMicrosecondPosition(0);
