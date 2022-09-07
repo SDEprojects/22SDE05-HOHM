@@ -54,6 +54,7 @@ public class GameRunner {
     public static void run() throws IOException {
         boolean newGame = false;
         UtilLoader.startText();
+        GameRunner.musicPlayer();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
@@ -68,7 +69,6 @@ public class GameRunner {
 
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
-                GameRunner.musicPlayer();
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
@@ -146,8 +146,8 @@ public class GameRunner {
             System.out.println("You have saved the room state");
         }
         else if (input.contains("where am i")) {
-            System.out.printf("You are currently in the: %s%n", currentRoom.getTitle());
-            System.out.printf("Your available exits are: %s%n", Arrays.toString(currentRoom.getExit()).replaceAll("[\\[\\](){}\"]", ""));
+            printSeparator();
+            UtilLoader.houseMap(currentRoom.getTitle());
         } else {
             System.out.println("Please enter a valid command");
             UtilLoader.help();

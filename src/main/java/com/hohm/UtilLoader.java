@@ -30,4 +30,10 @@ public final class UtilLoader {
         System.out.println("\n" + node.get("begin story").textValue() + "\n");
     }
 
+    public static void houseMap(String input) throws IOException{
+        InputStream file = classLoader.getResourceAsStream("maps.json");
+        JsonNode node = Json.parse(file);
+        System.out.println(node.get(input).textValue());
+    }
+
 }
