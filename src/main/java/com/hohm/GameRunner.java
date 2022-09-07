@@ -2,7 +2,6 @@ package com.hohm;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
-import com.hohm.models.Player;
 import java.io.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -99,6 +98,8 @@ public class GameRunner {
 
         String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
         String lookAt = String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
+        String getIt = String.valueOf(node.get("get")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
+        String useIt = String.valueOf(node.get("use")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
         String[] inputArr = input.toLowerCase().strip().split(" ");
 
         if (input.equalsIgnoreCase("help")) {
@@ -107,9 +108,9 @@ public class GameRunner {
             go(input, currentRoom);
         } else if (lookAt.contains(inputArr[0])) {
             look(input, currentRoom);
-        } else if (input.contains("get")) {
+        } else if (getIt.contains(inputArr[0])) {
             get(input, currentRoom);
-        } else if (input.contains("use")) {
+        } else if (useIt.contains(inputArr[0])) {
             use(input, currentRoom);
         }
         else if (input.contains("talk")) {
