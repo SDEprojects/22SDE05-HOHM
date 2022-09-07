@@ -105,7 +105,7 @@ public class TextInteractor {
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
                 } else if (objComplete && objType.equals("clue")) {
-                    clueCount++;
+                    player.incrementClues();
                     rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
                     checkComplete(currentRoom);
                     printSeparator();
@@ -190,7 +190,7 @@ public class TextInteractor {
         String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sClues Found: %s"
                 , player.getRoom().toUpperCase()
                 , "", player.getItems()[0].toUpperCase()
-                , "", String.valueOf(clueCount));
+                , "", player.getClues());
         System.out.println(dash);
         System.out.println(printSeparator);
         System.out.println(dash);
