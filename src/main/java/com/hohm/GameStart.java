@@ -3,7 +3,7 @@ package com.hohm;
 public class GameStart {
 
     public static void main(String[] args) throws Exception {
-
+        ClearScreen.ClearConsole();
         String title = "'##::::'##::'#######::'##::::'##::'######::'########:::::'#######::'########:                                                    \n" +
                 " ##:::: ##:'##.... ##: ##:::: ##:'##... ##: ##.....:::::'##.... ##: ##.....::                                                    \n" +
                 " ##:::: ##: ##:::: ##: ##:::: ##: ##:::..:: ##:::::::::: ##:::: ##: ##:::::::                                                    \n" +
