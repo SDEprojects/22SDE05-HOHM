@@ -179,9 +179,9 @@ public class TextInteractor {
     }
 
     public static void checkComplete(MemeRoom currentRoom) {
-        Map<String, Map<String, String>> objectives = rooms.get(currentRoom.getTitle()).getObjectives();
+        Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();
         if (objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")) {
-            rooms.get(currentRoom.getTitle()).setComplete(true);
+            GameInit.rooms.get(currentRoom.getTitle()).setComplete(true);
         }
     }
 

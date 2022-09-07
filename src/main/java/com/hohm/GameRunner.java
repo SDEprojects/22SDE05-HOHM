@@ -65,7 +65,7 @@ public class GameRunner {
             player.setRoom("hallway");
             player.setItems(startingItems);
             try {
-                rooms = Json.generateRooms();
+                GameInit.rooms = Json.generateRooms();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

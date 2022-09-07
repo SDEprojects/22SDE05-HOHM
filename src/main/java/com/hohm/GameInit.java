@@ -1,6 +1,7 @@
 package com.hohm;
 
 import com.hohm.models.MemeRoom;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -28,24 +29,24 @@ public class GameInit {
                     GameRunner.run();
                     break;
                 }
-                System.out.print("Would you like to start a new game (y/n)?: ");
-                String confirm = GameRunner.reader.readLine();
-                if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
-                    try {
-                        rooms = Json.generateRooms();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    System.out.println();
-                    printSeparator();
-                    GameRunner.run();
-                    break;
-                } else if (confirm.equalsIgnoreCase("n") || confirm.equalsIgnoreCase("no")) {
-                    System.out.println("That's unfortunate, we hope to meme with you again soon!");
-                    break;
-                } else {
-                    System.out.println("That wasn't valid input... \n");
+            }
+            System.out.print("Would you like to start a new game (y/n)?: ");
+            String confirm = GameRunner.reader.readLine();
+            if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
+                try {
+                    rooms = Json.generateRooms();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+                System.out.println();
+                printSeparator();
+                GameRunner.run();
+                break;
+            } else if (confirm.equalsIgnoreCase("n") || confirm.equalsIgnoreCase("no")) {
+                System.out.println("That's unfortunate, we hope to meme with you again soon!");
+                break;
+            } else {
+                System.out.println("That wasn't valid input... \n");
             }
         }
     }
