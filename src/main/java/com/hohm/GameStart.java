@@ -25,7 +25,7 @@ public class GameStart {
         }
         UtilLoader.intro();
         UtilLoader.help();
-        GameRunner.gameInit();
+        GameInit.gameInit();
 
     }
 }

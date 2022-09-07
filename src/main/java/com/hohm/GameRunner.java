@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
 
+import java.io.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.io.*;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
@@ -23,6 +23,7 @@ public class GameRunner {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static Map<String, MemeRoom> rooms;
 
+    // Any way we can do this at the start of a game rather then when Gamerunner is called
     static {
         try {
             rooms = Json.generateRooms();
@@ -30,25 +31,6 @@ public class GameRunner {
             throw new RuntimeException(e);
         }
 
-    }
-
-    public static void gameInit() throws IOException {
-
-        while (true) {
-            System.out.print("Would you like to start a new game (y/n)?: ");
-            String confirm = reader.readLine();
-            if (confirm.toLowerCase().equals("y") || confirm.toLowerCase().equals("yes")) {
-                System.out.println();
-                printSeparator();
-                GameRunner.run();
-                break;
-            } else if (confirm.toLowerCase().equals("n") || confirm.toLowerCase().equals("no")) {
-                System.out.println("That's unfortunate, we hope to meme with you again soon!");
-                break;
-            } else {
-                System.out.println("That wasn't valid input... \n");
-            }
-        }
     }
 
     public static void run() throws IOException {
@@ -142,7 +124,13 @@ public class GameRunner {
             talk(input,currentRoom);
         }
         else if (input.contains("save")) {
-            Save.save(rooms);
+            File savedRooms = new File("saved_data/saved_Rooms.json");
+            Boolean checkFolder = savedRooms.getParentFile().mkdirs();
+            if (!savedRooms.createNewFile()) {
+                System.out.println("You already have saved files, would you like to overwrite?");
+            } else {
+                Save.save(rooms);
+            }
             System.out.println("You have saved the room state");
         }
         else if (input.contains("where am i")) {
