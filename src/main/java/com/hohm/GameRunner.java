@@ -122,13 +122,13 @@ public class GameRunner {
                 System.out.print("You already have saved files, would you like to overwrite (y/n)?: ");
                 String saveConfirm = reader.readLine();
                 if (saveConfirm.equalsIgnoreCase("y") || saveConfirm.equalsIgnoreCase("yes")) {
-                    Save.save((GameInit.rooms));
+                    Save.save();
                     System.out.println("You have saved your game.");
                 } else {
                     System.out.println("You have chosen not to overwrite");
                 }
             } else {
-                Save.save(GameInit.rooms);
+                Save.save();
                 System.out.println("You have saved your game");
             }
         }

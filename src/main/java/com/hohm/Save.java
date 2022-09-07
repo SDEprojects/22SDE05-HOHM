@@ -10,11 +10,13 @@ import java.util.Map;
 
 public class Save {
 
-    public static void save(Map<String, MemeRoom> currentRooms) throws IOException {
+    public static void save() throws IOException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             File savedRooms = new File("saved_data/saved_Rooms.json");
-            objectMapper.writeValue(new FileOutputStream(savedRooms, false), currentRooms);
+            File savedCharacters = new File("saved_data/saved_Characters.json");
+            objectMapper.writeValue(new FileOutputStream(savedRooms, false), GameInit.rooms);
+            objectMapper.writeValue(new FileOutputStream(savedCharacters, false), GameRunner.player);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
