@@ -1,0 +1,8 @@
+{
+  "player": {
+    "name": "New Player",
+    "items": ["bucket"],
+    "room": "hallway",
+    "clues": 0
+  }
+}

@@ -1,15 +1,20 @@
 package com.hohm;
 
 import com.hohm.models.MemeRoom;
+import com.hohm.models.Player;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.hohm.Json.generatePlayer;
+import static com.hohm.Json.generateRooms;
 import static com.hohm.TextInteractor.printSeparator;
 
 public class GameInit {
 
+    static String[] startingItems = {"bucket"};
+    public static Player player;
     public static Map<String, MemeRoom> rooms;
 
     public static void gameInit() throws IOException {
@@ -21,7 +26,8 @@ public class GameInit {
                 String response = GameRunner.reader.readLine();
                 if (response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes")) {
                     try {
-                        rooms = Loader.load();
+                        rooms = Loader.loadRooms();
+                        player = Loader.loadPlayer();
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -34,7 +40,8 @@ public class GameInit {
             String confirm = GameRunner.reader.readLine();
             if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                 try {
-                    rooms = Json.generateRooms();
+                    rooms = generateRooms();
+                    player = generatePlayer();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

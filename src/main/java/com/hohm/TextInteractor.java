@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.hohm.GameInit.player;
 import static com.hohm.GameRunner.*;
 
 public class TextInteractor {
