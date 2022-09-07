@@ -94,8 +94,14 @@ public class GameRunner {
             }
         }
         if(newGame){
+            //Resetting everything in the game so that all the rooms are rebuilt from scratch
             player.setRoom("hallway");
             player.setItems(startingItems);
+            try {
+                rooms = Json.generateRooms();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             newGame = false;
             run();
         }else{

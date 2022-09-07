@@ -16,6 +16,7 @@ public class TextInteractor {
 
 
     public static void go(String input, MemeRoom currentRoom) throws IOException {
+        //TODO this can be simplified and based on what's in the JSON file rather than hard coded
         if (input.toLowerCase().contains("kitchen") && Arrays.asList(currentRoom.getExit()).contains("kitchen")) {
             player.setRoom("kitchen");
             printSeparator();
@@ -28,7 +29,11 @@ public class TextInteractor {
         } else if (input.toLowerCase().contains("hallway") && Arrays.asList(currentRoom.getExit()).contains("hallway")) {
             player.setRoom("hallway");
             printSeparator();
-        } else {
+        } else if(input.toLowerCase().contains("basement") && Arrays.asList(currentRoom.getExit()).contains("basement")){
+            player.setRoom("basement");
+            printSeparator();
+        }
+        else {
             printSeparator();
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
