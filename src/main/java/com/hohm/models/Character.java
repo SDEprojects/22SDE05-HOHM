@@ -7,6 +7,9 @@ public abstract class Character {
     private String[] items;
     private String room;
 
+    public Character(){
+
+    }
     public Character(String name, String[] items, String room) {
         this.name = name;
         this.items = items;
