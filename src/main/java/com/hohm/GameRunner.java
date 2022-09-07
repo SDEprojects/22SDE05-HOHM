@@ -105,8 +105,9 @@ public class GameRunner {
 
     public static void musicPlayer(){
         try{
-            //TODO - this may need to be refactored to work with a JAR file
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/background.wav"));
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream musicStream = classLoader.getResourceAsStream("background.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(musicStream);
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.setMicrosecondPosition(0);
