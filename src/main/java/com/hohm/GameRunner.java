@@ -140,7 +140,7 @@ public class GameRunner {
         } else if (goTo.contains(inputArr[0])) {
             go(input, currentRoom);
         } else if (lookAt.contains(inputArr[0])) {
-            look(input);
+            look(input, currentRoom);
         } else if (input.contains("get")) {
             get(input, currentRoom);
         } else if (input.contains("use")) {

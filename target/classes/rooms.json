@@ -29,7 +29,7 @@
         "complete": false
       },
       "clueFound": {
-        "incomplete": "The flames are gone, and you look around the charred kitchen\nThe dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
+        "incomplete": "You look around the charred kitchen\nThe dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
         "complete": false
       }
     },
@@ -41,7 +41,7 @@
       "coffee mug": {
         "prereq": "check complete",
         "type": "misc",
-        "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away, it is half full of piping hot coffee.",
+        "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away.\nIt seems to be half full of piping hot coffee.",
         "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...",
         "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire..."
       },
