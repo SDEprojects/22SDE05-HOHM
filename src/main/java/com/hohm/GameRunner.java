@@ -13,51 +13,19 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.hohm.MusicPlayer.musicPlayer;
+import static com.hohm.GameInit.player;
+import static com.hohm.GameInit.startingItems;
 import static com.hohm.TextInteractor.*;
 
 
 public class GameRunner {
     //Creating game objects to reference during game play
-    static String[] startingItems = {"bucket"};
-    public static int clueCount = 0;
-    public static Player player = new Player("noob", startingItems, "hallway");
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    public static Map<String, MemeRoom> rooms;
-    public static FloatControl gainControl;
-    public static ClassLoader classLoader;
-    public static Clip clip;
-
-    static {
-        try {
-            rooms = Json.generateRooms();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static void gameInit() throws IOException {
-
-        while (true) {
-            System.out.print("Would you like to start a new game (y/n)?: ");
-            String confirm = reader.readLine();
-            if (confirm.toLowerCase().equals("y") || confirm.toLowerCase().equals("yes")) {
-                System.out.println();
-                printSeparator();
-                GameRunner.run();
-                break;
-            } else if (confirm.toLowerCase().equals("n") || confirm.toLowerCase().equals("no")) {
-                System.out.println("That's unfortunate, we hope to meme with you again soon!");
-                break;
-            } else {
-                System.out.println("That wasn't valid input... \n");
-            }
-        }
-    }
 
     public static void run() throws IOException {
         boolean newGame = false;
         UtilLoader.startText();
+        GameRunner.musicPlayer();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
@@ -71,7 +39,7 @@ public class GameRunner {
                 break;
 
             } else {
-                MemeRoom currentRoom = rooms.get(player.getRoom());
+                MemeRoom currentRoom = GameInit.rooms.get(player.getRoom());
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
@@ -80,7 +48,6 @@ public class GameRunner {
                     }else{
                         System.out.println(currentRoom.getDescription().get(currentItem[0]));
                     }
-
                 }
 
                 System.out.print(">");
@@ -89,7 +56,7 @@ public class GameRunner {
                 String userInput = reader.readLine();
 
                 //handle logic based on user input
-                if (userInput.toLowerCase().equals("quit")) {
+                if (userInput.equalsIgnoreCase("quit")) {
                     break;
                 } else {
                     parseText(userInput, currentRoom);
@@ -97,8 +64,14 @@ public class GameRunner {
             }
         }
         if(newGame){
+            //Resetting everything in the game so that all the rooms are rebuilt from scratch
             player.setRoom("hallway");
             player.setItems(startingItems);
+            try {
+                GameInit.rooms = Json.generateRooms();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             newGame = false;
             run();
         }else{
@@ -116,6 +89,8 @@ public class GameRunner {
 
         String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
         String lookAt = String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
+        String getIt = String.valueOf(node.get("get")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
+        String useIt = String.valueOf(node.get("use")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
         String[] inputArr = input.toLowerCase().strip().split(" ");
 
         if (input.equalsIgnoreCase("help")) {
@@ -123,10 +98,10 @@ public class GameRunner {
         } else if (goTo.contains(inputArr[0])) {
             go(input, currentRoom);
         } else if (lookAt.contains(inputArr[0])) {
-            look(input);
-        } else if (input.contains("get")) {
+            look(input, currentRoom);
+        } else if (getIt.contains(inputArr[0])) {
             get(input, currentRoom);
-        } else if (input.contains("use")) {
+        } else if (useIt.contains(inputArr[0])) {
             use(input, currentRoom);
         }
         else if (input.contains("talk")) {
@@ -139,9 +114,23 @@ public class GameRunner {
             } catch (LineUnavailableException e) {
                 throw new RuntimeException(e);
             }
-        } else if (input.contains("save")) {
-            Save.save(rooms);
-            System.out.println("You have saved the room state");
+        }
+        else if (input.contains("save")) {
+            File savedRooms = new File("saved_data/saved_Rooms.json");
+            savedRooms.getParentFile().mkdirs();
+            if (!savedRooms.createNewFile()) {
+                System.out.print("You already have saved files, would you like to overwrite (y/n)?: ");
+                String saveConfirm = reader.readLine();
+                if (saveConfirm.equalsIgnoreCase("y") || saveConfirm.equalsIgnoreCase("yes")) {
+                    Save.save();
+                    System.out.println("You have saved your game.");
+                } else {
+                    System.out.println("You have chosen not to overwrite");
+                }
+            } else {
+                Save.save();
+                System.out.println("You have saved your game");
+            }
         }
         else if (input.contains("where am i")) {
             printSeparator();
