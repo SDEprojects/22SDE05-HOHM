@@ -15,8 +15,7 @@ import static com.hohm.TextInteractor.*;
 public class GameRunner {
     //Creating game objects to reference during game play
     static String[] startingItems = {"bucket"};
-    public static int clueCount = 0;
-    public static Player player = new Player("noob", startingItems, "hallway");
+    public static Player player = new Player("noob", startingItems, "hallway",0);
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void run() throws IOException {
