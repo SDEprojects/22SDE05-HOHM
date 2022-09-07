@@ -4,14 +4,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.*;
-import java.util.Arrays;
+import javax.sound.sampled.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.hohm.MusicPlayer.musicPlayer;
 import static com.hohm.TextInteractor.*;
 
 
@@ -22,6 +23,9 @@ public class GameRunner {
     public static Player player = new Player("noob", startingItems, "hallway");
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     public static Map<String, MemeRoom> rooms;
+    public static FloatControl gainControl;
+    public static ClassLoader classLoader;
+    public static Clip clip;
 
     static {
         try {
@@ -54,7 +58,6 @@ public class GameRunner {
     public static void run() throws IOException {
         boolean newGame = false;
         UtilLoader.startText();
-        GameRunner.musicPlayer();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
@@ -103,21 +106,7 @@ public class GameRunner {
         }
     }
 
-    public static void musicPlayer(){
-        try{
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream musicStream = classLoader.getResourceAsStream("background.wav");
-            InputStream bufferedMusic = new BufferedInputStream(musicStream);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedMusic);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.setMicrosecondPosition(0);
-            clip.start();
-        }
-        catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     public static void parseText(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -142,8 +131,15 @@ public class GameRunner {
         }
         else if (input.contains("talk")) {
             talk(input,currentRoom);
-        }
-        else if (input.contains("save")) {
+        } else if (input.contains("music") || input.contains("volume")) {
+            try {
+                musicPlayer(input);
+            } catch (UnsupportedAudioFileException e) {
+                throw new RuntimeException(e);
+            } catch (LineUnavailableException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (input.contains("save")) {
             Save.save(rooms);
             System.out.println("You have saved the room state");
         }
