@@ -37,17 +37,12 @@ public class TextInteractor {
             if(rooms.get(player.getRoom()).getComplete()){
                 System.out.println(rooms.get(player.getRoom()).getDescription().get("memeComplete"));
             }
-            if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
+            else if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
                 System.out.println(rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
-            } else if(!rooms.get(player.getRoom()).getComplete()){
+            } else {
                 System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
             }
-            else {
-
-            }
         }
-
-
     }
 
     public static void look(String input) throws IOException {
@@ -84,11 +79,12 @@ public class TextInteractor {
                 String objType = currentRoom.getItems().get(key[1]).get("type");
 
                 if (objComplete && objType.equals("misc")) {
-                    System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
-                    rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
                     String[] items = {key[1]};
-                    checkComplete(currentRoom);
                     player.setItems(items);
+                    rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
+                    checkComplete(currentRoom);
+                    printSeparator();
+                    System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
                 } else if(objComplete && objType.equals("clue")){
                     clueCount++;
@@ -104,9 +100,11 @@ public class TextInteractor {
             }
             else {
                 System.out.printf("You are unable to get the %s... whatever that is%n%n", key[1]);
+                System.out.println("PROBLEM HERE");
             }
         } catch (NullPointerException e) {
             System.out.printf("You are unable to get the %s... whatever that is%n%n", key[1]);
+            System.out.println("PROBLEM HERE NULL");
         }
 
     }
@@ -167,7 +165,6 @@ public class TextInteractor {
         Map<String, Map<String, String>> objectives = rooms.get(currentRoom.getTitle()).getObjectives();
         if(objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")){
             rooms.get(currentRoom.getTitle()).setComplete(true);
-            System.out.println(rooms.get(currentRoom.getTitle()).getComplete());
         }
     }
     public static void printSeparator(){

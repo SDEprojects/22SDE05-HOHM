@@ -105,12 +105,12 @@ public class GameRunner {
 
     public static void musicPlayer(){
         try{
+            //TODO - this may need to be refactored to work with a JAR file
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/background.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.setMicrosecondPosition(0);
             clip.start();
-            System.out.println("should be playing music");
         }
         catch(Exception e) {
             throw new RuntimeException(e);
