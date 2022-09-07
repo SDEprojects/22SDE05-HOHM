@@ -73,7 +73,6 @@ public class TextInteractor {
         String[] key = input.split(" ", 2);
         try {
             if (currentRoom.getItems().containsKey(key[1])) {
-                System.out.println(key[1]);
                 String objective = currentRoom.getItems().get(key[1]).get("prereq");
                 boolean objComplete = Boolean.parseBoolean(currentRoom.getObjectives().get(objective).get("complete"));
                 String objType = currentRoom.getItems().get(key[1]).get("type");
