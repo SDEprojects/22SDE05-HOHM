@@ -85,12 +85,14 @@
     "items": {
       "dice": {
         "prereq": "check complete",
+        "type": "misc",
         "description": "My dice don't jiggle jiggle they roll.",
         "prereqMet": "You got the dice off the desk, they aren't like your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.",
         "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the Emotional Damage sinks in."
       },
       "sticky note": {
         "prereq": "check complete",
+        "type": "clue",
         "description": "An old worn out sticky note sits on the table.\nSeems like something important is jotted on it",
         "prereqMet": "You look at the note, written in pencil is the following\n'...23', you make a mental note of the numbers",
         "prereqNotMet": "You look like a guy who would wear a 'Free hugs' sign\nFree hugs? go hug a cactus!\nThat one hurt really bad, you die from emotional damage"
