@@ -33,14 +33,14 @@ public class TextInteractor {
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
 
-        if (!Objects.equals(rooms.get(player.getRoom()).getTitle(), "hallway")) {
-            if(rooms.get(player.getRoom()).getComplete()){
-                System.out.println(rooms.get(player.getRoom()).getDescription().get("memeComplete"));
+        if (!Objects.equals(GameInit.rooms.get(player.getRoom()).getTitle(), "hallway")) {
+            if(GameInit.rooms.get(player.getRoom()).getComplete()){
+                System.out.println(GameInit.rooms.get(player.getRoom()).getDescription().get("memeComplete"));
             }
-            else if (rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
-                System.out.println(rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
+            else if (GameInit.rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
+                System.out.println(GameInit.rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
             } else {
-                System.out.println(rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
+                System.out.println(GameInit.rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
             }
         }
     }
@@ -55,10 +55,10 @@ public class TextInteractor {
         if (input.contains("room")) {
             if (player.getRoom().equals("hallway")) {
                 //Pass, description is handled in the start of the game loop
-            } else if (String.valueOf(rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete")).equals("false")) {
-                System.out.println(rooms.get(player.getRoom()).getObjectives().get("check complete").get("incomplete"));
+            } else if (String.valueOf(GameInit.rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete")).equals("false")) {
+                System.out.println(GameInit.rooms.get(player.getRoom()).getObjectives().get("check complete").get("incomplete"));
             } else {
-                System.out.println(rooms.get(player.getRoom()).getObjectives().get("check complete").get("completed"));
+                System.out.println(GameInit.rooms.get(player.getRoom()).getObjectives().get("check complete").get("completed"));
             }
 
         } else if (input.contains(itemDes)) {
@@ -80,14 +80,14 @@ public class TextInteractor {
                 if (objComplete && objType.equals("misc")) {
                     String[] items = {key[1]};
                     player.setItems(items);
-                    rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
+                    GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
                     checkComplete(currentRoom);
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                     System.out.println("You now have: " + Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", ""));
                 } else if(objComplete && objType.equals("clue")){
                     clueCount++;
-                    rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
+                    GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
                     checkComplete(currentRoom);
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
@@ -161,9 +161,9 @@ public class TextInteractor {
     }
 
     public static void checkComplete(MemeRoom currentRoom){
-        Map<String, Map<String, String>> objectives = rooms.get(currentRoom.getTitle()).getObjectives();
+        Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();
         if(objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")){
-            rooms.get(currentRoom.getTitle()).setComplete(true);
+            GameInit.rooms.get(currentRoom.getTitle()).setComplete(true);
         }
     }
     public static void printSeparator(){
@@ -172,7 +172,7 @@ public class TextInteractor {
         String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sClues Found: %s"
                 , player.getRoom().toUpperCase()
                 , "", player.getItems()[0].toUpperCase()
-                , "", String.valueOf(clueCount));
+                , "", clueCount);
         System.out.println(dash);
         System.out.println(printSeparator);
         System.out.println(dash);

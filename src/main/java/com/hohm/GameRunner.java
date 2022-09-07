@@ -3,13 +3,10 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
-
 import java.io.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
 
 import static com.hohm.TextInteractor.*;
@@ -21,17 +18,6 @@ public class GameRunner {
     public static int clueCount = 0;
     public static Player player = new Player("noob", startingItems, "hallway");
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    public static Map<String, MemeRoom> rooms;
-
-    // Any way we can do this at the start of a game rather then when Gamerunner is called
-    static {
-        try {
-            rooms = Json.generateRooms();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 
     public static void run() throws IOException {
         boolean newGame = false;
@@ -50,7 +36,7 @@ public class GameRunner {
                 break;
 
             } else {
-                MemeRoom currentRoom = rooms.get(player.getRoom());
+                MemeRoom currentRoom = GameInit.rooms.get(player.getRoom());
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
@@ -59,7 +45,6 @@ public class GameRunner {
                     }else{
                         System.out.println(currentRoom.getDescription().get(currentItem[0]));
                     }
-
                 }
 
                 System.out.print(">");
@@ -68,7 +53,7 @@ public class GameRunner {
                 String userInput = reader.readLine();
 
                 //handle logic based on user input
-                if (userInput.toLowerCase().equals("quit")) {
+                if (userInput.equalsIgnoreCase("quit")) {
                     break;
                 } else {
                     parseText(userInput, currentRoom);
@@ -127,13 +112,20 @@ public class GameRunner {
         }
         else if (input.contains("save")) {
             File savedRooms = new File("saved_data/saved_Rooms.json");
-            Boolean checkFolder = savedRooms.getParentFile().mkdirs();
+            savedRooms.getParentFile().mkdirs();
             if (!savedRooms.createNewFile()) {
-                System.out.println("You already have saved files, would you like to overwrite?");
+                System.out.print("You already have saved files, would you like to overwrite (y/n)?: ");
+                String saveConfirm = reader.readLine();
+                if (saveConfirm.equalsIgnoreCase("y") || saveConfirm.equalsIgnoreCase("yes")) {
+                    Save.save((GameInit.rooms));
+                    System.out.println("You have saved your game.");
+                } else {
+                    System.out.println("You have chosen not to overwrite");
+                }
             } else {
-                Save.save(rooms);
+                Save.save(GameInit.rooms);
+                System.out.println("You have saved your game");
             }
-            System.out.println("You have saved the room state");
         }
         else if (input.contains("where am i")) {
             printSeparator();
