@@ -94,8 +94,14 @@ public class GameRunner {
             }
         }
         if(newGame){
+            //Resetting everything in the game so that all the rooms are rebuilt from scratch
             player.setRoom("hallway");
             player.setItems(startingItems);
+            try {
+                rooms = Json.generateRooms();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             newGame = false;
             run();
         }else{
@@ -134,7 +140,7 @@ public class GameRunner {
         } else if (goTo.contains(inputArr[0])) {
             go(input, currentRoom);
         } else if (lookAt.contains(inputArr[0])) {
-            look(input);
+            look(input, currentRoom);
         } else if (input.contains("get")) {
             get(input, currentRoom);
         } else if (input.contains("use")) {
