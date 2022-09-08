@@ -33,7 +33,7 @@ public class GameInit {
                         throw new RuntimeException(e);
                     }
                     printSeparator();
-                    MusicPlayer.musicPlayer("start");
+                    MusicPlayer.play();
                     GameRunner.run();
                     break;
                 }
@@ -50,7 +50,7 @@ public class GameInit {
                 System.out.println();
                 printSeparator();
                 UtilLoader.utilPrint("begin story");
-                MusicPlayer.musicPlayer("start");
+                MusicPlayer.play();
                 GameRunner.run();
                 break;
             } else if (confirm.equalsIgnoreCase("n") || confirm.equalsIgnoreCase("no")) {

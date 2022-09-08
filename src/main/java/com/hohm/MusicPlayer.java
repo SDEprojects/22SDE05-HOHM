@@ -5,6 +5,8 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.hohm.TextInteractor.printSeparator;
+
 public class MusicPlayer {
     public static FloatControl gainControl;
     public static ClassLoader classLoader;
