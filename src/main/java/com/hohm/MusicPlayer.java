@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MusicPlayer {
-
     public static FloatControl gainControl;
     public static ClassLoader classLoader;
     public static Clip clip;
-
+    //Able to play music with a .wav file using javax
     public static void musicPlayer(String input) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        //controller for the music player
         if (input.contains("start")) {
             play();
         } else if (input.contains("stop")) {
@@ -26,8 +26,9 @@ public class MusicPlayer {
             System.out.println("Sorry music player might not have that ability.");
         }
     }
-
+    // Plays the music starting the game.
     public static void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        //Uses input stream->buffer for jar file, creates a clip that you're able to play,stop,volume up/down.
         classLoader = Thread.currentThread().getContextClassLoader();
         InputStream musicStream = classLoader.getResourceAsStream("background.wav");
         InputStream bufferedMusic = new BufferedInputStream(musicStream);
@@ -38,22 +39,27 @@ public class MusicPlayer {
         clip.start();
         clip.loop(clip.LOOP_CONTINUOUSLY);
     }
-
     public static void stops() {
+        //stops the current clip
         clip.stop();
     }
-
     public static void volumeIncrease() {
-        gainControl.setValue(6.0f);
+        //increases the volume
+        float currentVolume = gainControl.getValue();
+        if (currentVolume+1.0 <= 6.0) {
+            gainControl.setValue(currentVolume+1);
+        }
     }
-
     public static void volumeDecrease() {
-        gainControl.setValue(-10.0f);
+        //decreases the volume
+        float currentVolume = gainControl.getValue();
+        if(currentVolume-5 > -75) {
+            gainControl.setValue(currentVolume-5);
+        }
     }
-
     public static void volumeNormal() {
+        //resets the volume
         gainControl.setValue(0.0f);
     }
-
 }
 
