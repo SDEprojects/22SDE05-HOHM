@@ -56,7 +56,7 @@ public class TextParser {
         } else if (input.contains("where am i")) {
             printSeparator();
             UtilLoader.mapPrint(currentRoom.getTitle());
-        } else if (input.contains("music")) {
+        } else if (input.contains("music") || input.contains("volume")) {
             MusicPlayer.musicPlayer(input);
         } else {
             System.out.println("Please enter a valid command");
