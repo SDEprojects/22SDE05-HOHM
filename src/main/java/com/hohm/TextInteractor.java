@@ -3,12 +3,13 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hohm.models.MemeRoom;
+
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.hohm.GameInit.player;
+
 
 public class TextInteractor {
 
@@ -31,12 +32,13 @@ public class TextInteractor {
             printSeparator();
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
+
     }
 
     public static void look(String input, MemeRoom currentRoom) throws IOException {
-        String[] currentItems = player.getItems();
+        String [] currentItems = player.getItems();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode dialogue = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
+        JsonNode description = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
 
         try{
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
@@ -50,27 +52,25 @@ public class TextInteractor {
             printSeparator();
             //Do Nothing if there is a null pointer exception
         }
-        try {
-            if (input.contains("doge")) {
-                if (currentRoom.getTitle().equals("kitchen")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("doge").get("dialogue");
-                }
-            } else if (input.contains("kermit")) {
-                if (currentRoom.getTitle().equals("diningroom")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("kermit").get("dialogue");
-                }
-            } else if (input.contains("cat")) {
-                if (currentRoom.getTitle().equals("living room")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("grumpycat").get("dialogue");
-                }
-            } else {
-                System.out.println("There's no one of that name here.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("You can't look that person...");
-        }
 
-        if (input.contains("room")) {
+        if(input.contains("inventory")){
+            System.out.println("Inventory: "+ Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""));
+        } else if (input.contains(Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""))) {
+            String itemLookUp = Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", "");
+            System.out.println(description.get("items").get(itemLookUp));
+        } else if (input.contains("doge")||input.contains("dog")) {
+            if (currentRoom.getTitle().equals("kitchen")) {
+                System.out.println(description.get("doge").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
+            }
+        } else if (input.contains("kermit")||input.contains("frog")) {
+            if (currentRoom.getTitle().equals("diningroom")) {
+                System.out.println(description.get("kermit").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
+            }
+        } else if (input.contains("cat")||input.contains("grumpy")) {
+            if (currentRoom.getTitle().equals("livingroom")) {
+                System.out.println(description.get("grumpycat").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
+                }
+        } else if (input.contains("room")) {
             if (player.getRoom().equals("hallway") || player.getRoom().equals("basement")) {
                 //Do nothing, description is handled in the start of the game loop
             } else if (currentRoom.getComplete()) {
