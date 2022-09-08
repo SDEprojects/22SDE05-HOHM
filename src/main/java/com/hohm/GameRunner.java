@@ -1,13 +1,16 @@
 package com.hohm;
 
 import com.hohm.models.MemeRoom;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import java.util.Objects;
 
-import static com.hohm.GameInit.*;
+import static com.hohm.GameInit.player;
+import static com.hohm.GameInit.startingItems;
+import static com.hohm.MusicPlayer.musicPlayer;
+import static com.hohm.TextInteractor.*;
 
 
 public class GameRunner {
@@ -16,7 +19,6 @@ public class GameRunner {
 
     public static void run() throws IOException {
         boolean restartGame = false;
-        GameRunner.musicPlayer();
         //Initiating the game loop
         while (true) {
             //Current room starts as the hallway
@@ -71,20 +73,6 @@ public class GameRunner {
         }
     }
 
-    public static void musicPlayer(){
-        try{
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream musicStream = classLoader.getResourceAsStream("background.wav");
-            InputStream bufferedMusic = new BufferedInputStream(musicStream);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedMusic);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.setMicrosecondPosition(0);
-            clip.start();
-        }
-        catch(Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
 }
