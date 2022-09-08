@@ -5,7 +5,7 @@
       "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.",
       "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nThree rooms lie ahead of you, The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.",
       "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.",
-      "cat nip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.",
+      "catnip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.",
       "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
     },
     "exit": [
@@ -63,13 +63,13 @@
     "title": "living room",
     "description": {
       "memeComplete": "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
-      "memeIncomplete": "You enter and feel a presence slightly judging you.\nI had fun once.. it was awful.\n -Cat"
+      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nThe room is as grey as it can be like if someone were to suck the fun out of this place.\nI've never felt this before..\nBehind the cat you see a desk with a sticky note and a keyboard"
     },
     "objectives": {
       "check complete": {
-        "useItem": "cat nip",
+        "useItem": "catnip",
         "completed": "You give the cat catnip, he seems to be less grumpy.",
-        "incomplete": "I think this grumpy cat needs something, we should get cat-nip for the cat!",
+        "incomplete": "I think this grumpy cat needs something, we should get catnip for the cat!",
         "complete": false
       },
       "itemFound": {
@@ -77,7 +77,7 @@
         "complete": false
       },
       "clueFound": {
-        "completed": "There's a sticky note with \"Password = *23*\".",
+        "completed": "There's a sticky note with \"Password = *23*\" on the desk with some dice that seem a bit off.",
         "incomplete": "I should search the desk to find some clues.",
         "complete": false
       }
@@ -106,18 +106,18 @@
   "dining": {
     "title": "diningroom",
     "description": {
-      "memeIncomplete": "You enter the dining room and oddly sitting at the head of the table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo cat nip.\nAbove you is a chandelier with an odd number of dangling jewels.",
-      "memeComplete": "Kermit has left, and you have retrieved the primo cat nip.\nAll that is left is the odd chandelier."
+      "memeIncomplete": "You enter the dining room and oddly sitting at the head of the table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo catnip.\nAbove you is a chandelier with an odd number of dangling jewels.",
+      "memeComplete": "Kermit has left, and you have retrieved the primo catnip.\nAll that is left is the odd chandelier."
     },
     "objectives": {
       "check complete": {
         "useItem": "coffee mug",
         "completed": "Kermit accepts your offering, and sips his coffee.\nHe slaps his knees and says 'Welp, better head out' and leaves the room",
-        "incomplete": "At the foot of the table you notice a small bowl.\nFrom your cat wrangling days, you recognize what looks to be some primo cat nip rested in the bowl\nAbove you is a chandelier with an odd number of dangling jewels.",
+        "incomplete": "At the foot of the table you notice a small bowl.\nFrom your cat wrangling days, you recognize what looks to be some primo catnip rested in the bowl\nAbove you is a chandelier with an odd number of dangling jewels.",
         "complete": false
       },
       "itemFound": {
-        "incomplete": "There's that primo plate, just waiting for you to take the cat nip.",
+        "incomplete": "There's that primo plate, just waiting for you to take the catnip.",
         "complete": false
       },
       "clueFound": {
@@ -126,7 +126,7 @@
       }
     },
     "items": {
-      "cat nip": {
+      "catnip": {
         "prereq": "check complete",
         "type": "misc",
         "description": "The most exquisite, finely plated catnip to exist in the metaverse",
