@@ -4,20 +4,21 @@ import com.hohm.models.MemeRoom;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 import static com.hohm.GameInit.player;
 import static com.hohm.GameInit.startingItems;
-import static com.hohm.MusicPlayer.musicPlayer;
-import static com.hohm.TextInteractor.*;
+import static com.hohm.GameInit.rooms;
 
 
 public class GameRunner {
     //Creating game objects to reference during game play
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void run() throws IOException {
+    public static void run() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         boolean restartGame = false;
         //Initiating the game loop
         while (true) {
@@ -26,7 +27,7 @@ public class GameRunner {
                 System.out.println("Seems you have died... how very unfortunate. Would you like to play again (y/n)?");
                 System.out.print(">");
                 String playAgain = reader.readLine();
-                if(playAgain.equals("y") || playAgain.equals("yes")){
+                if (playAgain.equals("y") || playAgain.equals("yes")) {
                     restartGame = true;
                 }
                 break;
@@ -36,9 +37,9 @@ public class GameRunner {
                 //Check room and check user inventory if hallway
                 if (currentRoom.getTitle().equals("hallway")) {
                     String[] currentItem = player.getItems();
-                    if(Objects.equals(currentItem[0], "[]")){
+                    if (Objects.equals(currentItem[0], "[]")) {
                         System.out.println(currentRoom.getDescription().get("nullHallway"));
-                    }else{
+                    } else {
                         System.out.println(currentRoom.getDescription().get(currentItem[0]));
                     }
                 }
@@ -56,7 +57,7 @@ public class GameRunner {
                 }
             }
         }
-        if(restartGame){
+        if (restartGame) {
             //Resetting everything in the game for game restart
             player.setRoom("hallway");
             player.setItems(startingItems);
@@ -68,11 +69,8 @@ public class GameRunner {
             }
             restartGame = false;
             run();
-        }else{
+        } else {
             System.out.println("Thanks for playing, we hope to meme with you again soon!");
         }
     }
-
-
-
 }

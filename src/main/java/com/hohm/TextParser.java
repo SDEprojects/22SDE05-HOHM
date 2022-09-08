@@ -3,6 +3,8 @@ package com.hohm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.models.MemeRoom;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +13,7 @@ import static com.hohm.TextInteractor.*;
 
 public class TextParser {
 
-    public static void parseText(String input, MemeRoom currentRoom) throws IOException {
+    public static void parseText(String input, MemeRoom currentRoom) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream utils = classLoader.getResourceAsStream("utils.json");
         JsonNode node = Generator.parse(utils);
@@ -33,11 +35,9 @@ public class TextParser {
             get(input, currentRoom);
         } else if (useIt.contains(inputArr[0])) {
             use(input, currentRoom);
-        }
-        else if (input.contains("talk")) {
-            talk(input,currentRoom);
-        }
-        else if (input.contains("save")) {
+        } else if (input.contains("talk")) {
+            talk(input, currentRoom);
+        } else if (input.contains("save")) {
             File savedRooms = new File("saved_data/saved_Rooms.json");
             savedRooms.getParentFile().mkdirs();
             if (!savedRooms.createNewFile()) {
@@ -53,10 +53,11 @@ public class TextParser {
                 Save.save();
                 System.out.println("You have saved your game");
             }
-        }
-        else if (input.contains("where am i")) {
+        } else if (input.contains("where am i")) {
             printSeparator();
             UtilLoader.mapPrint(currentRoom.getTitle());
+        } else if (input.contains("music")) {
+            MusicPlayer.musicPlayer(input);
         } else {
             System.out.println("Please enter a valid command");
             UtilLoader.utilPrint("help");

@@ -176,7 +176,9 @@ public class TextInteractor {
             System.out.println("You can't talk to that person...");
         }
     }
+    public static void description(){
 
+    }
     public static void checkComplete(MemeRoom currentRoom) {
         Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();
         if (objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")) {

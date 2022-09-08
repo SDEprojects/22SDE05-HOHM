@@ -2,6 +2,9 @@ package com.hohm;
 
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -15,7 +18,7 @@ public class GameInit {
     public static Player player;
     public static Map<String, MemeRoom> rooms;
 
-    public static void gameInit() throws IOException {
+    public static void gameInit() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         while (true) {
             File saved = new File("saved_data/saved_Rooms.json");
@@ -30,6 +33,7 @@ public class GameInit {
                         throw new RuntimeException(e);
                     }
                     printSeparator();
+                    MusicPlayer.musicPlayer("start");
                     GameRunner.run();
                     break;
                 }
@@ -46,6 +50,7 @@ public class GameInit {
                 System.out.println();
                 printSeparator();
                 UtilLoader.utilPrint("begin story");
+                MusicPlayer.musicPlayer("start");
                 GameRunner.run();
                 break;
             } else if (confirm.equalsIgnoreCase("n") || confirm.equalsIgnoreCase("no")) {
