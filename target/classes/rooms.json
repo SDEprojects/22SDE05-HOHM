@@ -1,101 +1,155 @@
 {
-    "hallway": {
-        "title": "hallway",
-        "description": {
-            "bucket": "You are in the entry way, the door is firmly shut behind you, no way out!!\nThree rooms lie ahead of you, The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.",
-            "coffee mug": "The door remains firmly shut and the smoke has vanished, from the Dining room you hear the sounds of a grumpy tired muppet.",
-            "cat-nip": "You hear a loud MEEOWW from the Living Room.",
-            "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
-        },
-        "exit": ["kitchen", "living room", "dining room"],
-        "complete": false
+  "hallway": {
+    "title": "hallway",
+    "description": {
+      "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.",
+      "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nThree rooms lie ahead of you, The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.",
+      "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.",
+      "cat nip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.",
+      "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
     },
-    
-    "kitchen":{
-        "title": "kitchen",
-        "objectives":{
-            "check complete":{
-                "useItem": "bucket",
-                "completed":"You toss the watery contents of the bucket on the flames and watch as they flicker and sizzle away. The dog smiles at you and tips his hat, as his apparition dissapears his hat falls to the ground and his coffee mug sits on the table unattended",
-                "incomplete":"As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them",
-                "complete": false
-            }
-        },
-        "description": {
-            "memeComplete" : "The charred walls of the kitchen remind you of the odd scene you saw here, nothing is left but the door... taunting you to open and enter into the basement to discover the mysteries within...", 
-            "memeIncomplete" : "You enter the kitchen and see flames, flames everywhere!!\nIn the middle of the room sits a dog wearing a sweet fedora sitting in a chair.\nNext to him is a piping hot mug of coffee.\nHe rocks back and forth muttering to himself 'This is fine, this is fine'"
-        },
-        "items":{
-            "coffee mug":{
-                "prereq": "check complete",
-                "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away, it is half full of piping hot coffee.",
-                "prereqMet":"You reach out and grab the mug, you carefully stash it in your bag and notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it", 
-                "prereqNotMet":"The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire..."
-            }
-        },
-        "exit": ["hallway", "basement"],
+    "exit": [
+      "kitchen",
+      "living room",
+      "dining room"
+    ],
+    "complete": false
+  },
+  "kitchen": {
+    "title": "kitchen",
+    "objectives": {
+      "check complete": {
+        "useItem": "bucket",
+        "completed": "You toss the watery contents of the bucket on the flames.\nThe yellow light flickers and sizzles away.\nThe dog smiles at you and tips his hat, as his apparition disappears.\nHis hat falls to the ground and his coffee mug sits on the table unattended",
+        "incomplete": "As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them",
         "complete": false
+      },
+      "itemFound": {
+        "incomplete": "On the table sits the half full coffee mug.\nThe sweet aroma reminds you of grandma's coffee.",
+        "complete": false
+      },
+      "clueFound": {
+        "incomplete": "You look around the charred kitchen\nThe dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
+        "complete": false
+      }
     },
-
-    "livingroom": {
-        "title": "living room",
-        "description": {
-            "memeComplete" : "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat", 
-            "memeIncomplete" : "You enter and feel a presence slightly judging you. \n I had fun once.. it was awful.\n -Cat"
-        },
-        "objectives": {
-            "check complete": {
-                "useItem" : "cat nip",
-                "completed": "You give the cat catnip, he seems to be less grumpy.",
-                "incomplete": "I think this grumpy cat needs something, we should get cat-nip for the cat!",
-                "complete" : false
-            },
-            "clueFound":{
-                "completed" : "There's a sticky note with \"Password = *23*\".",
-                "incomplete" : "I should search the desk to find some clues.",
-                "complete" : false
-            }
-        },
-        "items": {
-            "Dice": {
-                "prereq": "check complete",
-                "description": "My dice don't jiggle jiggle they roll.",
-                "prereqMet": "You got the dice off the desk, they aren't your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.",
-                "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the Emotional Damage sinks in."
-            }
-        },
-        "exit": ["hallway"],
-        "complete": false
+    "description": {
+      "memeComplete": "The charred walls of the kitchen remind you of the odd scene you saw here\nNothing is left but the basement door... taunting you to open and discover the mysteries within...",
+      "memeIncomplete": "You enter the kitchen and see flames, flames everywhere!!\nIn the middle of the room sits a dog wearing a sweet fedora sitting in a chair.\nNext to him is a coffee mug full of piping hot coffee.\nHe rocks back and forth muttering to himself 'This is fine, this is fine'"
     },
-
-    "diningroom": {
-        "title": "dining room",
-        "description": {
-            "memeIncomplete": "You enter the dining room and see at the head of the table you see Kermit the Frog. Kermit seems groggy and turns to give you a blank stare while waiting for your next action",
-            "memeComplete": "Kermit is no longer here all you see is the dining table and chandelier"
-        },
-        "objectives": {
-            "check complete": {
-                "useItem": "coffee mug",
-                "completed":"Kermit accepts your offering, sips his coffee and leaves the room",
-                "incomplete": "At the foot of the table you notice a small bowl with something inside of it, and chandelier with an odd number of dangling jewels.",
-                "complete": false
-            },
-            "clueFound": {
-                "completed": "There are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7",
-                "incomplete": "Have a closer look at the chandelier",
-                "complete": false
-            }
-        },
-        "items": {
-            "catnip": {
-                "prereq": "check complete",
-                "description": "The most exquisite, finely plated catnip to exist in the metaverse",
-                "prereqMet": "You carefully grab the plate so as to not disturb the aesthetics of the catnip and place it into your inventory.",
-                "prereqNotMet": "You reach for the plate of exquisite catnip when Kermit stares at you... Kermit starts to mumble and your hands stops before reaching the plate... 'You... G... Succeed...' Kermit continues to stare into your soul and speaks clearly, 'Really breh? It seems you wont go too far in life. How you gonna get stuck in a haunted house and not even consider breaking the walls or windows first? Can you even think? You probably a B rated student at best, B for BELOW AVERAGE. Get gud kid. You die from emotional damage."            
-            }
-        },
-        "exit": ["hallway"],
+    "items": {
+      "coffee mug": {
+        "prereq": "check complete",
+        "type": "misc",
+        "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away.\nIt seems to be half full of piping hot coffee.",
+        "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...",
+        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire..."
+      },
+      "fedora": {
+        "prereq": "check complete",
+        "type": "clue",
+        "description": "That's one cool cap!\nIt may fit you but you would have to get it to check out the tag for the size.",
+        "prereqMet": "You look and see a faint scribble on the inner brim of the fedora, 'Door Code: MR....'\nSome of the other characters have faded..",
+        "prereqNotMet": "You try to yank the fedora off the dog.\nLooks like that was the straw that broke the camel's back\n'NOT OKAY DUDE' he yells... your people pleasing heart is broken, you die from that heartbreaking emotional damage"
+      }
+    },
+    "exit": [
+      "hallway",
+      "basement"
+    ],
+    "complete": false
+  },
+  "livingroom": {
+    "title": "livingroom",
+    "description": {
+      "memeComplete": "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
+      "memeIncomplete": "You enter and feel a presence slightly judging you.\nI had fun once.. it was awful.\n -Cat"
+    },
+    "objectives": {
+      "check complete": {
+        "useItem": "cat nip",
+        "completed": "You give the cat catnip, he seems to be less grumpy.",
+        "incomplete": "I think this grumpy cat needs something, we should get cat-nip for the cat!",
         "complete": false
+      },
+      "itemFound": {
+        "incomplete": "Behind where the grumpy cat sat is a set of SHINY dice.\nThey aren't like your normal six sided dice though.\n",
+        "complete": false
+      },
+      "clueFound": {
+        "completed": "There's a sticky note with \"Password = *23*\".",
+        "incomplete": "I should search the desk to find some clues.",
+        "complete": false
+      }
+    },
+    "items": {
+      "dice": {
+        "prereq": "check complete",
+        "type": "misc",
+        "description": "My dice don't jiggle jiggle they roll.",
+        "prereqMet": "You got the dice off the desk, they aren't like your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.",
+        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the Emotional Damage sinks in."
+      },
+      "sticky note": {
+        "prereq": "check complete",
+        "type": "clue",
+        "description": "An old worn out sticky note sits on the table.\nSeems like something important is jotted on it",
+        "prereqMet": "You look at the note, written in pencil is the following\n'...23', you make a mental note of the numbers",
+        "prereqNotMet": "You look like a guy who would wear a 'Free hugs' sign\nFree hugs? go hug a cactus!\nThat one hurt really bad, you die from emotional damage"
+      }
+    },
+    "exit": [
+      "hallway"
+    ],
+    "complete": false
+  },
+  "diningroom": {
+    "title": "diningroom",
+    "description": {
+      "memeIncomplete": "You enter the dining room and oddly sitting at the head of the table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo cat nip.\nAbove you is a chandelier with an odd number of dangling jewels.",
+      "memeComplete": "Kermit has left, and you have retrieved the primo cat nip.\nAll that is left is the odd chandelier."
+    },
+    "objectives": {
+      "check complete": {
+        "useItem": "coffee mug",
+        "completed": "Kermit accepts your offering, and sips his coffee.\nHe slaps his knees and says 'Welp, better head out' and leaves the room",
+        "incomplete": "At the foot of the table you notice a small bowl.\nFrom your cat wrangling days, you recognize what looks to be some primo cat nip rested in the bowl\nAbove you is a chandelier with an odd number of dangling jewels.",
+        "complete": false
+      },
+      "itemFound": {
+        "incomplete": "There's that primo plate, just waiting for you to take the cat nip.",
+        "complete": false
+      },
+      "clueFound": {
+        "incomplete": "Have a closer look at the chandelier",
+        "complete": false
+      }
+    },
+    "items": {
+      "cat nip": {
+        "prereq": "check complete",
+        "type": "misc",
+        "description": "The most exquisite, finely plated catnip to exist in the metaverse",
+        "prereqMet": "You carefully grab the plate so as to not disturb the aesthetics of the catnip and place it into your inventory.",
+        "prereqNotMet": "You reach for the plate of exquisite catnip when Kermit snaps his neck to glare at you...\nKermit starts to mumble and your hands stops before reaching the plate...\n 'You... G... Succeed...' Kermit continues to stare into your soul and speaks clearly,\n'Really breh? It seems you wont go too far in life. How you gonna get stuck in a haunted house and not even consider breaking the walls or windows first?\n Can you even think? You probably a B rated student at best, B for BELOW AVERAGE. Get gud kid.\n...You die from emotional damage."
+      },
+      "chandelier": {
+        "prereq": "check complete",
+        "type": "clue",
+        "description": "The jewels hanging from the chandelier are strangely beautiful\nThe number of jewels seems odd though...",
+        "prereqMet": "You touch each jewel individually\nOne... two.... three...\nThere are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7",
+        "prereqNotMet": "You look up at the chandelier and try to count the jewels, one... two... thre...\nKermit looks at you with an air of superiority.\n'HEH looks like SOMEONE never learned to count...But that's none of my business'\nYou stop counting and cry yourself to sleep, you feel the burn deeply....and die."
+      }
+    },
+    "exit": [
+      "hallway"
+    ],
+    "complete": false
+  },
+  "basement": {
+    "title": "basement",
+    "description": {
+      "memeIncomplete": ""
+      }
     }
-} 
+}
