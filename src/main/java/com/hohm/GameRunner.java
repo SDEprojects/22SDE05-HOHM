@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import static com.hohm.GameInit.player;
 import static com.hohm.GameInit.startingItems;
 import static com.hohm.GameInit.rooms;
+import static com.hohm.TextInteractor.printSeparator;
 
 
 public class GameRunner {
@@ -34,6 +35,7 @@ public class GameRunner {
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
                 //Check room and check user inventory if hallway
+                System.out.println();
                 TextInteractor.description(currentRoom);
 
                 System.out.print(">");
@@ -60,6 +62,7 @@ public class GameRunner {
                 throw new RuntimeException(e);
             }
             restartGame = false;
+            printSeparator();
             run();
         } else {
             System.out.println("Thanks for playing, we hope to meme with you again soon!");

@@ -4,36 +4,33 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hohm.models.MemeRoom;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import static com.hohm.GameInit.player;
 
 public class TextInteractor {
 
 
     public static void go(String input, MemeRoom currentRoom) {
-        //TODO this can be simplified and based on what's in the JSON file rather than hard coded
-        if (input.toLowerCase().contains("kitchen") && Arrays.asList(currentRoom.getExit()).contains("kitchen")) {
-            player.setRoom("kitchen");
+
+        String[] rooms = GameInit.rooms.keySet().toArray(new String[0]);
+        String room = String.join(" ",rooms);
+
+        List<String> roomArr = Arrays.stream(room.split(" ")).map(String::toLowerCase).collect(Collectors.toList());
+        Set<String> set = Arrays.stream(input.split(" ")).map(String::toLowerCase).collect(Collectors.toCollection(LinkedHashSet::new));
+
+        set.retainAll(roomArr);
+        set.retainAll(Arrays.asList(currentRoom.getExit()));
+
+        if(set.iterator().hasNext()){
+            player.setRoom(set.iterator().next());
             printSeparator();
-        } else if (input.toLowerCase().contains("living room") && Arrays.asList(currentRoom.getExit()).contains("living room")) {
-            player.setRoom("livingroom");
-            printSeparator();
-        } else if (input.toLowerCase().contains("dining room") && Arrays.asList(currentRoom.getExit()).contains("dining room")) {
-            player.setRoom("diningroom");
-            printSeparator();
-        } else if (input.toLowerCase().contains("hallway") && Arrays.asList(currentRoom.getExit()).contains("hallway")) {
-            player.setRoom("hallway");
-            printSeparator();
-        } else if (input.toLowerCase().contains("basement") && Arrays.asList(currentRoom.getExit()).contains("basement")) {
-            player.setRoom("basement");
-            printSeparator();
-        } else {
+        }else{
             printSeparator();
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
-
     }
 
     public static void look(String input, MemeRoom currentRoom) throws IOException {
@@ -42,10 +39,12 @@ public class TextInteractor {
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
             for(String item: currentRoomItems){
                 if(input.contains(item)){
+                    printSeparator();
                     System.out.println(currentRoom.getItems().get(item).get("description"));
                 }
             }
         }catch (NullPointerException e){
+            printSeparator();
             //Do Nothing if there is a null pointer exception
         }
 
@@ -53,18 +52,23 @@ public class TextInteractor {
             if (player.getRoom().equals("hallway") || player.getRoom().equals("basement")) {
                 //Do nothing, description is handled in the start of the game loop
             } else if (currentRoom.getComplete()) {
+                printSeparator();
                 System.out.println(currentRoom.getDescription().get("memeComplete"));
             } else if (currentRoom.getObjectives().get("check complete").get("complete").equals("false")) {
+                printSeparator();
                 System.out.println(currentRoom.getObjectives().get("check complete").get("incomplete"));
             } else if (currentRoom.getObjectives().get("itemFound").get("complete").equals("false")
                     && currentRoom.getObjectives().get("clueFound").get("complete").equals("false")) {
+                printSeparator();
                 System.out.printf("%s%n%s%n",
                         currentRoom.getObjectives().get("clueFound").get("incomplete"),
                         currentRoom.getObjectives().get("itemFound").get("incomplete"));
             } else if (currentRoom.getObjectives().get("itemFound").get("complete").equals("true")
                     && currentRoom.getObjectives().get("clueFound").get("complete").equals("false")) {
+                printSeparator();
                 System.out.println(currentRoom.getObjectives().get("clueFound").get("incomplete"));
             } else {
+                printSeparator();
                 System.out.println(currentRoom.getObjectives().get("itemFound").get("incomplete"));
             }
 
@@ -98,16 +102,17 @@ public class TextInteractor {
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqMet"));
                 } else {
+                    printSeparator();
                     System.out.println(currentRoom.getItems().get(key[1]).get("prereqNotMet"));
                     player.setRoom("dead");
                 }
             } else {
+                printSeparator();
                 System.out.printf("You are unable to get the %s... whatever that is%n%n", key[1]);
-                System.out.println("PROBLEM HERE");
             }
         } catch (NullPointerException e) {
+            printSeparator();
             System.out.printf("You are unable to get the %s... whatever that is%n%n", key[1]);
-            System.out.println("PROBLEM HERE NULL");
         }
 
     }
@@ -191,10 +196,16 @@ public class TextInteractor {
     }
 
     public static void printSeparator() {
+        String printRoom = player.getRoom();
+
+        if(player.getRoom().equals("living") || player.getRoom().equals("dining")){
+            printRoom = player.getRoom() + " room";
+        }
+
         ClearScreen.ClearConsole();
         String dash = "- - ".repeat(29);
         String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sClues Found: %s"
-                , player.getRoom().toUpperCase()
+                , printRoom.toUpperCase()
                 , "", player.getItems()[0].toUpperCase()
                 , "", player.getClues());
         System.out.println(dash);
