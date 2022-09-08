@@ -151,7 +151,7 @@ public class TextInteractor {
 
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode dialogue = Json.parse(classLoader.getResourceAsStream("dialogue.json"));
+        JsonNode dialogue = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
         int random = (int) (Math.random() * 3);
         try {
             if (input.contains("doge")) {

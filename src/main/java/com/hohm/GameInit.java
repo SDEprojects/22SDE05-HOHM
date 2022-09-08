@@ -5,8 +5,8 @@ import com.hohm.models.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import static com.hohm.Json.generatePlayer;
-import static com.hohm.Json.generateRooms;
+import static com.hohm.Generator.generatePlayer;
+import static com.hohm.Generator.generateRooms;
 import static com.hohm.TextInteractor.printSeparator;
 
 public class GameInit {
@@ -45,6 +45,7 @@ public class GameInit {
                 }
                 System.out.println();
                 printSeparator();
+                UtilLoader.utilPrint("begin story");
                 GameRunner.run();
                 break;
             } else if (confirm.equalsIgnoreCase("n") || confirm.equalsIgnoreCase("no")) {
