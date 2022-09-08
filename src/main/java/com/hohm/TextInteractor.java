@@ -38,6 +38,9 @@ public class TextInteractor {
 
     public static void look(String input, MemeRoom currentRoom) throws IOException {
         String[] currentItems = player.getItems();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        JsonNode dialogue = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
+
         try{
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
             for(String item: currentRoomItems){
@@ -47,6 +50,25 @@ public class TextInteractor {
             }
         }catch (NullPointerException e){
             //Do Nothing if there is a null pointer exception
+        }
+        try {
+            if (input.contains("doge")) {
+                if (currentRoom.getTitle().equals("kitchen")) {
+                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("doge").get("dialogue");
+                }
+            } else if (input.contains("kermit")) {
+                if (currentRoom.getTitle().equals("diningroom")) {
+                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("kermit").get("dialogue");
+                }
+            } else if (input.contains("cat")) {
+                if (currentRoom.getTitle().equals("living room")) {
+                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("grumpycat").get("dialogue");
+                }
+            } else {
+                System.out.println("There's no one of that name here.");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("You can't look that person...");
         }
 
         if (input.contains("room")) {
@@ -147,7 +169,7 @@ public class TextInteractor {
                     System.out.println(returnDialogue.get(random));
                 }
             } else if (input.contains("kermit")) {
-                if (currentRoom.getTitle().equals("dining room")) {
+                if (currentRoom.getTitle().equals("diningroom")) {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("kermit").get("dialogue");
                     System.out.println(returnDialogue.get(random));
                 }
