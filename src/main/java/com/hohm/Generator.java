@@ -5,12 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hohm.models.MemeRoom;
 import com.hohm.models.Player;
 
-import java.io.DataInput;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-public class Json {
+public class Generator {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 

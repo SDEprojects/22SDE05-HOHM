@@ -151,7 +151,7 @@ public class TextInteractor {
 
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode dialogue = Json.parse(classLoader.getResourceAsStream("dialogue.json"));
+        JsonNode dialogue = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
         int random = (int) (Math.random() * 3);
         try {
             if (input.contains("doge")) {
@@ -176,7 +176,9 @@ public class TextInteractor {
             System.out.println("You can't talk to that person...");
         }
     }
+    public static void description(){
 
+    }
     public static void checkComplete(MemeRoom currentRoom) {
         Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();
         if (objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")) {
