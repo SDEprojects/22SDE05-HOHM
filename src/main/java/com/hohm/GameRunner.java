@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 
 import static com.hohm.GameInit.player;
 import static com.hohm.GameInit.rooms;
+import static com.hohm.TextInteractor.printSeparator;
 
 
 public class GameRunner {

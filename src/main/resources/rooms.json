@@ -10,8 +10,8 @@
     },
     "exit": [
       "kitchen",
-      "living room",
-      "dining room"
+      "living",
+      "dining"
     ],
     "complete": false
   },
@@ -59,8 +59,8 @@
     ],
     "complete": false
   },
-  "livingroom": {
-    "title": "livingroom",
+  "living": {
+    "title": "living room",
     "description": {
       "memeComplete": "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
       "memeIncomplete": "You enter and feel a presence slightly judging you.\nI had fun once.. it was awful.\n -Cat"
@@ -103,7 +103,7 @@
     ],
     "complete": false
   },
-  "diningroom": {
+  "dining": {
     "title": "diningroom",
     "description": {
       "memeIncomplete": "You enter the dining room and oddly sitting at the head of the table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo cat nip.\nAbove you is a chandelier with an odd number of dangling jewels.",
