@@ -12,7 +12,7 @@ import static com.hohm.GameInit.player;
 public class TextInteractor {
 
 
-    public static void go(String input, MemeRoom currentRoom) throws IOException {
+    public static void go(String input, MemeRoom currentRoom) {
         //TODO this can be simplified and based on what's in the JSON file rather than hard coded
         if (input.toLowerCase().contains("kitchen") && Arrays.asList(currentRoom.getExit()).contains("kitchen")) {
             player.setRoom("kitchen");
@@ -34,21 +34,9 @@ public class TextInteractor {
             System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
         }
 
-        if (!Objects.equals(GameInit.rooms.get(player.getRoom()).getTitle(), "hallway")) {
-            if(GameInit.rooms.get(player.getRoom()).getComplete()){
-                System.out.println(GameInit.rooms.get(player.getRoom()).getDescription().get("memeComplete"));
-            }
-            else if (GameInit.rooms.get(player.getRoom()).getObjectives().get("check complete").get("complete").equals("true")) {
-                System.out.println(GameInit.rooms.get(player.getRoom()).getObjectives().get("clueFound").get("incomplete"));
-            } else {
-                System.out.println(GameInit.rooms.get(player.getRoom()).getDescription().get("memeIncomplete"));
-            }
-        }
     }
 
     public static void look(String input, MemeRoom currentRoom) throws IOException {
-        //TODO - look needs to be refactored to prompt for looking at clues
-
         String[] currentItems = player.getItems();
         try{
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
@@ -60,7 +48,6 @@ public class TextInteractor {
         }catch (NullPointerException e){
             //Do Nothing if there is a null pointer exception
         }
-
 
         if (input.contains("room")) {
             if (player.getRoom().equals("hallway") || player.getRoom().equals("basement")) {
@@ -176,8 +163,25 @@ public class TextInteractor {
             System.out.println("You can't talk to that person...");
         }
     }
-    public static void description(){
-
+    public static void description(MemeRoom currentRoom){
+        if (currentRoom.getTitle().equals("hallway")) {
+            String[] currentItem = player.getItems();
+            if (Objects.equals(currentItem[0], "[]")) {
+                System.out.println(currentRoom.getDescription().get("nullHallway"));
+            } else {
+                System.out.println(currentRoom.getDescription().get(currentItem[0]));
+            }
+        }
+        else {
+                if(currentRoom.getComplete()){
+                    System.out.println(currentRoom.getDescription().get("memeComplete"));
+                }
+                else if (currentRoom.getObjectives().get("check complete").get("complete").equals("true")) {
+                    System.out.println(currentRoom.getObjectives().get("clueFound").get("incomplete"));
+                } else {
+                    System.out.println(currentRoom.getDescription().get("memeIncomplete"));
+                }
+        }
     }
     public static void checkComplete(MemeRoom currentRoom) {
         Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();

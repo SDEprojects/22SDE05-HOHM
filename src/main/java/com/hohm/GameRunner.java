@@ -7,7 +7,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Objects;
 
 import static com.hohm.GameInit.player;
 import static com.hohm.GameInit.startingItems;
@@ -35,14 +34,7 @@ public class GameRunner {
             } else {
                 MemeRoom currentRoom = rooms.get(player.getRoom());
                 //Check room and check user inventory if hallway
-                if (currentRoom.getTitle().equals("hallway")) {
-                    String[] currentItem = player.getItems();
-                    if (Objects.equals(currentItem[0], "[]")) {
-                        System.out.println(currentRoom.getDescription().get("nullHallway"));
-                    } else {
-                        System.out.println(currentRoom.getDescription().get(currentItem[0]));
-                    }
-                }
+                TextInteractor.description(currentRoom);
 
                 System.out.print(">");
 
