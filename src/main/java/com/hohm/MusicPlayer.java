@@ -27,6 +27,7 @@ public class MusicPlayer {
         } else {
             System.out.println("Sorry music player might not have that ability.");
         }
+        printSeparator();
     }
     // Plays the music starting the game.
     public static void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {

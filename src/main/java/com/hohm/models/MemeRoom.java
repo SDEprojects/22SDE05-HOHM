@@ -11,6 +11,7 @@ public class MemeRoom {
     private Map<String, Map<String, String>> items;
     private String[] exit;
     private Boolean complete;
+    private Map<String, String> altGet;
 
     public MemeRoom(){
 
@@ -70,5 +71,13 @@ public class MemeRoom {
 
     public void setComplete(Boolean complete) {
         this.complete = complete;
+    }
+
+    public Map<String, String> getAltGet() {
+        return altGet;
+    }
+
+    public void setAltGet(Map<String, String> altGet) {
+        this.altGet = altGet;
     }
 }
