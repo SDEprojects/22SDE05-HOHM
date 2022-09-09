@@ -20,30 +20,30 @@
     "objectives": {
       "check complete": {
         "useItem": "bucket",
-        "completed": "You toss the watery contents of the bucket on the flames.\nThe yellow light flickers and sizzles away.\nThe dog smiles at you and tips his hat, as his apparition disappears.\nHis hat falls to the ground and his coffee mug sits on the table unattended",
-        "incomplete": "As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them",
+        "completed": "You toss the watery contents of the bucket on the flames.\nThe yellow light flickers and sizzles away.\nThe dog smiles at you and tips his hat, as his apparition disappears.\n",
+        "incomplete": "As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them\n",
         "complete": false
       },
       "itemFound": {
-        "incomplete": "On the table sits the half full coffee mug.\nThe sweet aroma reminds you of grandma's coffee.",
+        "incomplete": "On the table sits the half full coffee mug.\nThe sweet aroma reminds you of grandma's coffee.\n",
         "complete": false
       },
       "clueFound": {
-        "incomplete": "You look around the charred kitchen\nThe dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.",
+        "incomplete": "The dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.\n",
         "complete": false
       }
     },
     "description": {
-      "memeComplete": "The charred walls of the kitchen remind you of the odd scene you saw here\nNothing is left but the basement door... taunting you to open and discover the mysteries within...",
-      "memeIncomplete": "You enter the kitchen and see flames, flames everywhere!!\nIn the middle of the room sits a dog wearing a sweet fedora sitting in a chair.\nNext to him is a coffee mug full of piping hot coffee.\nHe rocks back and forth muttering to himself 'This is fine, this is fine'"
+      "memeComplete": "The charred walls of the kitchen remind you of the odd scene you saw here\nNothing is left but the basement door... taunting you to open and discover the mysteries within...\n",
+      "memeIncomplete": "The kitchen is full of flames, flames everywhere!!\nIn the middle of the room sits a dog wearing a sweet fedora sitting in a chair.\nNext to him is a coffee mug full of piping hot coffee.\nHe rocks back and forth muttering to himself 'This is fine, this is fine'\n"
     },
     "items": {
       "coffee mug": {
         "prereq": "check complete",
         "type": "misc",
-        "description": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away.\nIt seems to be half full of piping hot coffee.",
-        "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...",
-        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire..."
+        "description": "The coffee mug has 'Worlds Greatest Doge' written in bold black font.\nIt seems to be half full of piping hot coffee.\n",
+        "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...\n",
+        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire...\n"
       },
       "fedora": {
         "prereq": "check complete",
@@ -57,19 +57,27 @@
       "hallway",
       "basement"
     ],
-    "complete": false
+    "complete": false,
+
+    "altGet": {
+      "coffee": "coffee mug",
+      "mug": "coffee mug",
+      "cup": "coffee mug",
+      "hat": "fedora",
+      "cap": "fedora"
+    }
   },
   "living": {
     "title": "living room",
     "description": {
-      "memeComplete": "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
-      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nThe room is as grey as it can be like if someone were to suck the fun out of this place.\nI've never felt this before..\nBehind the cat you see a desk with a sticky note and a keyboard"
+      "memeComplete": "The cat has returned and seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
+      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nThe room is as grey as it can be like if someone were to suck the fun out of this place.\nBeside him is a plate with a colorful set of dice\nBehind him is a desk with pens, papers, and sticky notes"
     },
     "objectives": {
       "check complete": {
         "useItem": "catnip",
-        "completed": "You give the cat catnip, he seems to be less grumpy.",
-        "incomplete": "I think this grumpy cat needs something, we should get catnip for the cat!",
+        "completed": "You give the cat catnip, he hops off the table and vanishes around the corner.\nThank goodness for that, he was quite the debbie downer\n",
+        "incomplete": "The cat looks like he's never had a good day.\nIf only you had something that would help him chillax.",
         "complete": false
       },
       "itemFound": {
@@ -77,8 +85,7 @@
         "complete": false
       },
       "clueFound": {
-        "completed": "There's a sticky note with \"Password = *23*\" on the desk with some dice that seem a bit off.",
-        "incomplete": "I should search the desk to find some clues.",
+        "incomplete": "On the desk sits an assortment of desk stuff, in the middle of the desk is a sticky note.\nSeems like there may be something written on the note, but you can't make out what's written on it from here.\n",
         "complete": false
       }
     },
@@ -86,14 +93,14 @@
       "dice": {
         "prereq": "check complete",
         "type": "misc",
-        "description": "My dice don't jiggle jiggle they roll.",
-        "prereqMet": "You got the dice off the desk, they aren't like your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.",
-        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the Emotional Damage sinks in."
+        "description": "These dice don't jiggle jiggle, they roll.\nYou aren't sure how, but they may come in handy later\n",
+        "prereqMet": "You got the dice off the desk, they aren't like your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.\n",
+        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the Emotional Damage sinks in.\n"
       },
       "sticky note": {
         "prereq": "check complete",
         "type": "clue",
-        "description": "An old worn out sticky note sits on the table.\nSeems like something important is jotted on it",
+        "description": "An old worn out sticky note sits on the writing desk.\nSeems like something important is jotted on it.\n",
         "prereqMet": "You look at the note, written in pencil is the following\n'...23', you make a mental note of the numbers",
         "prereqNotMet": "You look like a guy who would wear a 'Free hugs' sign\nFree hugs? go hug a cactus!\nThat one hurt really bad, you die from emotional damage"
       }
@@ -101,12 +108,18 @@
     "exit": [
       "hallway"
     ],
-    "complete": false
+    "complete": false,
+    "altGet": {
+      "die" : "dice",
+      "note": "sticky note",
+      "sticky": "sticky note",
+      "sticky notes": "sticky note"
+    }
   },
   "dining": {
-    "title": "diningroom",
+    "title": "dining room",
     "description": {
-      "memeIncomplete": "You enter the dining room and oddly sitting at the head of the table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo catnip.\nAbove you is a chandelier with an odd number of dangling jewels.",
+      "memeIncomplete": "The dining room is very opulent, oddly sitting at the head of the big ol table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo catnip.\nAbove you is a chandelier with an odd number of dangling jewels.",
       "memeComplete": "Kermit has left, and you have retrieved the primo catnip.\nAll that is left is the odd chandelier."
     },
     "objectives": {
@@ -121,7 +134,7 @@
         "complete": false
       },
       "clueFound": {
-        "incomplete": "Have a closer look at the chandelier",
+        "incomplete": "You may want to get those jewels... at least to count em",
         "complete": false
       }
     },
@@ -144,12 +157,47 @@
     "exit": [
       "hallway"
     ],
-    "complete": false
+    "complete": false,
+    "altGet": {
+      "plate": "catnip",
+      "leaves": "catnip",
+      "nip": "catnip",
+      "jewels": "chandelier",
+      "count": "chandelier",
+      "number": "chandelier"
+    }
   },
   "basement": {
     "title": "basement",
     "description": {
-      "memeIncomplete": ""
+      "memeIncomplete": "A massive door stands in your way, on the door is a keypad.\nIt's one of those fancy locks your buddy kevin told you about.\nLooks like this keypad takes letters and numbers, you may need to enter the right code to get in.\n(Note: Type 'Kitchen' if you want to return to the kitchen)",
+      "memeComplete": "You hear a click in the door and the lock comes open.\nWill you go into the depths?\n"
+    },
+    "objectives": {
+      "check complete": {
+        "useItem": null,
+        "completed": null,
+        "incomplete": null,
+        "complete": false
+      },
+      "itemFound": {
+        "incomplete": null,
+        "complete": false
+      },
+      "clueFound": {
+        "incomplete": null,
+        "complete": false
       }
+    },
+    "exit": [
+      "kitchen"
+    ],
+    "complete": false
+  },
+  "depths":{
+    "description": {
+      "hasDice": "Sitting in front of you is what you assume to be a ghost.\nWELCOME TO MY ABODE I AM THE MEME LORD\nYou surmise that this is the entity who locked you in this house of haunted memes.\n'I see you have dice, how fortuitous, in order to get out of this house you must play a game with me.\nDefeat me in my last Dungeons and Dragons encounter and I will set you free.\nLose and I will roast you to oblivion.'\nThis seems to be your only way out... Roll for initiative!!\n",
+      "noDice": "A cold feeling fills your soul.\nFor a second you feel like you can't breathe, like everything is broken and you hear a whisper.\n'No dice?!?! Looks like you chose death as your escape'\nThe darkness overwhelms you and you ask why... why did you run into this stupid house?!?!\n"
     }
+  }
 }

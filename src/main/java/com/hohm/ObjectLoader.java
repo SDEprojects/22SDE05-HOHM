@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class Loader {
+public class ObjectLoader {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 

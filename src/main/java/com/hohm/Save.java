@@ -1,15 +1,13 @@
 package com.hohm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hohm.models.MemeRoom;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Map;
 
-import static com.hohm.GameInit.player;
-import static com.hohm.GameInit.rooms;
+import static com.hohm.GameBuilder.player;
+import static com.hohm.GameBuilder.rooms;
 
 public class Save {
 

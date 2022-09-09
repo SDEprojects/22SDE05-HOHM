@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-public class Generator {
+public class ObjectGenerator {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
