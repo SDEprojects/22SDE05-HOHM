@@ -25,6 +25,7 @@ public class TextInteractor {
         set.retainAll(Arrays.asList(currentRoom.getExit()));
 
         if (set.iterator().hasNext()) {
+            GameLoop.previousRoom = currentRoom;
             player.setRoom(set.iterator().next());
             printSeparator();
         } else {
@@ -34,6 +35,7 @@ public class TextInteractor {
     }
 
     public static void look(String input, MemeRoom currentRoom) throws IOException {
+
         String[] currentItems = player.getItems();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         JsonNode description = ObjectGenerator.parse(classLoader.getResourceAsStream("dialogue.json"));
@@ -160,19 +162,29 @@ public class TextInteractor {
             if (input.contains("doge")) {
                 if (currentRoom.getTitle().equals("kitchen")) {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("doge").get("dialogue");
+                    printSeparator();
                     System.out.println(returnDialogue.get(random));
                 }
             } else if (input.contains("kermit")) {
                 if (currentRoom.getTitle().equals("dining")) {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("kermit").get("dialogue");
+                    printSeparator();
                     System.out.println(returnDialogue.get(random));
                 }
             } else if (input.contains("cat")) {
                 if (currentRoom.getTitle().equals("living")) {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("grumpycat").get("dialogue");
+                    printSeparator();
                     System.out.println(returnDialogue.get(random));
                 }
-            } else {
+            } else if (input.contains("boromir")) {
+                if (currentRoom.getTitle().equals("office")) {
+                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("boromir").get("dialogue");
+                    printSeparator();
+                    System.out.println(returnDialogue.get(random));
+                }
+            }
+            else {
                 System.out.println("There's no one to talk to here.");
             }
         } catch (NullPointerException e) {
