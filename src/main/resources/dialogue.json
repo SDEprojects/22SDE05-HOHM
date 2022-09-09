@@ -1,5 +1,16 @@
 {
-  "kermit" : {"dialogue": ["Hello loser", "What's up meme dweeb", "touch grass"] },
-  "doge" : {"dialogue": ["Everything's fine..", "I mean but did you die?", "Yep I'm in my safe zone."]},
-  "grumpycat" : {"dialogue": ["I tried to be happy, it was terrible", "fun? never heard of it", "ayooooo"]}
+  "kermit" : {"dialogue": ["Hello loser", "What's up meme dweeb", "touch grass"],
+              "description": ["He's a puppet like little fellow, seems like he can use a cup of coffee"]
+          },
+  "doge" : {"dialogue": ["Everything's fine..", "I mean but did you die?", "Yep I'm in my safe zone."],
+            "description": ["He looks like a more espresso less depresso kind of doge, pretty calm for this chaos."]
+          },
+  "grumpycat" : {"dialogue": ["I tried to be happy, it was terrible", "fun? never heard of it", "ayooooo"],
+                "description": ["The grumpiest of cats, he looks like he needs some catnip."]
+          },
+  "items": { "coffee mug": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away.\nIt seems to be half full of piping hot coffee.",
+              "dice": "My dice don't jiggle jiggle they roll.",
+              "catnip":"The most exquisite, finely plated catnip to exist in the metaverse",
+          "bucket": "This bucket is full of water, perhaps we should use it on the kitchen's walls."
+  }
 }

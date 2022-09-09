@@ -7,6 +7,6 @@ public class GameStart {
         UtilLoader.utilPrint("title");
         UtilLoader.utilPrint("intro");
         UtilLoader.utilPrint("help");
-        GameInit.gameInit();
+        GameBuilder.gameInit();
     }
 }

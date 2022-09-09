@@ -6,17 +6,16 @@ import com.hohm.models.MemeRoom;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static com.hohm.GameInit.player;
+import static com.hohm.GameBuilder.player;
 
 public class TextInteractor {
 
 
     public static void go(String input, MemeRoom currentRoom) {
 
-        String[] rooms = GameInit.rooms.keySet().toArray(new String[0]);
+        String[] rooms = GameBuilder.rooms.keySet().toArray(new String[0]);
         String room = String.join(" ", rooms);
 
         List<String> roomArr = Arrays.stream(room.split(" ")).map(String::toLowerCase).collect(Collectors.toList());
@@ -37,7 +36,7 @@ public class TextInteractor {
     public static void look(String input, MemeRoom currentRoom) throws IOException {
         String[] currentItems = player.getItems();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode description = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
+        JsonNode description = ObjectGenerator.parse(classLoader.getResourceAsStream("dialogue.json"));
 
         try {
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
@@ -84,26 +83,28 @@ public class TextInteractor {
         String[] altGet = currentRoom.getAltGet().keySet().toArray(new String[0]);
         String keyVal = Arrays.asList(altGet).contains(key[1]) ?
                 currentRoom.getAltGet().get(key[1]) : key[1];
+        boolean itemsBool = currentRoom.getItems().containsKey(keyVal);
+        boolean altItems = currentRoom.getItems().containsKey(keyVal);
 
         try {
-            if (currentRoom.getItems().containsKey(key[1]) || Arrays.asList(altGet).contains(key[1])) {
-                String objective = (String) currentRoom.getItems().get(keyVal).get("prereq");
+            if (itemsBool || altItems) {
+                String objective = currentRoom.getItems().get(keyVal).get("prereq");
                 boolean objComplete = Boolean.parseBoolean(currentRoom.getObjectives().get(objective).get("complete"));
-                String objType = (String) currentRoom.getItems().get(keyVal).get("type");
+                String objType = currentRoom.getItems().get(keyVal).get("type");
 
                 if (objComplete && objType.equals("misc")) {
                     String[] items = {keyVal};
                     player.setItems(items);
-                    GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("itemFound").put("complete", "true");
+                    currentRoom.getObjectives().get("itemFound").put("complete", "true");
                     checkComplete(currentRoom);
                     printSeparator();
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqMet"));
                     System.out.println("You now have: " +
                             Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", "").toUpperCase() + "\n");
                 } else if (objComplete && objType.equals("clue")) {
-                    if (GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").get("complete").equals("false")) {
+                    if (currentRoom.getObjectives().get("clueFound").get("complete").equals("false")) {
                         player.incrementClues();
-                        GameInit.rooms.get(currentRoom.getTitle()).getObjectives().get("clueFound").put("complete", "true");
+                        currentRoom.getObjectives().get("clueFound").put("complete", "true");
                     }
                     checkComplete(currentRoom);
                     printSeparator();
@@ -116,10 +117,12 @@ public class TextInteractor {
                 }
             } else {
                 printSeparator();
+                System.out.println("NO ERROR");
                 System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
             }
         } catch (NullPointerException e) {
             printSeparator();
+            e.printStackTrace();
             System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
         }
 
@@ -151,7 +154,7 @@ public class TextInteractor {
 
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode dialogue = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
+        JsonNode dialogue = ObjectGenerator.parse(classLoader.getResourceAsStream("dialogue.json"));
         int random = (int) (Math.random() * 3);
         try {
             if (input.contains("doge")) {
@@ -211,21 +214,24 @@ public class TextInteractor {
     }
 
     public static void checkComplete(MemeRoom currentRoom) {
-        Map<String, Map<String, String>> objectives = GameInit.rooms.get(currentRoom.getTitle()).getObjectives();
+        Map<String, Map<String, String>> objectives = currentRoom.getObjectives();
         if (objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")) {
-            GameInit.rooms.get(currentRoom.getTitle()).setComplete(true);
+            currentRoom.setComplete(true);
         }
     }
 
     public static void printSeparator() {
         String printRoom = player.getRoom();
-
-        if (player.getRoom().equals("living") || player.getRoom().equals("dining")) {
-            printRoom = player.getRoom() + " room";
-        }
-
-        if(player.getRoom().equals("basement")){
-            printRoom = player.getRoom() + " door";
+        switch (printRoom){
+            case "living":
+            case "dining":
+                printRoom = player.getRoom() + " room";
+                break;
+            case "basement":
+                printRoom = player.getRoom() + " door";
+                break;
+            case "depths":
+                printRoom = "basement " + player.getRoom();
         }
 
         ClearScreen.ClearConsole();

@@ -12,14 +12,19 @@ public final class UtilLoader {
 
     public static void utilPrint(String nodeKey) throws IOException {
         InputStream file = classLoader.getResourceAsStream("utils.json");
-        JsonNode node = Generator.parse(file);
+        JsonNode node = ObjectGenerator.parse(file);
         System.out.println("\n" + node.get(nodeKey).textValue() + "\n");
     }
 
     public static void mapPrint(String nodeKey) throws IOException{
         InputStream file = classLoader.getResourceAsStream("maps.json");
-        JsonNode node = Generator.parse(file);
+        JsonNode node = ObjectGenerator.parse(file);
         System.out.println(node.get(nodeKey).textValue());
     }
 
+    public static String code() throws IOException {
+        InputStream file = classLoader.getResourceAsStream("utils.json");
+        JsonNode node = ObjectGenerator.parse(file);
+        return node.get("basement code").asText();
+    }
 }

@@ -70,8 +70,8 @@
   "living": {
     "title": "living room",
     "description": {
-      "memeComplete": "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
-      "memeIncomplete": "This living room is odd, you feel a presence slightly judging you.\nOn the table is the grumpiest cat you've ever seen.\nBeside him is a plate with a colorful set of dice\nBehind him is a desk with pens, papers, and sticky notes"
+      "memeComplete": "The cat has returned and seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
+      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nThe room is as grey as it can be like if someone were to suck the fun out of this place.\nBeside him is a plate with a colorful set of dice\nBehind him is a desk with pens, papers, and sticky notes"
     },
     "objectives": {
       "check complete": {
@@ -117,7 +117,7 @@
     }
   },
   "dining": {
-    "title": "diningroom",
+    "title": "dining room",
     "description": {
       "memeIncomplete": "The dining room is very opulent, oddly sitting at the head of the big ol table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo catnip.\nAbove you is a chandelier with an odd number of dangling jewels.",
       "memeComplete": "Kermit has left, and you have retrieved the primo catnip.\nAll that is left is the odd chandelier."
@@ -170,44 +170,34 @@
   "basement": {
     "title": "basement",
     "description": {
-      "memeIncomplete": "You walk up to the door and you see a keypad. It's one of those fancy locks your buddy kevin told you about.\nLooks like this keypad takes letters and numbers, you may need to enter the right code to get in.",
+      "memeIncomplete": "A massive door stands in your way, on the door is a keypad.\nIt's one of those fancy locks your buddy kevin told you about.\nLooks like this keypad takes letters and numbers, you may need to enter the right code to get in.\n(Note: Type 'Kitchen' if you want to return to the kitchen)",
       "memeComplete": "You hear a click in the door and the lock comes open.\nWill you go into the depths?\n"
     },
     "objectives": {
       "check complete": {
-        "useItem": "coffee mug",
-        "completed": "Kermit accepts your offering, and sips his coffee.\nHe slaps his knees and says 'Welp, better head out' and leaves the room",
-        "incomplete": "At the foot of the table you notice a small bowl.\nFrom your cat wrangling days, you recognize what looks to be some primo catnip rested in the bowl\nAbove you is a chandelier with an odd number of dangling jewels.",
+        "useItem": null,
+        "completed": null,
+        "incomplete": null,
         "complete": false
       },
       "itemFound": {
-        "incomplete": "There's that primo plate, just waiting for you to take the catnip.",
+        "incomplete": null,
         "complete": false
       },
       "clueFound": {
-        "incomplete": "Have a closer look at the chandelier",
+        "incomplete": null,
         "complete": false
-      }
-    },
-    "items": {
-      "catnip": {
-        "prereq": "check complete",
-        "type": "misc",
-        "description": "The most exquisite, finely plated catnip to exist in the metaverse",
-        "prereqMet": "You carefully grab the plate so as to not disturb the aesthetics of the catnip and place it into your inventory.",
-        "prereqNotMet": "You reach for the plate of exquisite catnip when Kermit snaps his neck to glare at you...\nKermit starts to mumble and your hands stops before reaching the plate...\n 'You... G... Succeed...' Kermit continues to stare into your soul and speaks clearly,\n'Really breh? It seems you wont go too far in life. How you gonna get stuck in a haunted house and not even consider breaking the walls or windows first?\n Can you even think? You probably a B rated student at best, B for BELOW AVERAGE. Get gud kid.\n...You die from emotional damage."
-      },
-      "chandelier": {
-        "prereq": "check complete",
-        "type": "clue",
-        "description": "The jewels hanging from the chandelier are strangely beautiful\nThe number of jewels seems odd though...",
-        "prereqMet": "You touch each jewel individually\nOne... two.... three...\nThere are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7",
-        "prereqNotMet": "You look up at the chandelier and try to count the jewels, one... two... thre...\nKermit looks at you with an air of superiority.\n'HEH looks like SOMEONE never learned to count...But that's none of my business'\nYou stop counting and cry yourself to sleep, you feel the burn deeply....and die."
       }
     },
     "exit": [
       "kitchen"
     ],
     "complete": false
+  },
+  "depths":{
+    "description": {
+      "hasDice": "Sitting in front of you is what you assume to be a ghost.\nWELCOME TO MY ABODE I AM THE MEME LORD\nYou surmise that this is the entity who locked you in this house of haunted memes.\n'I see you have dice, how fortuitous, in order to get out of this house you must play a game with me.\nDefeat me in my last Dungeons and Dragons encounter and I will set you free.\nLose and I will roast you to oblivion.'\nThis seems to be your only way out... Roll for initiative!!\n",
+      "noDice": "A cold feeling fills your soul.\nFor a second you feel like you can't breathe, like everything is broken and you hear a whisper.\n'No dice?!?! Looks like you chose death as your escape'\nThe darkness overwhelms you and you ask why... why did you run into this stupid house?!?!\n"
+    }
   }
 }

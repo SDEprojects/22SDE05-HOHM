@@ -16,7 +16,7 @@ public class TextParser {
     public static void parseText(String input, MemeRoom currentRoom) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream utils = classLoader.getResourceAsStream("utils.json");
-        JsonNode node = Generator.parse(utils);
+        JsonNode node = ObjectGenerator.parse(utils);
         node = node.get("commands");
 
         String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
@@ -42,15 +42,18 @@ public class TextParser {
             savedRooms.getParentFile().mkdirs();
             if (!savedRooms.createNewFile()) {
                 System.out.print("You already have saved files, would you like to overwrite (y/n)?: ");
-                String saveConfirm = GameRunner.reader.readLine();
+                String saveConfirm = GameLoop.reader.readLine();
                 if (saveConfirm.equalsIgnoreCase("y") || saveConfirm.equalsIgnoreCase("yes")) {
                     Save.save();
+                    printSeparator();
                     System.out.println("You have saved your game.");
                 } else {
+                    printSeparator();
                     System.out.println("You have chosen not to overwrite");
                 }
             } else {
                 Save.save();
+                printSeparator();
                 System.out.println("You have saved your game");
             }
         } else if (input.contains("where am i")) {
