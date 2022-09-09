@@ -26,7 +26,11 @@ public class TextParser {
         String[] inputArr = input.toLowerCase().strip().split(" ");
 
         if (input.equalsIgnoreCase("help")) {
+            printSeparator();
             UtilLoader.utilPrint("help");
+            if (currentRoom.getTitle().equalsIgnoreCase("office")) {
+                System.out.println(currentRoom.getDescription().get("hint"));
+            }
         } else if (goTo.contains(inputArr[0])) {
             go(input, currentRoom);
         } else if (lookAt.contains(inputArr[0])) {

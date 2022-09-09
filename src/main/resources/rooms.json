@@ -12,6 +12,7 @@
       "kitchen",
       "living",
       "dining",
+      "office",
       "bathroom"
     ],
     "complete": false
@@ -167,6 +168,34 @@
       "count": "chandelier",
       "number": "chandelier"
     }
+  },
+  "office": {
+    "title": "office",
+    "description": {
+      "hint": "Perhaps speak in the same tongue as Boromir.",
+      "memeIncomplete": "As you enter the room, turning around on a revolving chair, \nBoromir turns and welcomes you. Before you can say or make any actions he states, \n'One does not simply leave a house before meeting the owner does he not?'",
+      "memeComplete": "Boromir has already left to finish his mission and you have obtained a special die."
+    },
+    "objectives": {
+      "check complete": {
+        "useItem": null,
+        "completed": null,
+        "incomplete": null,
+        "complete": false
+      },
+      "itemFound": {
+        "incomplete": null,
+        "complete": false
+      },
+      "clueFound": {
+        "incomplete": null,
+        "complete": false
+      }
+    },
+    "exit": [
+      "hallway"
+    ],
+    "complete": false
   },
   "basement": {
     "title": "basement",

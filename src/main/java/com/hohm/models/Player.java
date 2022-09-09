@@ -2,6 +2,8 @@ package com.hohm.models;
 
 public class Player extends Character{
     private int clues;
+    private boolean hasAdvantage = false;
+    private boolean hasSecretKey = false;
 
     public Player(){
 
@@ -25,5 +27,21 @@ public class Player extends Character{
 
     public void incrementClues(){
         clues++;
+    }
+
+    public boolean getHasAdvantage() {
+        return hasAdvantage;
+    }
+
+    public void setHasAdvantage(boolean hasAdvantage) {
+        this.hasAdvantage = hasAdvantage;
+    }
+
+    public boolean getHasSecretKey() {
+        return hasSecretKey;
+    }
+
+    public void setHasSecretKey(boolean hasSecretKey) {
+        this.hasSecretKey = hasSecretKey;
     }
 }
