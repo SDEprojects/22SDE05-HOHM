@@ -12,8 +12,8 @@
       "kitchen",
       "living",
       "dining",
-      "bathroom",
-      "office"
+      "office",
+      "bathroom"
     ],
     "complete": false
   },

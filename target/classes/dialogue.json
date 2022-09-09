@@ -8,10 +8,6 @@
   "grumpycat" : {"dialogue": ["I tried to be happy, it was terrible", "fun? never heard of it", "ayooooo"],
                 "description": ["The grumpiest of cats, he looks like he needs some catnip."]
           },
-  "gollum" : {"dialogue": ["Smeagol promises to Precious, promises faithfully. Never come again, never speak, no never!", "Smeagol will swear on the Precious.", "‘Stew the rabbits!’ squealed Gollum in dismay. ‘Spoil beautiful meat Smeagol saved for you, poor hungry Smeagol!"],
-            "description": ["You look into his eyes and only see pencil dots for pupils"]},
-  "smeagol": {"dialogue": ["Stew the rabbits!", "Curse the Baggins! It’s gone! ", "Precious, precious, precious!"],
-              "description": ["You look into his eyes and see huge pupils"]},
   "boromir" : {
     "dialogue": [
       "One does not simply learn a new language without learning the bad words first",
@@ -19,6 +15,10 @@
       "One does not simply walk 500 miles without walking 500 more"
     ]
   },
+  "gollum" : {"dialogue": ["Smeagol promises to Precious, promises faithfully. Never come again, never speak, no never!", "Smeagol will swear on the Precious.", "‘Stew the rabbits!’ squealed Gollum in dismay. ‘Spoil beautiful meat Smeagol saved for you, poor hungry Smeagol!"],
+            "description": ["You look into his eyes and only see pencil dots for pupils"]},
+  "smeagol": {"dialogue": ["Stew the rabbits!", "Curse the Baggins! It’s gone! ", "Precious, precious, precious!"],
+              "description": ["You look into his eyes and see huge pupils"]},
   "items": { "coffee mug": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away.\nIt seems to be half full of piping hot coffee.",
               "dice": "My dice don't jiggle jiggle they roll.",
               "catnip":"The most exquisite, finely plated catnip to exist in the metaverse",

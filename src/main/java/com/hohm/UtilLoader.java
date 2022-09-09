@@ -1,8 +1,11 @@
 package com.hohm;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
 import java.io.IOException;
 import java.io.InputStream;
+
+import static com.hohm.GameBuilder.player;
 
 // UtilLoader will be used
 public final class UtilLoader {
@@ -19,8 +22,15 @@ public final class UtilLoader {
     public static void mapPrint(String nodeKey) throws IOException{
         InputStream file = classLoader.getResourceAsStream("maps.json");
         JsonNode node = ObjectGenerator.parse(file);
+        if(node.get(nodeKey).equals(node.get("hallway")) && player.getHasSecretKey()){
+            System.out.println(node.get("frontdoor").textValue());
+        }else if (node.get(nodeKey).equals(node.get("hallway")) && player.getFailedKey()) {
+            System.out.println(node.get("nobathroom").textValue());
+        }else{
         System.out.println(node.get(nodeKey).textValue());
+        }
     }
+
 
     public static String code() throws IOException {
         InputStream file = classLoader.getResourceAsStream("utils.json");
