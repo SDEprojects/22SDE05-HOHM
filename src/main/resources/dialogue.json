@@ -8,6 +8,13 @@
   "grumpycat" : {"dialogue": ["I tried to be happy, it was terrible", "fun? never heard of it", "ayooooo"],
                 "description": ["The grumpiest of cats, he looks like he needs some catnip."]
           },
+  "boromir" : {
+    "dialogue": [
+      "One does not simply learn a new language without learning the bad words first",
+      "One does not simply meme like an edgelord",
+      "One does not simply walk 500 miles without walking 500 more"
+    ]
+  },
   "items": { "coffee mug": "The coffee mug has the words worlds greatest.... with the rest of the words smudged away.\nIt seems to be half full of piping hot coffee.",
               "dice": "My dice don't jiggle jiggle they roll.",
               "catnip":"The most exquisite, finely plated catnip to exist in the metaverse",
