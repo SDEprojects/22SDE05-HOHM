@@ -4,6 +4,7 @@ public class Player extends Character{
     private int clues;
     private boolean hasAdvantage = false;
     private boolean hasSecretKey = false;
+    private boolean hasFailedKey = false;
 
     public Player(){
 
@@ -43,5 +44,12 @@ public class Player extends Character{
 
     public void setHasSecretKey(boolean hasSecretKey) {
         this.hasSecretKey = hasSecretKey;
+    }
+    public boolean getFailedKey() {
+        return hasFailedKey;
+    }
+
+    public void setFailedKey(boolean hasSecretKey) {
+        this.hasFailedKey = hasSecretKey;
     }
 }
