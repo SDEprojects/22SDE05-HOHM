@@ -35,6 +35,9 @@ public class TextInteractor {
     }
 
     public static void look(String input, MemeRoom currentRoom) throws IOException {
+        String[] currentItems = player.getItems();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        JsonNode description = Generator.parse(classLoader.getResourceAsStream("dialogue.json"));
 
         try {
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
@@ -55,8 +58,25 @@ public class TextInteractor {
             System.out.println("That item may exist in the world, but you can't look at it here\n");
             //Do Nothing if there is a null pointer exception
         }
-
-}
+        if(input.contains("inventory")){
+            System.out.println("Inventory: "+ Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""));
+        } else if (input.contains(Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""))) {
+            String itemLookUp = Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", "");
+            System.out.println(description.get("items").get(itemLookUp));
+        } else if (input.contains("doge")||input.contains("dog")) {
+            if (currentRoom.getTitle().equals("kitchen")) {
+                System.out.println(description.get("doge").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
+            }
+        } else if (input.contains("kermit")||input.contains("frog")) {
+            if (currentRoom.getTitle().equals("diningroom")) {
+                System.out.println(description.get("kermit").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
+            }
+        } else if (input.contains("cat")||input.contains("grumpy")) {
+            if (currentRoom.getTitle().equals("livingroom")) {
+                System.out.println(description.get("grumpycat").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
+            }
+        }
+    }
 
     public static void get(String input, MemeRoom currentRoom) {
 
@@ -140,12 +160,12 @@ public class TextInteractor {
                     System.out.println(returnDialogue.get(random));
                 }
             } else if (input.contains("kermit")) {
-                if (currentRoom.getTitle().equals("dining room")) {
+                if (currentRoom.getTitle().equals("dining")) {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("kermit").get("dialogue");
                     System.out.println(returnDialogue.get(random));
                 }
             } else if (input.contains("cat")) {
-                if (currentRoom.getTitle().equals("living room")) {
+                if (currentRoom.getTitle().equals("living")) {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("grumpycat").get("dialogue");
                     System.out.println(returnDialogue.get(random));
                 }

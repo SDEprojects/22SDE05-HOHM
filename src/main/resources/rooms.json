@@ -71,7 +71,7 @@
     "title": "living room",
     "description": {
       "memeComplete": "The cat in the room seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
-      "memeIncomplete": "This living room is odd, you feel a presence slightly judging you.\nOn the table is the grumpiest cat you've ever seen.\nBeside him is a plate with a colorful set of dice\nBehind him is a desk with pens, papers, and sticky notes"
+      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nThe room is as grey as it can be like if someone were to suck the fun out of this place.\nBeside him is a plate with a colorful set of dice\nBehind him is a desk with pens, papers, and sticky notes"
     },
     "objectives": {
       "check complete": {
