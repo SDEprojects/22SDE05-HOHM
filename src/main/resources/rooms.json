@@ -11,7 +11,8 @@
     "exit": [
       "kitchen",
       "living",
-      "dining"
+      "dining",
+      "bathroom"
     ],
     "complete": false
   },
@@ -198,6 +199,44 @@
     "description": {
       "hasDice": "Sitting in front of you is what you assume to be a ghost.\nWELCOME TO MY ABODE I AM THE MEME LORD\nYou surmise that this is the entity who locked you in this house of haunted memes.\n'I see you have dice, how fortuitous, in order to get out of this house you must play a game with me.\nDefeat me in my last Dungeons and Dragons encounter and I will set you free.\nLose and I will roast you to oblivion.'\nThis seems to be your only way out... Roll for initiative!!\n",
       "noDice": "A cold feeling fills your soul.\nFor a second you feel like you can't breathe, like everything is broken and you hear a whisper.\n'No dice?!?! Looks like you chose death as your escape'\nThe darkness overwhelms you and you ask why... why did you run into this stupid house?!?!\n"
+    }
+  },
+  "bathroom": {
+    "title": "bathroom",
+    "description": {
+      "memeIncomplete": "He doesn’t know what we minds, does he, precious?\nYou look around and you see gollum looking into the mirror mumbling things to himself. We should speak to gollum.",
+      "memeComplete": "What has it got in his nasty little pocketses?"
+    },
+    "objectives": {
+      "check complete": {
+        "useItem": "",
+        "completed": "What has it got in his nasty little pocketses?",
+        "incomplete": "He doesn’t know what we minds, does he, precious?\nYou look around and you see gollum looking into the mirror mumbling things to himself. We should speak to gollum.",
+        "complete": false
+      },
+      "itemFound": {
+        "incomplete": "",
+        "complete": false
+      },
+      "clueFound": {
+        "incomplete": "",
+        "complete": false
+      }
+    },
+    "items": {
+      "key": {
+        "prereq": "check complete",
+        "type": "misc",
+        "description": "",
+        "prereqMet": "",
+        "prereqNotMet": ""
+      }
+    },
+    "exit": [
+      "hallway"
+    ],
+    "complete": false,
+    "altGet": {
     }
   }
 }

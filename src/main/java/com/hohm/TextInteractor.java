@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hohm.models.MemeRoom;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -172,7 +174,42 @@ public class TextInteractor {
                     ArrayNode returnDialogue = (ArrayNode) dialogue.get("grumpycat").get("dialogue");
                     System.out.println(returnDialogue.get(random));
                 }
-            } else {
+            }else if (input.contains("smeagol")) {
+                if (currentRoom.getTitle().equals("bathroom")) {
+                    BufferedReader smeagolRiddle = new BufferedReader(new InputStreamReader(System.in));
+                    System.out.println("You want to play a game of riddles with smeagol.");
+                    System.out.println("What has roots as nobody sees, Is taller than trees, Up, up, up it goes And yet, never grows");
+                    String first = smeagolRiddle.readLine().toLowerCase();
+                    if(first.contains("mountain")){
+                        System.out.println("Voiceless it cries,\n" +
+                                "Wingless flutters,\n" +
+                                "Toothless bites,\n" +
+                                "Mouthless mutters.");
+                        String second = smeagolRiddle.readLine().toLowerCase();
+                        if(second.contains("wind")){
+                            System.out.println("It cannot be seen, cannot be felt,\n" +
+                                    "Cannot be heard, cannot be smelt.\n" +
+                                    "It lies behind stars and under hills,\n" +
+                                    "And empty holes it fills.\n" +
+                                    "It comes first and follows after,\n" +
+                                    "Ends life, kills laughter");
+                            String third = smeagolRiddle.readLine().toLowerCase();
+                            if(third.contains("Darkness")){
+
+                            }
+                        }
+                    }
+                    else{
+
+                    }
+                }
+            }else if (input.contains("gollum")) {
+                if (currentRoom.getTitle().equals("bathroom")) {
+                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("gollum").get("dialogue");
+                    System.out.println(returnDialogue.get(random));
+                }
+            }
+            else {
                 System.out.println("There's no one to talk to here.");
             }
         } catch (NullPointerException e) {
@@ -232,6 +269,8 @@ public class TextInteractor {
                 break;
             case "depths":
                 printRoom = "basement " + player.getRoom();
+            case "bathroom":
+                printRoom = player.getRoom();
         }
 
         ClearScreen.ClearConsole();
