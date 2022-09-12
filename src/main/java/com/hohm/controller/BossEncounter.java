@@ -17,7 +17,7 @@ import static com.hohm.controller.GameLoop.reader;
  */
 public class BossEncounter {
 
-    static MemeLord battle = new MemeLord(15);
+    static MemeLord boss = new MemeLord(20);
     static int spellCount = 3;
     static int playerAC = player.getHasAdvantage() ? 10: 8;
 
@@ -58,30 +58,31 @@ public class BossEncounter {
         reader.readLine();
 
         //Start game loop for the encounter
-        while (player.getHp() > 0 && battle.getHp() > 0){
+        while (player.getHp() > 0 && boss.getHp() > 0){
             if(playerInt>bossInt){
                 playerTurn();
-                if(battle.getHp() < 0 || player.getHp() < 0){
+                if(player.getHp() <= 0 || boss.getHp() <= 0){
                     break;
                 }
                 bossTurn();
-                if(player.getHp() < 0 || battle.getHp() < 0){
+                if(player.getHp() <= 0 || boss.getHp() <= 0){
                     break;
                 }
             }else{
                 bossTurn();
-                if(player.getHp() < 0 || battle.getHp() < 0){
+                if(player.getHp() <= 0 || boss.getHp() <= 0){
                     break;
                 }
                 playerTurn();
-                if(player.getHp() < 0 || battle.getHp() < 0){
+                if(player.getHp() <= 0 || boss.getHp() <= 0){
                     break;
                 }
+
             }
         }
 
         //Room is set based on who won the encounter, if player doesn't win the room is set to "dead and the game ends
-        if(battle.getHp() <= 0){
+        if(boss.getHp() <= 0){
             player.setRoom("win");
         }else{
             player.setRoom("dead");
@@ -100,11 +101,11 @@ public class BossEncounter {
         encounterSeparator();
         String attack;
         while (true) {
+            System.out.println("YOUR TURN");
             System.out.println("Choose Your Attack:");
             System.out.println("1) Roll Sword Attack");
-            System.out.println("2) Dodge");
             if (spellCount > 0) {
-                System.out.printf("3) Roll Spell Attack (%s)%n", spellCount);
+                System.out.printf("2) Roll Spell Attack (%s)%n", spellCount);
             }
             System.out.print(">");
             attack = reader.readLine();
@@ -126,11 +127,10 @@ public class BossEncounter {
                 System.out.println("Press Enter to Roll for Damage:");
                 reader.readLine();
                 int damageRoll = roll(4) + roll(4);
-                battle.hit(damageRoll);
-                if(battle.getHp() < 0){battle.setHp(0);}
+                boss.hit(damageRoll);
+                if(boss.getHp() < 0){boss.setHp(0);}
                 System.out.printf("You hit the enemy for %s damage%n", damageRoll);
-                System.out.printf("The enemy has %s health left%n", battle.getHp());
-                System.out.println("It's the MemeLord's Turn");
+                System.out.printf("The enemy has %s health left%n", boss.getHp());
                 reader.readLine();
             }else{
                 System.out.printf("You rolled... %s you missed!%n", attackRoll);
@@ -143,10 +143,10 @@ public class BossEncounter {
             System.out.print(">");
             int damageRoll = roll(4) + roll(4);
             reader.readLine();
-            battle.hit(damageRoll);
-            if(battle.getHp()<0){battle.setHp(0);}
+            boss.hit(damageRoll);
+            if(boss.getHp()<0){boss.setHp(0);}
             System.out.printf("You hit the enemy for %s damage%n", damageRoll);
-            System.out.printf("The enemy has %s health left%n", battle.getHp());
+            System.out.printf("The enemy has %s health left%n", boss.getHp());
             reader.readLine();
         } else {
             System.out.println("Invalid selection, enter the number of your attack!");
@@ -163,6 +163,7 @@ public class BossEncounter {
      */
     public static void bossTurn() throws InterruptedException, IOException {
         encounterSeparator();
+        System.out.println("MEMELORD'S TURN");
         System.out.println("The MemeLord is rolling to hit: ");
         TimeUnit.SECONDS.sleep(1);
         int attackroll = roll(20);

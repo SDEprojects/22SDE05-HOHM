@@ -225,10 +225,11 @@
     "complete": false
   },
   "depths":{
+    "title": "depths",
     "description": {
       "hasDice": "Sitting in front of you is what you assume to be a ghost.\nWELCOME TO MY ABODE I AM THE MEME LORD\nYou surmise that this is the entity who locked you in this house of haunted memes.\n'I see you have dice, how fortuitous, in order to get out of this house you must play a game with me.\nDefeat me in my last Dungeons and Dragons encounter and I will set you free.\nLose and I will roast you to oblivion.'\nThis seems to be your only way out... Roll for initiative!!\n",
       "noDice": "A cold feeling fills your soul.\nFor a second you feel like you can't breathe, like everything is broken and you hear a whisper.\n'No dice?!?! Looks like you chose death as your escape'\nThe darkness overwhelms you and you ask why... why did you run into this stupid house?!?!\n",
-      "encounterBegin": "A few things to note as we begin our battle:\n1. You can attack with sword <1> an unlimited amount of times, the sword isn't guaranteed to hit.\n2. You can use your spell to attack <2>, it will always hit but you only have 3 spell slots\n3.You will roll damage IF you are able to hit my monsters\n4. If you win you will be freed from this place, if you loose...well don't lose\n4. Press Enter to begin!!"
+      "encounterBegin": "A few things to note as we begin our battle:\n1. You can attack with sword <1> an unlimited amount of times, the sword isn't guaranteed to hit.\n2. You can use your spell to attack <2>, it will always hit but you only have 3 spell slots\n3.You will roll damage IF you are able to hit my monsters\n4. If you win you will be freed from this place, if you loose...well don't lose\nPRESS ENTER TO BEGIN"
     }
   },
   "bathroom": {

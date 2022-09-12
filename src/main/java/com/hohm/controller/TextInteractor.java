@@ -173,10 +173,9 @@ public class TextInteractor {
                     System.out.println("CLUE FOUND:");
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqMet") + "\n");
                 } else {
+                    player.hit(1);
                     printSeparator();
-                    //TODO fix prereqNotMet descriptions to do damage instead of instakill
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqNotMet"));
-                    player.hit(2);
                     if (player.getHp() <= 0) {
                         player.setRoom("dead");
                     }
@@ -398,6 +397,14 @@ public class TextInteractor {
     public static void commandList() {
         String dash = "= = ".repeat(29);
         String availableCommands = " BASIC COMMANDS: Look Room or <Item/npc>  |  Go <Room>  |  Get <Item>  |  Use <Item>  | Save  | Quit | Help";
+        System.out.println("\n\n" + dash);
+        System.out.println(availableCommands);
+        System.out.println(dash);
+    }
+
+    public static void doorCommandList() {
+        String dash = "= = ".repeat(29);
+        String availableCommands = "RETURN TO KITCHEN: type only 'kitchen' ";
         System.out.println("\n\n" + dash);
         System.out.println(availableCommands);
         System.out.println(dash);

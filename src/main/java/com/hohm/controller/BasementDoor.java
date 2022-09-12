@@ -18,7 +18,7 @@ public class BasementDoor {
 
     static {
         try {
-            DOOR_CODE = JsonParser.code();
+            DOOR_CODE = JsonParser.utilNodeReturn("basement code");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
