@@ -14,6 +14,11 @@ import static com.hohm.controller.GameBuilder.rooms;
 
 public class Save {
 
+    /**
+     * This functions saves current state of the game as a JSON file
+     * A new file is created or overwritten, with the current state of the instanced objects of the room and characters.
+     * @throws IOException
+     */
     public static void save() throws IOException {
         try {
             Map<String, Player> playerMap = new HashMap<>();
