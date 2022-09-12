@@ -1,6 +1,6 @@
 package com.hohm.controller;
 
-import com.hohm.model.BattleChar;
+import com.hohm.model.MemeLord;
 import com.hohm.model.MemeRoom;
 import com.hohm.utility.ClearScreen;
 
@@ -17,7 +17,7 @@ import static com.hohm.controller.GameLoop.reader;
  */
 public class BossEncounter {
 
-    static BattleChar battle = new BattleChar(15);
+    static MemeLord battle = new MemeLord(15);
     static int spellCount = 3;
     static int playerAC = player.getHasAdvantage() ? 10: 8;
 

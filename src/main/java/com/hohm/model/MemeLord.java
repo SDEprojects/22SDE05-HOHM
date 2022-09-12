@@ -1,10 +1,10 @@
 package com.hohm.model;
 
-public class BattleChar {
+public class MemeLord {
 
     private int hp;
 
-    public BattleChar(int hp) {
+    public MemeLord(int hp) {
         this.hp = hp;
     }
 
