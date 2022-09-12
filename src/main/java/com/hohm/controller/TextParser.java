@@ -1,23 +1,24 @@
-package com.hohm;
+package com.hohm.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.hohm.models.MemeRoom;
+import com.hohm.model.MemeRoom;
+import com.hohm.utility.JsonParser;
+import com.hohm.utility.MusicPlayer;
+import com.hohm.utility.Save;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
-import static com.hohm.TextInteractor.*;
+import static com.hohm.controller.TextInteractor.*;
+import static com.hohm.utility.JsonParser.commands;
 
 public class TextParser {
 
     public static void parseText(String input, MemeRoom currentRoom) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream utils = classLoader.getResourceAsStream("utils.json");
-        JsonNode node = ObjectGenerator.parse(utils);
-        node = node.get("commands");
+
+        JsonNode node = commands();
 
         String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
         String lookAt = String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
@@ -27,7 +28,7 @@ public class TextParser {
 
         if (input.equalsIgnoreCase("help")) {
             printSeparator();
-            UtilLoader.utilPrint("help");
+            JsonParser.utilPrint("help");
             if (currentRoom.getTitle().equalsIgnoreCase("office")) {
                 System.out.println(currentRoom.getDescription().get("hint"));
             }
@@ -62,12 +63,13 @@ public class TextParser {
             }
         } else if (input.contains("where am i")) {
             printSeparator();
-            UtilLoader.mapPrint(currentRoom.getTitle());
+            JsonParser.mapPrint(currentRoom.getTitle());
         } else if (input.contains("music") || input.contains("volume")) {
-            MusicPlayer.musicPlayer(input);
+            MusicPlayer.musicPlayer(input, currentRoom);
         } else {
+            printSeparator();
             System.out.println("Please enter a valid command");
-            UtilLoader.utilPrint("help");
+            JsonParser.utilPrint("help");
         }
     }
 }

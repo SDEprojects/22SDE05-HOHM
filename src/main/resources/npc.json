@@ -1,0 +1,51 @@
+{
+  "kermit" : {"dialogue": ["Hello loser", "What's up meme dweeb", "touch grass"],
+              "description": "He's a puppet like little fellow, seems pretty tired. Some liquid energy might do him some good.\nBut that's not my business.",
+              "room": "dining room",
+              "altName": {
+                "kermie": "kermit",
+                "muppet": "kermit",
+                "npc": "kermit"
+              }
+          },
+  "doge" : {"dialogue": ["Everything's fine..", "I mean but did you die?", "Yep I'm in my safe zone."],
+            "description": "He looks like a more espresso less depresso kind of doge, pretty calm for this chaos.\nMight be a load off if these flames were to be put out.\n",
+            "room": "kitchen",
+            "altName": {
+              "dog": "doge",
+              "flameo": "doge",
+              "npc": "doge"
+            }
+            },
+  "grumpycat" : {"dialogue": ["I tried to be happy, it was terrible", "fun? never heard of it", "ayooooo"],
+                "description": "The grumpiest of cats, if only there was something in the universe to bring him joy.\n",
+                "room": "living room",
+                "altName": {
+                  "cat": "grumpycat",
+                  "grumpy": "grumpycat",
+                  "npc": "grumpycat"
+                }
+          },
+  "boromir" : {
+    "dialogue": [
+      "One does not simply learn a new language without learning the bad words first",
+      "One does not simply meme like an edgelord",
+      "One does not simply walk 500 miles without walking 500 more"
+    ],
+    "description": "He looks quite kingly, although he is the son of a steward you presume he aspires to be king.",
+    "room": "office",
+    "altName": {
+      "knight": "boromir",
+      "npc": "boromir"
+    }
+  },
+  "gollum" : {"dialogue": ["Smeagol promises to Precious, promises faithfully. Never come again, never speak, no never!", "Smeagol will swear on the Precious.", "‘Stew the rabbits!’ squealed Gollum in dismay. ‘Spoil beautiful meat Smeagol saved for you, poor hungry Smeagol!"],
+            "description": "You look into his eyes and only see pencil dots for pupils",
+            "room": "bathroom",
+            "altName": {
+              "npc": "gollum"
+            }},
+  "smeagol": {"dialogue": ["Stew the rabbits!", "Curse the Baggins! It’s gone! ", "Precious, precious, precious!"],
+              "description": "You look into his eyes and see huge pupils",
+              "room": "bathroom"}
+}

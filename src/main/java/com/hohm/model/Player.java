@@ -1,15 +1,15 @@
-package com.hohm.models;
+package com.hohm.model;
 
 public class Player extends Character{
     private int clues;
     private boolean hasAdvantage = false;
     private boolean hasSecretKey = false;
     private boolean hasFailedKey = false;
-
+    private int hp = 15;
     public Player(){
 
     }
-    public Player(String name, String[] items, String room, int clues) {
+    public Player(String name, String[] items, String room, int clues,int hp) {
         super(name, items, room);
         this.clues = clues;
     }
@@ -51,5 +51,17 @@ public class Player extends Character{
 
     public void setFailedKey(boolean hasSecretKey) {
         this.hasFailedKey = hasSecretKey;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void hit(int hp){
+        this.hp -= hp;
     }
 }

@@ -1,6 +1,4 @@
-package com.hohm.models;
-
-import java.util.ArrayList;
+package com.hohm.model;
 
 public abstract class Character {
     private String name;

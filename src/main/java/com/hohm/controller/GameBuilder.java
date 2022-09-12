@@ -1,24 +1,41 @@
-package com.hohm;
+package com.hohm.controller;
 
-import com.hohm.models.MemeRoom;
-import com.hohm.models.Player;
+import com.hohm.controller.GameLoop;
+import com.hohm.model.Meme;
+import com.hohm.model.MemeRoom;
+import com.hohm.model.Player;
+import com.hohm.utility.JsonParser;
+import com.hohm.utility.MusicPlayer;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import static com.hohm.ObjectGenerator.generatePlayer;
-import static com.hohm.ObjectGenerator.generateRooms;
-import static com.hohm.TextInteractor.printSeparator;
 
+import static com.hohm.utility.JsonParser.objMapFromFile;
+import static com.hohm.utility.JsonParser.playerFromFile;
+import static com.hohm.controller.TextInteractor.printSeparator;
+
+/**
+ * Authors: Kaitlyn Fernelius, Daniel An, Agustin Duran
+ * GameBuilder is used to set the static objects that are viewed and manipulated in game.
+ */
 public class GameBuilder {
 
-    static String[] startingItems = {"bucket"};
     public static Player player;
     public static Map<String, MemeRoom> rooms;
+    public static Map<String, Meme> memes;
 
-    public static void gameInit() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+    /**
+     * GameInit is called after the user has determined that they would like to play a game.
+     * GameInit holds the logic to either load a saved game (if one exists) or to create a new game from base files
+     * @throws IOException
+     * @throws UnsupportedAudioFileException
+     * @throws LineUnavailableException
+     * @throws InterruptedException
+     */
+    public static void gameInit() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 
         while (true) {
             File saved = new File("saved_data/saved_Rooms.json");
@@ -27,8 +44,8 @@ public class GameBuilder {
                 String response = GameLoop.reader.readLine();
                 if (response.equalsIgnoreCase("y") || response.equalsIgnoreCase("yes")) {
                     try {
-                        rooms = ObjectLoader.loadRooms();
-                        player = ObjectLoader.loadPlayer();
+                        rooms = objMapFromFile("saved_data/saved_Rooms.json",MemeRoom.class);
+                        player = playerFromFile("saved_data/saved_Characters.json");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -42,14 +59,15 @@ public class GameBuilder {
             String confirm = GameLoop.reader.readLine();
             if (confirm.equalsIgnoreCase("y") || confirm.equalsIgnoreCase("yes")) {
                 try {
-                    rooms = generateRooms();
-                    player = generatePlayer();
+                    rooms = objMapFromFile("rooms.json",MemeRoom.class);
+                    player = playerFromFile("characters.json");
+                    memes = objMapFromFile("npc.json",Meme.class);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 System.out.println();
                 printSeparator();
-                UtilLoader.utilPrint("begin story");
+                JsonParser.utilPrint("begin story");
                 MusicPlayer.play();
                 GameLoop.run();
                 break;
