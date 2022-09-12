@@ -2,11 +2,11 @@
   "hallway": {
     "title": "hallway",
     "description": {
-      "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.",
-      "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nMany rooms lie ahead of you, the main ones are The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.\nTry typing where am i, to see all your room options.",
-      "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.",
-      "catnip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.",
-      "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
+      "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.\n",
+      "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nMany rooms lie ahead of you, the main ones are The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.\nTry typing where am i, to see all your room options.\n",
+      "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.\n",
+      "catnip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.\n",
+      "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...\n"
     },
     "exit": [
       "kitchen",
@@ -45,14 +45,14 @@
         "type": "misc",
         "description": "The coffee mug has 'Worlds Greatest Doge' written in bold black font.\nIt seems to be half full of piping hot coffee.\n",
         "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...\n",
-        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nIf only you had put out the fire...\n"
+        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nYou have taken damage, if only you had put out the fire...\n"
       },
       "fedora": {
         "prereq": "check complete",
         "type": "clue",
-        "description": "That's one cool cap!\nIt may fit you but you would have to get it to check out the tag for the size.",
-        "prereqMet": "You look and see a faint scribble on the inner brim of the fedora, 'Door Code: MR....'\nSome of the other characters have faded..",
-        "prereqNotMet": "You try to yank the fedora off the dog.\nLooks like that was the straw that broke the camel's back\n'NOT OKAY DUDE' he yells... your people pleasing heart is broken, you die from that heartbreaking emotional damage"
+        "description": "That's one cool cap!\nIt may fit you but you would have to get it to check out the tag for the size.\n",
+        "prereqMet": "You look and see a faint scribble on the inner brim of the fedora, 'Door Code: MR...'\nSome of the other characters have faded...\n",
+        "prereqNotMet": "You try to yank the fedora off the dog.\nLooks like that was the straw that broke the camel's back\n'NOT OKAY DUDE' he yells... your people pleasing heart is broken, \nyou take physical damage from that heartbreaking emotional damage.\n"
       }
     },
     "exit": [
@@ -73,13 +73,13 @@
     "title": "living room",
     "description": {
       "memeComplete": "The cat has returned and seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
-      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nSitting on the couch is the grumpiest cat you've seen in your entire life.\nBeside him on the side table is a box which holds a bunch of colorful yet odd looking dice.\nBehind him is a desk with pens, papers, and sticky notes"
+      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nSitting on the couch is the grumpiest cat you've seen in your entire life.\nBeside him on the side table is a box which holds a bunch of colorful yet odd looking dice.\nBehind him is a desk with pens, papers, and sticky notes.\n"
     },
     "objectives": {
       "check complete": {
         "useItem": "catnip",
         "completed": "You give the cat catnip, he hops off the table and vanishes around the corner.\nThank goodness for that, he was quite the debbie downer\n",
-        "incomplete": "The cat looks like he's never had a good day.\nIf only you had something that would help him chillax.",
+        "incomplete": "The cat looks like he's never had a good day.\nIf only you had something that would help him chillax.\n",
         "complete": false
       },
       "itemFound": {
@@ -97,14 +97,14 @@
         "type": "misc",
         "description": "These dice don't jiggle jiggle, they roll.\nYou aren't sure how, but they may come in handy later\n",
         "prereqMet": "You got the dice off the desk, they aren't like your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.\n",
-        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the Emotional Damage sinks in.\n"
+        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the physical and emotional damage sinks in.\n"
       },
       "sticky note": {
         "prereq": "check complete",
         "type": "clue",
         "description": "An old worn out sticky note sits on the writing desk.\nSeems like something important is jotted on it.\n",
-        "prereqMet": "You look at the note, written in pencil is the following\n'...23', you make a mental note of the numbers",
-        "prereqNotMet": "You look like a guy who would wear a 'Free hugs' sign\nFree hugs? go hug a cactus!\nThat one hurt really bad, you die from emotional damage"
+        "prereqMet": "You look at the note, written in pencil is the following\n'...23', you make a mental note of the numbers.\n",
+        "prereqNotMet": "You look like a guy who would wear a 'Free hugs' sign\nFree hugs? go hug a cactus!\nThat one hurt really bad, you take physical and emotional damage.\n"
       }
     },
     "exit": [
@@ -121,22 +121,22 @@
   "dining": {
     "title": "dining room",
     "description": {
-      "memeIncomplete": "The dining room is very opulent, oddly sitting at the head of the big ol table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo catnip.\nAbove you is a chandelier with an odd number of dangling jewels.",
-      "memeComplete": "Kermit has left, and you have retrieved the primo catnip.\nAll that is left is the odd chandelier."
+      "memeIncomplete": "The dining room is very opulent, oddly sitting at the head of the big ol table is Kermit THE Frog.\nKermit seems groggy and turns to give you a blank stare.\nHe looks forward and mumbles 'That's not my business'.\nYou see a plate next to him filled with dried leaves\nAs a cat connoisseur you know that to be some primo catnip.\nAbove you is a chandelier with an odd number of dangling jewels.\n",
+      "memeComplete": "Kermit has left, and you have retrieved the primo catnip.\nAll that is left is the odd chandelier.\n"
     },
     "objectives": {
       "check complete": {
         "useItem": "coffee mug",
-        "completed": "Kermit accepts your offering, and sips his coffee.\nHe slaps his knees and says 'Welp, better head out' and leaves the room",
-        "incomplete": "At the foot of the table you notice a small bowl.\nFrom your cat wrangling days, you recognize what looks to be some primo catnip rested in the bowl\nAbove you is a chandelier with an odd number of dangling jewels.",
+        "completed": "Kermit accepts your offering, and sips his coffee.\nHe slaps his knees and says 'Welp, better head out' and leaves the room.\n",
+        "incomplete": "At the foot of the table you notice a small bowl.\nFrom your cat wrangling days, you recognize what looks to be some primo catnip rested in the bowl\nAbove you is a chandelier with an odd number of dangling jewels.\n",
         "complete": false
       },
       "itemFound": {
-        "incomplete": "There's that primo plate, just waiting for you to take the catnip.",
+        "incomplete": "There's that primo plate, just waiting for you to take the catnip.\n",
         "complete": false
       },
       "clueFound": {
-        "incomplete": "You may want to get those jewels... at least to count em",
+        "incomplete": "You may want to get those jewels... at least to count em.\n",
         "complete": false
       }
     },
@@ -144,16 +144,16 @@
       "catnip": {
         "prereq": "check complete",
         "type": "misc",
-        "description": "The most exquisite, finely plated catnip to exist in the metaverse",
-        "prereqMet": "You carefully grab the plate so as to not disturb the aesthetics of the catnip and place it into your inventory.",
-        "prereqNotMet": "You reach for the plate of exquisite catnip when Kermit snaps his neck to glare at you...\nKermit starts to mumble and your hands stops before reaching the plate...\n 'You... G... Succeed...' Kermit continues to stare into your soul and speaks clearly,\n'Really breh? It seems you wont go too far in life. How you gonna get stuck in a haunted house and not even consider breaking the walls or windows first?\n Can you even think? You probably a B rated student at best, B for BELOW AVERAGE. Get gud kid.\n...You die from emotional damage."
+        "description": "The most exquisite, finely plated catnip to exist in the metaverse.\n",
+        "prereqMet": "You carefully grab the plate so as to not disturb the aesthetics of the catnip and place it into your inventory.\n",
+        "prereqNotMet": "You reach for the plate of exquisite catnip when Kermit snaps his neck to glare at you...\nKermit starts to mumble and your hands stops before reaching the plate...\n 'You... G... Succeed...' Kermit continues to stare into your soul and speaks clearly,\n'Really breh? It seems you wont go too far in life. How you gonna get stuck in a haunted house and not even consider breaking the walls or windows first?\n Can you even think? You probably a B rated student at best, B for BELOW AVERAGE. Get gud kid.\n... You take physical and emotional damage."
       },
       "chandelier": {
         "prereq": "check complete",
         "type": "clue",
-        "description": "The jewels hanging from the chandelier are strangely beautiful\nThe number of jewels seems odd though...",
-        "prereqMet": "You touch each jewel individually\nOne... two.... three...\nThere are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7",
-        "prereqNotMet": "You look up at the chandelier and try to count the jewels, one... two... thre...\nKermit looks at you with an air of superiority.\n'HEH looks like SOMEONE never learned to count...But that's none of my business'\nYou stop counting and cry yourself to sleep, you feel the burn deeply....and die."
+        "description": "The jewels hanging from the chandelier are strangely beautiful\nThe number of jewels seems odd though...\n",
+        "prereqMet": "You touch each jewel individually\nOne... two.... three...\nThere are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7.\n",
+        "prereqNotMet": "You look up at the chandelier and try to count the jewels, one... two... thre...\nKermit looks at you with an air of superiority.\n'HEH looks like SOMEONE never learned to count...But that's none of my business'\nYou stop counting and cry yourself to sleep, you feel the burn deeply....and die.\n"
       }
     },
     "exit": [
@@ -172,9 +172,9 @@
   "office": {
     "title": "office",
     "description": {
-      "hint": "Perhaps speak in the same tongue as Boromir.",
-      "memeIncomplete": "As you enter the room, turning around on a revolving chair, \nBoromir turns and welcomes you. Before you can say or make any actions he states, \n'One does not simply leave a house before meeting the owner does he not?'",
-      "memeComplete": "Boromir has already left to finish his mission and you have obtained a special die."
+      "hint": "Perhaps speak in the same tongue as Boromir.\n",
+      "memeIncomplete": "As you enter the room, turning around on a revolving chair, \nBoromir turns and welcomes you. Before you can say or make any actions he states, \n'One does not simply leave a house before meeting the owner does he not?'\n",
+      "memeComplete": "Boromir has already left to finish his mission and you have obtained a special die.\n"
     },
     "objectives": {
       "check complete": {
@@ -200,7 +200,7 @@
   "basement": {
     "title": "basement",
     "description": {
-      "memeIncomplete": "A massive door stands in your way, on the door is a keypad.\nIt's one of those fancy locks your buddy kevin told you about.\nLooks like this keypad takes letters and numbers, you may need to enter the right code to get in.\n(Note: Type 'Kitchen' if you want to return to the kitchen)",
+      "memeIncomplete": "A massive door stands in your way, on the door is a keypad.\nIt's one of those fancy locks your buddy kevin told you about.\nLooks like this keypad takes letters and numbers, you may need to enter the right code to get in.\n(Note: Type 'Kitchen' if you want to return to the kitchen)\n",
       "memeComplete": "You hear a click in the door and the lock comes open.\nWill you go into the depths?\n"
     },
     "objectives": {
@@ -235,14 +235,14 @@
   "bathroom": {
     "title": "bathroom",
     "description": {
-      "memeIncomplete": "He doesn’t know what we minds, does he, precious?\nYou look around and you see gollum looking into the mirror mumbling things to himself. We should speak to gollum.",
-      "memeComplete": "What has it got in his nasty little pocketses?"
+      "memeIncomplete": "He doesn’t know what we minds, does he, precious?\nYou look around and you see gollum looking into the mirror mumbling things to himself. We should speak to gollum.\n",
+      "memeComplete": "What has it got in his nasty little pocketses?\n"
     },
     "objectives": {
       "check complete": {
         "useItem": "",
-        "completed": "What has it got in his nasty little pocketses?",
-        "incomplete": "He doesn’t know what we minds, does he, precious?\nYou look around and you see gollum looking into the mirror mumbling things to himself. We should speak to gollum.",
+        "completed": "What has it got in his nasty little pocketses?\n",
+        "incomplete": "He doesn’t know what we minds, does he, precious?\nYou look around and you see gollum looking into the mirror mumbling things to himself. We should speak to gollum.\n",
         "complete": false
       },
       "itemFound": {
