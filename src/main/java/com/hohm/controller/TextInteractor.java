@@ -18,7 +18,13 @@ import static com.hohm.utility.JsonParser.parse;
 
 public class TextInteractor {
 
-
+    /**
+     * go is used to move the player from room to room
+     * Go checks to see if the user input contains a valid direction and if the exit is available
+     * If both are true the player is moved to that room, otherwise the player remains in the current room
+     * @param input - text input from the player
+     * @param currentRoom - the current room the player is in
+     */
     public static void go(String input, MemeRoom currentRoom) {
 
         String[] rooms = GameBuilder.rooms.keySet().toArray(new String[0]);
@@ -40,6 +46,13 @@ public class TextInteractor {
         }
     }
 
+    /**
+     * Look checks to see what the player would like to look at and then provides descriptive output accordingly
+     * If the item or NPC does not exist the player gets a prompt to use look room see a description of the room
+     * @param input - input received from the player
+     * @param currentRoom - The current room the player is in
+     * @throws IOException - Exception thrown if there is input output errors
+     */
     public static void look(String input, MemeRoom currentRoom) throws IOException {
 
         String[] currentItems = player.getItems();
@@ -60,6 +73,13 @@ public class TextInteractor {
         }
 
     }
+
+    /**
+     * Look item checks to see if the user input contains an item name/altname
+     * If user input is valid it prints the description of the item
+     * @param currentRoom - Room the player is currently in
+     * @param input - input obtained from the player
+     */
     public static void lookItem(MemeRoom currentRoom, String input){
         try {
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
@@ -78,10 +98,15 @@ public class TextInteractor {
         } catch (NullPointerException e) {
             printSeparator();
             System.out.println("That item may exist in the world, but you can't look at it here.\nTry using 'look room' to check your surroundings.");
-            //Do Nothing if there is a null pointer exception
         }
     }
 
+    /**
+     * Look NPC checks to see if the user input contains a valid npc name and if they are in the current room
+     * If user input is valid it prints a description of the npc in the room
+     * @param currentRoom - Room the player is currently in
+     * @param input - input obtained from the player
+     */
     public static void lookNPC(MemeRoom currentRoom, String input){
         try{
             Set<Map.Entry<String,Meme>> set = memes.entrySet().stream().filter(a->a.getValue().getRoom().equals(currentRoom.getTitle())).collect(Collectors.toSet());
@@ -101,6 +126,15 @@ public class TextInteractor {
             //Do Nothing if the NPC isn't in the room
         }
     }
+
+    /**
+     * Get checks to see if the user input contains an item name/altname.
+     * It then checks to see if the check complete objective is completed.
+     * If the check complete objective is completed the user obtains the item.
+     * If the check complete objective is not complete the user is unable to obtain the item and loses HP.
+     * @param input - input obtained from the user
+     * @param currentRoom - the current room the player is in
+     */
     public static void get(String input, MemeRoom currentRoom) {
 
         String[] key = input.split(" ", 2);
@@ -145,7 +179,6 @@ public class TextInteractor {
                 }
             } else {
                 printSeparator();
-                System.out.println("NO ERROR");
                 System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
             }
         } catch (NullPointerException e) {
@@ -156,6 +189,13 @@ public class TextInteractor {
 
     }
 
+    /**
+     * Use checks to see if the useItem is applicable to the check complete objective (which is the objective associated with an item to be used)
+     * If the item is, the item is removed from the inventory and check complete is marked as completed
+     * If the item is not applicable the user is told they are unable to use that item, or that they don't have the item
+     * @param input - input passed in from the user
+     * @param currentRoom - The current room that the player is in
+     */
     public static void use(String input, MemeRoom currentRoom) {
         String[] key = input.split(" ", 2);
         try {
@@ -180,6 +220,8 @@ public class TextInteractor {
         }
     }
 
+    //TODO - place the riddles in a json file and print from the json document
+    //TODO - refactor talk so that it is loosely coupled and npc's can be added without having to update this method
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         JsonNode dialogue = parse(classLoader.getResourceAsStream("npc.json"));
@@ -231,7 +273,7 @@ public class TextInteractor {
                             String third = smeagolRiddle.readLine().toLowerCase();
                             if(third.contains("darkness")){
                                 player.setHasSecretKey(true);
-                                System.out.println("You have completed smeagol's riddle challenge.. he sits there with disbelief as you steel his ring of keys.");
+                                System.out.println("You have completed smeagol's riddle challenge.. he sits there with disbelief as you steal his ring of keys.");
                                 System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
                                 player.setRoom("hallway");
                                 rooms.remove("bathroom");
@@ -260,6 +302,14 @@ public class TextInteractor {
         }
     }
 
+    /**
+     * Description is used to print the appropriate output based on the status of the room.
+     * If the room is the hallway a separate status is printed based on the user's inventory.
+     * This is because the current item shows the progress in the game.
+     * If the room is complete then the rooms final state is printed
+     * Otherwise the description is based on objectives that are in the room that still must be completed
+     * @param currentRoom - The current room that the player is in
+     */
     public static void description(MemeRoom currentRoom) {
         if (currentRoom.getTitle().equals("hallway")) {
             String[] currentItem = player.getItems();
@@ -293,6 +343,12 @@ public class TextInteractor {
         }
     }
 
+    /**
+     * checkComplete is used to determine if all objectives have been completed in the room for a standard room
+     * if the objectives of the room have been completed then the rooms complete status is set to true
+     * Otherwise no change is made
+     * @param currentRoom - The current room that the player is in
+     */
     public static void checkComplete(MemeRoom currentRoom) {
         Map<String, Map<String, String>> objectives = currentRoom.getObjectives();
         if (objectives.get("itemFound").get("complete").equals("true") && objectives.get("clueFound").get("complete").equals("true")) {
@@ -300,8 +356,14 @@ public class TextInteractor {
         }
     }
 
+    /**
+     * Print Separator is used to clear the console and display information to the player.
+     * Player should see the following at the top of the screen: Current Room, Inventory, Clues Found, HP
+     */
     public static void printSeparator() {
         String printRoom = player.getRoom();
+
+        //Updating room print if case is living, dining, basement, or depths to print out a logical statement for the player
         switch (printRoom){
             case "living":
             case "dining":
@@ -312,8 +374,6 @@ public class TextInteractor {
                 break;
             case "depths":
                 printRoom = "basement " + player.getRoom();
-            case "bathroom":
-                printRoom = player.getRoom();
         }
 
         ClearScreen.clearConsole();
@@ -330,9 +390,13 @@ public class TextInteractor {
 
     }
 
+    /**
+     * commandList will show the player the commands that they can use for the game
+     * Command list should be displayed at the bottom of the screen right before player input is read
+     */
     public static void commandList(){
         String dash = "= = ".repeat(29);
-        String availableCommands = "COMMANDS:   Look Room    |  Look <Item/NPC>    |   Go <Room>    |   Get <Item>    |   Use <Item>    |   Save ";
+        String availableCommands = " BASIC COMMANDS: Look Room or <Item/npc>  |  Go <Room>  |  Get <Item>  |  Use <Item>  | Save  | Quit | Help";
         System.out.println("\n\n" + dash);
         System.out.println(availableCommands);
         System.out.println(dash);

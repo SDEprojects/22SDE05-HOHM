@@ -1,6 +1,5 @@
 package com.hohm.controller;
 
-import com.hohm.controller.GameLoop;
 import com.hohm.model.Meme;
 import com.hohm.model.MemeRoom;
 import com.hohm.model.Player;

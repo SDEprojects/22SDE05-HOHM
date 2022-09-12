@@ -3,7 +3,7 @@
     "title": "hallway",
     "description": {
       "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.",
-      "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nThree rooms lie ahead of you, The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.",
+      "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nMany rooms lie ahead of you, the main ones are The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.\nTry typing where am i, to see all your room options.",
       "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.",
       "catnip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.",
       "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...."
@@ -73,7 +73,7 @@
     "title": "living room",
     "description": {
       "memeComplete": "The cat has returned and seems to be happy. He no longer is staring you down. \"So many reasons to be grumpy, so little time off I go.\"\n -Cat",
-      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nThe room is as grey as it can be like if someone were to suck the fun out of this place.\nBeside him is a plate with a colorful set of dice\nBehind him is a desk with pens, papers, and sticky notes"
+      "memeIncomplete": "You enter the living room, the temperature instantly becomes cold.\nSitting on the couch is the grumpiest cat you've seen in your entire life.\nBeside him on the side table is a box which holds a bunch of colorful yet odd looking dice.\nBehind him is a desk with pens, papers, and sticky notes"
     },
     "objectives": {
       "check complete": {
