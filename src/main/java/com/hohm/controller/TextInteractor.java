@@ -1,8 +1,10 @@
-package com.hohm;
+package com.hohm.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.hohm.models.MemeRoom;
+import com.hohm.model.Meme;
+import com.hohm.model.MemeRoom;
+import com.hohm.utility.ClearScreen;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +12,9 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.hohm.GameBuilder.player;
-import static com.hohm.GameBuilder.rooms;
+import static com.hohm.controller.GameBuilder.*;
+import static com.hohm.utility.JsonParser.itemPrint;
+import static com.hohm.utility.JsonParser.parse;
 
 public class TextInteractor {
 
@@ -40,9 +43,24 @@ public class TextInteractor {
     public static void look(String input, MemeRoom currentRoom) throws IOException {
 
         String[] currentItems = player.getItems();
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode description = ObjectGenerator.parse(classLoader.getResourceAsStream("dialogue.json"));
+        if(input.contains("room")){
+            printSeparator();
+            description(currentRoom);
+        }else if(input.contains("inventory")){
+            printSeparator();
+            System.out.println("Inventory: " + Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""));
+        }
+        else if (input.contains(Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""))) {
+            printSeparator();
+            String itemLookUp = Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", "");
+            itemPrint(itemLookUp);
+        }else{
+            lookItem(currentRoom,input);
+            lookNPC(currentRoom, input);
+        }
 
+    }
+    public static void lookItem(MemeRoom currentRoom, String input){
         try {
             String[] currentRoomItems = currentRoom.getItems().keySet().toArray(new String[0]);
             String[] currentRoomAltGet = currentRoom.getAltGet().keySet().toArray(new String[0]);
@@ -59,29 +77,30 @@ public class TextInteractor {
             }
         } catch (NullPointerException e) {
             printSeparator();
-            System.out.println("That item may exist in the world, but you can't look at it here\n");
+            System.out.println("That item may exist in the world, but you can't look at it here.\nTry using 'look room' to check your surroundings.");
             //Do Nothing if there is a null pointer exception
-        }
-        if(input.contains("inventory")){
-            System.out.println("Inventory: "+ Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""));
-        } else if (input.contains(Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""))) {
-            String itemLookUp = Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", "");
-            System.out.println(description.get("items").get(itemLookUp));
-        } else if (input.contains("doge")||input.contains("dog")) {
-            if (currentRoom.getTitle().equals("kitchen")) {
-                System.out.println(description.get("doge").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
-            }
-        } else if (input.contains("kermit")||input.contains("frog")) {
-            if (currentRoom.getTitle().equals("diningroom")) {
-                System.out.println(description.get("kermit").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
-            }
-        } else if (input.contains("cat")||input.contains("grumpy")) {
-            if (currentRoom.getTitle().equals("livingroom")) {
-                System.out.println(description.get("grumpycat").get("description").toPrettyString().replaceAll("[\\[\\](){}\\\\\"]", ""));
-            }
         }
     }
 
+    public static void lookNPC(MemeRoom currentRoom, String input){
+        try{
+            Set<Map.Entry<String,Meme>> set = memes.entrySet().stream().filter(a->a.getValue().getRoom().equals(currentRoom.getTitle())).collect(Collectors.toSet());
+            List<String> inputArr = Arrays.stream(input.split(" ")).map(String::toLowerCase).collect(Collectors.toList());
+            Meme currentMeme = set.iterator().next().getValue();
+            String[] altName = currentMeme.getAltName().keySet().toArray(new String[0]);
+            inputArr.retainAll(List.of(altName));
+
+            if(currentMeme.getRoom().equals(currentRoom.getTitle()) && input.contains(set.iterator().next().getKey()) || inputArr.iterator().hasNext()){
+                printSeparator();
+                System.out.println(currentMeme.getDescription());
+            }else{
+                printSeparator();
+                System.out.println("There's no one here by that name, must be a dream, try using 'look room' to check your surroundings");
+            }
+        }catch (NoSuchElementException e){
+            //Do Nothing if the NPC isn't in the room
+        }
+    }
     public static void get(String input, MemeRoom currentRoom) {
 
         String[] key = input.split(" ", 2);
@@ -117,8 +136,12 @@ public class TextInteractor {
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqMet") + "\n");
                 } else {
                     printSeparator();
+                    //TODO fix prereqNotMet descriptions to do damage instead of instakill
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqNotMet"));
-                    player.setRoom("dead");
+                    player.hit(2);
+                    if(player.getHp() <= 0){
+                        player.setRoom("dead");
+                    }
                 }
             } else {
                 printSeparator();
@@ -159,7 +182,7 @@ public class TextInteractor {
 
     public static void talk(String input, MemeRoom currentRoom) throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode dialogue = ObjectGenerator.parse(classLoader.getResourceAsStream("dialogue.json"));
+        JsonNode dialogue = parse(classLoader.getResourceAsStream("npc.json"));
         int random = (int) (Math.random() * 3);
         try {
             if (input.contains("doge")) {
@@ -293,14 +316,25 @@ public class TextInteractor {
                 printRoom = player.getRoom();
         }
 
-        ClearScreen.ClearConsole();
-        String dash = "- - ".repeat(29);
-        String printSeparator = String.format("Current Room: %s %20sInventory: %s %20sClues Found: %s"
+        ClearScreen.clearConsole();
+        String dash = "= = ".repeat(29);
+        String printSeparator = String.format("Current Room: %s %12sInventory: %s %12sClues Found: %s %12sPlayer HP: %s"
                 , printRoom.toUpperCase()
                 , "", player.getItems()[0].toUpperCase()
-                , "", player.getClues());
+                , "", player.getClues()
+                , "", player.getHp());
+
         System.out.println(dash);
         System.out.println(printSeparator);
+        System.out.println(dash + "\n\n");
+
+    }
+
+    public static void commandList(){
+        String dash = "= = ".repeat(29);
+        String availableCommands = "COMMANDS:   Look Room    |  Look <Item/NPC>    |   Go <Room>    |   Get <Item>    |   Use <Item>    |   Save ";
+        System.out.println("\n\n" + dash);
+        System.out.println(availableCommands);
         System.out.println(dash);
     }
 }

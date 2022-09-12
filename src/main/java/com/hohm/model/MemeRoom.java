@@ -1,7 +1,5 @@
-package com.hohm.models;
+package com.hohm.model;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class MemeRoom {
