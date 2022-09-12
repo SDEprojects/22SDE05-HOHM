@@ -43,11 +43,11 @@
   },
   "boromir": {
     "dialogue": [
-      "One does not simply learn a new language without learning the bad words first\n",
-      "One does not simply meme like an edgelord\n",
-      "One does not simply walk 500 miles without walking 500 more\n"
+      "One does not simply learn a new language without learning the bad words first",
+      "One does not simply meme like an edgelord",
+      "One does not simply walk 500 miles without walking 500 more"
     ],
-    "description": "He looks quite kingly, although he is the son of a steward you presume he aspires to be king.\n",
+    "description": "He looks quite kingly, although he is the son of a steward you presume he aspires to be king.",
     "room": "office",
     "altName": {
       "knight": "boromir",
