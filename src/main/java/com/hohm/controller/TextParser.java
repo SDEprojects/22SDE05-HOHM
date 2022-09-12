@@ -10,6 +10,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.hohm.controller.TextInteractor.*;
 import static com.hohm.utility.JsonParser.commands;
@@ -31,11 +34,10 @@ public class TextParser {
     public static void parseText(String input, MemeRoom currentRoom) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         JsonNode node = commands();
-
-        String goTo = String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
-        String lookAt = String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
-        String getIt = String.valueOf(node.get("get")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
-        String useIt = String.valueOf(node.get("use")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "");
+        List<String> goTo = Arrays.stream(String.valueOf(node.get("go")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "").split(",")).collect(Collectors.toList());
+        List<String> lookAt = Arrays.stream(String.valueOf(node.get("look")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "").split(",")).collect(Collectors.toList());
+        List<String> getIt = Arrays.stream(String.valueOf(node.get("get")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "").split(",")).collect(Collectors.toList());
+        List<String> useIt = Arrays.stream(String.valueOf(node.get("use")).toLowerCase().strip().replaceAll("[\\[\\](){}\"]", "").split(",")).collect(Collectors.toList());
         String[] inputArr = input.toLowerCase().strip().split(" ");
 
         if (input.equalsIgnoreCase("help")) {
