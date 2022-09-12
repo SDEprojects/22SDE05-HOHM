@@ -1,6 +1,8 @@
 package com.hohm.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.model.MemeRoom;
+import com.hohm.utility.JsonParser;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -12,6 +14,7 @@ import java.util.Arrays;
 import static com.hohm.controller.GameBuilder.player;
 import static com.hohm.controller.GameBuilder.rooms;
 import static com.hohm.controller.TextInteractor.commandList;
+import static com.hohm.controller.TextInteractor.printSeparator;
 
 /**
  * Authors: Daniel An, Kaitlyn Fernelius, Agustin Duran
@@ -38,14 +41,23 @@ public class GameLoop {
             //If no special circumstances are found, the normal text parsing occurs
             switch (player.getRoom()) {
                 case "win":
-                    System.out.println("You win, the meme lord is defeated!!");
+                    String winOut = JsonParser.utilNodeReturn("win text");
+                    printSeparator();
+                    System.out.println(winOut + "\n");
+                    System.out.println("Thanks for playing, we hope to meme with you again soon");
                     break label;
                 case "dead":
-                    System.out.println("Seems you have died... how very unfortunate.");
+                    if(currentRoom.getTitle().equals("depths")){
+                        String loseOut = JsonParser.utilNodeReturn("lose text");
+                        System.out.println(loseOut);
+                    }else{
+                        System.out.println("Seems you have died... how very unfortunate.");
+                    }
                     GameBuilder.gameInit();
                     break label;
                 case "basement": {
                     TextInteractor.description(currentRoom);
+                    TextInteractor.doorCommandList();
                     System.out.print(">Door Code:");
                     String input = reader.readLine();
                     BasementDoor.openDoor(input);

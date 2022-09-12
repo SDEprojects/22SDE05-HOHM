@@ -72,15 +72,15 @@ public final class JsonParser {
     }
 
     /**
-     * unlike utilPrint, code returns the string value to be used for comparison when the player is attempting to
+     * unlike utilPrint, utilNodeReturn() returns the string value to be used for comparison when the player is attempting to
      * enter the basement.
-     * @return String of the code
+     * @return String of the utilNodeReturn()
      * @throws IOException - thrown if the node is not found
      */
-    public static String code() throws IOException {
+    public static String utilNodeReturn(String nodeName) throws IOException {
         InputStream file = classLoader.getResourceAsStream("utils.json");
         JsonNode node = parse(file);
-        return node.get("basement code").asText();
+        return node.get(nodeName).asText();
     }
 
     /**
