@@ -1,7 +1,5 @@
 package com.hohm.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.hohm.model.Meme;
 import com.hohm.model.MemeRoom;
 import com.hohm.utility.ClearScreen;
@@ -14,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static com.hohm.controller.GameBuilder.*;
 import static com.hohm.utility.JsonParser.itemPrint;
-import static com.hohm.utility.JsonParser.parse;
+import static java.lang.System.exit;
 
 public class TextInteractor {
 
@@ -41,9 +39,10 @@ public class TextInteractor {
             GameLoop.previousRoom = currentRoom;
             player.setRoom(set.iterator().next());
             printSeparator();
-        } else {
+        } else if(player.getHasSecretKey() && input.contains("front door")) {
             printSeparator();
-            System.out.println("INVALID DIRECTION: Try typing 'WHERE AM I' for a list of valid exits\n");
+            System.out.println("Congrats you were able to let the house burn down without getting mimed..");
+            exit(0);
         }
     }
 
@@ -224,85 +223,66 @@ public class TextInteractor {
         }
     }
 
-    //TODO - place the riddles in a json file and print from the json document
-    //TODO - refactor talk so that it is loosely coupled and npc's can be added without having to update this method
-    public static void talk(String input, MemeRoom currentRoom) throws IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        JsonNode dialogue = parse(classLoader.getResourceAsStream("npc.json"));
+    public static void talk(String input, MemeRoom currentRoom) {
         int random = (int) (Math.random() * 3);
         try {
-            if (input.contains("doge")) {
-                if (currentRoom.getTitle().equals("kitchen")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("doge").get("dialogue");
-                    printSeparator();
-                    System.out.println(returnDialogue.get(random));
-                }
-            } else if (input.contains("kermit")) {
-                if (currentRoom.getTitle().equals("dining")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("kermit").get("dialogue");
-                    printSeparator();
-                    System.out.println(returnDialogue.get(random));
-                }
-            } else if (input.contains("cat")) {
-                if (currentRoom.getTitle().equals("living")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("grumpycat").get("dialogue");
-                    printSeparator();
-                    System.out.println(returnDialogue.get(random));
-                }
-            } else if (input.contains("boromir")) {
-                if (currentRoom.getTitle().equals("office")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("boromir").get("dialogue");
-                    printSeparator();
-                    System.out.println(returnDialogue.get(random));
-                }
-            } else if (input.contains("smeagol")) {
+            Set<Map.Entry<String, Meme>> set = memes.entrySet().stream().filter(a -> a.getValue().getRoom().equals(currentRoom.getTitle())).collect(Collectors.toSet());
+            Meme currentMeme = set.iterator().next().getValue();
+            if (input.contains("smeagol")) {
                 if (currentRoom.getTitle().equals("bathroom")) {
-                    BufferedReader smeagolRiddle = new BufferedReader(new InputStreamReader(System.in));
-                    System.out.println("You want to play a game of riddles with smeagol.");
-                    System.out.println("What has roots as nobody sees, Is taller than trees, Up, up, up it goes And yet, never grows");
-                    String first = smeagolRiddle.readLine().toLowerCase();
-                    if (first.contains("mountain")) {
-                        System.out.println("Voiceless it cries,\n" +
-                                "Wingless flutters,\n" +
-                                "Toothless bites,\n" +
-                                "Mouthless mutters.");
-                        String second = smeagolRiddle.readLine().toLowerCase();
-                        if (second.contains("wind")) {
-                            System.out.println("It cannot be seen, cannot be felt,\n" +
-                                    "Cannot be heard, cannot be smelt.\n" +
-                                    "It lies behind stars and under hills,\n" +
-                                    "And empty holes it fills.\n" +
-                                    "It comes first and follows after,\n" +
-                                    "Ends life, kills laughter");
-                            String third = smeagolRiddle.readLine().toLowerCase();
-                            if (third.contains("darkness")) {
-                                player.setHasSecretKey(true);
-                                System.out.println("You have completed smeagol's riddle challenge.. he sits there with disbelief as you steal his ring of keys.");
-                                System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
-                                player.setRoom("hallway");
-                                rooms.remove("bathroom");
-                            }
-                        }
-                    } else {
-                        System.out.println("What did you say?.. Leave now and never come back! We told him to go away and away he goes precious!");
-                        player.setFailedKey(true);
-                        System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
-                        player.setRoom("hallway");
-                        rooms.remove("bathroom");
-                    }
+                    RiddlesInTheDark();
+                    printSeparator();
                 }
-            } else if (input.contains("gollum")) {
-                if (currentRoom.getTitle().equals("bathroom")) {
-                    ArrayNode returnDialogue = (ArrayNode) dialogue.get("gollum").get("dialogue");
-                    System.out.println(returnDialogue.get(random));
-                }
-            } else {
-                System.out.println("There's no one to talk to here.");
             }
-        } catch (NullPointerException e) {
-            System.out.println("You can't talk to that person...");
+            if (currentMeme.getRoom().equals(currentRoom.getTitle()) && input.contains(set.iterator().next().getKey())) {
+                printSeparator();
+                System.out.println(currentMeme.getDialogue()[random]);
+            }
+        } catch (NoSuchElementException | IOException e) {
+            printSeparator();
+            System.out.println("There's no one to talk to here.");
         }
     }
+
+    private static void RiddlesInTheDark() throws IOException {
+        BufferedReader smeagolRiddle = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("You want to play a game of riddles with smeagol.\n");
+        System.out.println("Smeagol: What has roots as nobody sees, Is taller than trees, Up, up, up it goes And yet, never grows");
+        System.out.print(">");
+        String first = smeagolRiddle.readLine().toLowerCase();
+        if (first.contains("mountain")) {
+            printSeparator();
+            System.out.print("Smeagol mumbled something under his breath..\n");
+            System.out.println("Smeagol: Voiceless it cries,\n" + "Wingless flutters,\n" + "Toothless bites,\n" + "Mouthless mutters.");
+            System.out.print(">");
+            String second = smeagolRiddle.readLine().toLowerCase();
+            if (second.contains("wind")) {
+                printSeparator();
+                System.out.println("Smeagol is visibly upset..");
+                System.out.println("It cannot be seen, cannot be felt,\n" + "Cannot be heard, cannot be smelt.\n" + "It lies behind stars and under hills,\n" + "And empty holes it fills.\n" + "It comes first and follows after,\n" + "Ends life, kills laughter");
+                System.out.print(">");
+                String third = smeagolRiddle.readLine().toLowerCase();
+                if (third.contains("darkness")) {
+                    player.setHasSecretKey(true);
+                    printSeparator();
+                    System.out.println("Smeagol yells that you cheated!!");
+                    System.out.println("You have completed smeagol's riddle challenge.. he sits there with disbelief as you steal his ring of keys.");
+                    System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
+                    player.setRoom("hallway");
+                    rooms.remove("bathroom");
+                }
+            }
+        } else {
+            printSeparator();
+            System.out.println("Smeagol starts to smile.");
+            System.out.println("What did you say?.. Leave now and never come back! We told him to go away and away he goes precious!");
+            player.setFailedKey(true);
+            System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
+            player.setRoom("hallway");
+            rooms.remove("bathroom");
+        }
+    }
+
 
     /**
      * Description is used to print the appropriate output based on the status of the room.
