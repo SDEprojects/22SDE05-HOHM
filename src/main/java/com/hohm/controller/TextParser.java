@@ -14,8 +14,20 @@ import java.io.IOException;
 import static com.hohm.controller.TextInteractor.*;
 import static com.hohm.utility.JsonParser.commands;
 
+/**
+ * Authors: Kaitlyn Fernelius, Daniel An, Agustin Duran
+ * TextParser is used to parse the text and determine if a command is valid then call the appropriate method
+ */
 public class TextParser {
 
+    /**
+     * parseText takes in the user input and checks to see if any commands or synonyms of commands are called.
+     * If they are then it is passed to the appropriate method to handle the output logic of the command.
+      * @param input - user input
+     * @param currentRoom - current room the player is in
+     * @throws IOException - thrown if user input is incorrect
+     * @throws UnsupportedAudioFileException - thrown if the music file called is unsupported
+     */
     public static void parseText(String input, MemeRoom currentRoom) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         JsonNode node = commands();

@@ -13,18 +13,29 @@ import static com.hohm.controller.GameBuilder.player;
 import static com.hohm.controller.GameBuilder.rooms;
 import static com.hohm.controller.TextInteractor.commandList;
 
-
+/**
+ * Authors: Daniel An, Kaitlyn Fernelius, Agustin Duran
+ * GameLoop is used to instantiate the game loop, and continually run until a win condition or a lose condition occurs
+ */
 public class GameLoop {
     //Creating game objects to reference during game play
     public static MemeRoom previousRoom;
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+    /**
+     * Run starts a game loop that gathers user input and passes the controller capabilities to the TextInteractor
+     * @throws IOException - Thrown from improper input
+     * @throws UnsupportedAudioFileException - Thrown if audio file is referenced that is unsupported
+     */
     public static void run() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
         //Initiating the game loop
         label:
         while (true) {
             //Current room starts as the hallway
             MemeRoom currentRoom = rooms.get(player.getRoom());
+
+            //Special circumstances are checked and different courses of action are taken based on room type
+            //If no special circumstances are found, the normal text parsing occurs
             switch (player.getRoom()) {
                 case "win":
                     System.out.println("You win, the meme lord is defeated!!");
@@ -72,8 +83,8 @@ public class GameLoop {
 
                     commandList();
                     System.out.print(">");
-
                     String userInput = reader.readLine();
+
 
                     if (userInput.equalsIgnoreCase("quit")) {
                         break label;
