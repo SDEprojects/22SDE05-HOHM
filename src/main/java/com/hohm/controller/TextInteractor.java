@@ -222,7 +222,7 @@ public class TextInteractor {
                 PrintSeparators.printSeparatorMain();
                 System.out.printf("Might be nice to use the %s, but... you don't even have that!%n", key[1]);
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e ) {
             PrintSeparators.printSeparatorMain();
             System.out.println("You can't use that here...");
         }
