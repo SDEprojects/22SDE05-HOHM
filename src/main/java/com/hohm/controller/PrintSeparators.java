@@ -45,7 +45,7 @@ public class PrintSeparators {
      */
     public static void printSeparatorBottom() {
         String dash = "= = ".repeat(29);
-        String availableCommands = " BASIC COMMANDS: Look Room or <Item/npc>  |  Go <Room>  |  Get <Item>  |  Use <Item>  | Save  | Quit | Help";
+        String availableCommands = " BASIC COMMANDS:   Look Room  |    Go <room>  |    Get <item>  |    Use <item>  |   Talk <npc>  |  Save  |   Help";
         System.out.println("\n\n" + dash);
         System.out.println(availableCommands);
         System.out.println(dash);

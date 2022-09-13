@@ -40,6 +40,10 @@ public class TextInteractor {
             PrintSeparators.printSeparatorMain();
             System.out.println("Congrats you were able to let the house burn down without getting mimed..");
             exit(0);
+        } else{
+            PrintSeparators.printSeparatorMain();
+            System.out.println("You can't go that way, try using 'Where am i' for a map of exits.\n" +
+                    "If you are interested in this room's secrets try using 'look room'" );
         }
     }
 
@@ -137,14 +141,19 @@ public class TextInteractor {
      */
     public static void get(String input, MemeRoom currentRoom) {
 
-        String[] key = input.split(" ", 2);
-        String[] altGet = currentRoom.getAltGet().keySet().toArray(new String[0]);
-        String keyVal = Arrays.asList(altGet).contains(key[1]) ?
-                currentRoom.getAltGet().get(key[1]) : key[1];
-        boolean itemsBool = currentRoom.getItems().containsKey(keyVal);
-        boolean altItems = currentRoom.getItems().containsKey(keyVal);
-
+        String keyVal = null;
         try {
+            String[] key = input.split(" ", 2);
+            keyVal = key[1];
+
+                String[] altGet = currentRoom.getAltGet().keySet().toArray(new String[0]);
+                keyVal = Arrays.asList(altGet).contains(key[1]) ?
+                        currentRoom.getAltGet().get(key[1]) : key[1];
+                boolean itemsBool = currentRoom.getItems().containsKey(keyVal);
+                boolean altItems = currentRoom.getItems().containsKey(keyVal);
+
+
+
             if (itemsBool || altItems) {
                 String objective = currentRoom.getItems().get(keyVal).get("prereq");
                 boolean objComplete = Boolean.parseBoolean(currentRoom.getObjectives().get(objective).get("complete"));
@@ -178,12 +187,11 @@ public class TextInteractor {
                 }
             } else {
                 PrintSeparators.printSeparatorMain();
-                System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
+                System.out.printf("You are unable to get the %s... whatever that is%nTry using look room to see what's going on in here.%n", keyVal);
             }
         } catch (NullPointerException e) {
             PrintSeparators.printSeparatorMain();
-            e.printStackTrace();
-            System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
+            System.out.printf("You are unable to get the %s... whatever that is%nTry using look room to see what's going on in here.%n", keyVal);
         }
 
     }

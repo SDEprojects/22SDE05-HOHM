@@ -5,7 +5,7 @@ public class Player extends Character{
     private boolean hasAdvantage = false;
     private boolean hasSecretKey = false;
     private boolean hasFailedKey = false;
-    private int hp = 1;
+    private int hp = 15;
     public Player(){
 
     }
