@@ -189,7 +189,7 @@ public class TextInteractor {
                 PrintSeparators.printSeparatorMain();
                 System.out.printf("You are unable to get the %s... whatever that is%nTry using look room to see what's going on in here.%n", keyVal);
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             PrintSeparators.printSeparatorMain();
             System.out.printf("You are unable to get the %s... whatever that is%nTry using look room to see what's going on in here.%n", keyVal);
         }
