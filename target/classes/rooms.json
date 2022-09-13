@@ -4,8 +4,8 @@
     "description": {
       "nullHallway": "You go back to the hallway, no items, no way out.\nYou need to figure out your next move or else you are going to be stuck here.\nMight be good to make sure you are thorough with your searching.\n",
       "bucket": "You are in the hallway, the door is firmly shut behind you, no way out!!\nMany rooms lie ahead of you, the main ones are The Kitchen, Dining Room and Living Room.\nSmoke is flooding the hall and it seems to be coming from the kitchen.\nTry typing where am i, to see all your room options.\n",
-      "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, it's so lame in here.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.\n",
-      "catnip": "The door, still locked seems to mock you.\nFlames are quenched, muppets placated, and you hear a loud MEEOWW from the Living Room.\n",
+      "coffee mug": "The door remains firmly shut and the smoke has vanished.\nYou hope to get out of this place soon, you need to watch the new episode of House of the Dragon.\nFrom the Dining room you hear the sounds of a grumpy tired muppet.\nFrom the Living Room you hear the grumblings of a cat.",
+      "catnip": "The door, still locked seems to mock you.\nWhy did you have to get stuck today... on grandma's birthday.\nFlames are quenched, Muppets placated, and you hear a loud MEEOWW from the Living Room.\n",
       "dice": "Your mind wanders to the mysteries of the basement, if only you knew the code for the door...\n"
     },
     "exit": [
@@ -23,7 +23,7 @@
       "check complete": {
         "useItem": "bucket",
         "completed": "You toss the watery contents of the bucket on the flames.\nThe yellow light flickers and sizzles away.\nThe dog smiles at you and tips his hat, as his apparition disappears.\n",
-        "incomplete": "As many flames as there are, it seems reasonable that say...\nPerhaps, a bucket-full of water might work to douse them\n",
+        "incomplete": "As many flames as there are, it seems reasonable that say...\nPerhaps, some sloshable water might work to douse them\n",
         "complete": false
       },
       "itemFound": {
@@ -31,7 +31,7 @@
         "complete": false
       },
       "clueFound": {
-        "incomplete": "The dog's sweet fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.\n",
+        "incomplete": "The dog's cool as heck fedora is lying on the ground in front of the table.\nPast the table the basement door lies ahead of you.\n",
         "complete": false
       }
     },
@@ -43,9 +43,9 @@
       "coffee mug": {
         "prereq": "check complete",
         "type": "misc",
-        "description": "The coffee mug has 'Worlds Greatest Doge' written in bold black font.\nIt seems to be half full of piping hot coffee.\n",
+        "description": "The coffee mug has 'World's Greatest Doge' written in bold black font.\nIt seems to be half full of piping hot coffee.\n",
         "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...\n",
-        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to slowly expire surrounded by etherial flames.\nYou have taken damage, if only you had put out the fire...\n"
+        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to question your existence ethereal flames.\nYou have taken existential crisis damage, if only you had put out the fire...\n"
       },
       "fedora": {
         "prereq": "check complete",
@@ -96,7 +96,7 @@
         "type": "misc",
         "description": "These dice don't jiggle jiggle, they roll.\nYou aren't sure how, but they may come in handy later\n",
         "prereqMet": "You got the dice off the desk, they aren't like your normal six sided die.\nOne has the number 20 on it, we should look around to see what we can use them for.\n",
-        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the physical and emotional damage sinks in.\n"
+        "prereqNotMet": "As you reach for the dice the cat turns it's grumpy face towards you\nHe says 'Like a good neighbor, you should have stayed over there'\nA single tear falls down your face and the physical and emotional damage sinks in.\nYou really are the worst neighbor.\n"
       },
       "sticky note": {
         "prereq": "check complete",
@@ -152,7 +152,7 @@
         "type": "clue",
         "description": "The jewels hanging from the chandelier are strangely beautiful\nThe number of jewels seems odd though...\n",
         "prereqMet": "You touch each jewel individually\nOne... two.... three...\nThere are 7 jewels hanging from the Chandelier, you keep a mental note of the number 7.\n",
-        "prereqNotMet": "You look up at the chandelier and try to count the jewels, one... two... thre...\nKermit looks at you with an air of superiority.\n'HEH looks like SOMEONE never learned to count...But that's none of my business'\nYou stop counting and cry yourself to sleep, you feel the burn deeply....and die.\n"
+        "prereqNotMet": "You look up at the chandelier and try to count the jewels, one... two... thre...\nKermit looks at you with an air of superiority.\n'HEH looks like SOMEONE never learned to count...But that's none of my business'\nYou stop counting because the tears welling up in your eyes make it impossible to see.\nYou take emotional damage on that one...\n"
       }
     },
     "exit": [
