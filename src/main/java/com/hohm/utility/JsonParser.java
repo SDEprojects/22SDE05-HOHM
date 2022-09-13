@@ -54,7 +54,7 @@ public final class JsonParser {
     }
 
     /**
-     * mapPrint is used to find and print the applicable map for the room, special cases are if riddles in the dark
+     * mapPrint is used to find and print the applicable map for the room, special cases are if riddlesBottom in the dark
      * has been completed
      * @param nodeKey - key of the map to be printed
      * @throws IOException - thrown if the map is not found
@@ -91,7 +91,7 @@ public final class JsonParser {
     public static void itemPrint(String item) throws IOException {
         InputStream file = classLoader.getResourceAsStream("utils.json");
         JsonNode description = parse(file);
-        System.out.println(description.get("items").get(item));
+        System.out.println(description.get("items").get(item).textValue());
     }
 
     /**
@@ -99,9 +99,9 @@ public final class JsonParser {
      * @return - synonym array list found in utils file
      * @throws IOException - thrown if file cannot be found
      */
-    public static JsonNode commands() throws IOException {
-        InputStream file = classLoader.getResourceAsStream("utils.json");
-        return parse(file).get("commands");
+    public static JsonNode nodeValueReturn(String nodeName, String fileName) throws IOException {
+        InputStream file = classLoader.getResourceAsStream(fileName);
+        return parse(file).get(nodeName);
     }
 
     /**

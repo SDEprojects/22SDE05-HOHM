@@ -5,7 +5,7 @@ import com.hohm.utility.JsonParser;
 import java.io.IOException;
 
 import static com.hohm.controller.GameBuilder.player;
-import static com.hohm.controller.TextInteractor.printSeparator;
+import static com.hohm.controller.PrintSeparators.printSeparatorMain;
 
 
 /**
@@ -37,14 +37,14 @@ public class BasementDoor {
         if(openAttempts<2){
             if(input.equals(DOOR_CODE)){
                 player.setRoom("depths");
-                printSeparator();
+                printSeparatorMain();
                 System.out.println("The door opens, and you walk down into the basement depths....");
             }else if(input.equalsIgnoreCase("kitchen")){
                 player.setRoom("kitchen");
-                printSeparator();
+                printSeparatorMain();
             }
             else{
-                printSeparator();
+                printSeparatorMain();
                 openAttempts++;
                 System.out.printf("ERROR WRONG CODE: %s More Chances%n", 3 - openAttempts);
             }

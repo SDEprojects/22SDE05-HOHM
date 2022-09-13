@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static com.hohm.utility.JsonParser.objMapFromFile;
 import static com.hohm.utility.JsonParser.playerFromFile;
-import static com.hohm.controller.TextInteractor.printSeparator;
+import static com.hohm.controller.PrintSeparators.printSeparatorMain;
 
 /**
  * Authors: Kaitlyn Fernelius, Daniel An, Agustin Duran
@@ -48,7 +48,7 @@ public class GameBuilder {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                    printSeparator();
+                    printSeparatorMain();
                     MusicPlayer.play();
                     GameLoop.run();
                     break;
@@ -65,7 +65,7 @@ public class GameBuilder {
                     throw new RuntimeException(e);
                 }
                 System.out.println();
-                printSeparator();
+                printSeparatorMain();
                 JsonParser.utilPrint("begin story");
                 MusicPlayer.play();
                 GameLoop.run();

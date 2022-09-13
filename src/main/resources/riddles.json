@@ -1,0 +1,16 @@
+{
+  "1": {
+    "riddle": "Smeagol: 'What has roots as nobody sees,\nIs taller than trees,\nUp, up, up it goes and yet, never grows'",
+    "answer": "mountain"
+  },
+  "2": {
+    "riddle": "Smeagol, mumbles something under his breath...\nSmeagol: 'Voiceless it cries,\nWingless flutters,\ntoothless bites,\nMouthless mutters.'",
+    "answer": "wind"
+  },
+  "3": {
+    "riddle": "Smeagol is visibly upset...\nIt cannot be seen, cannot be felt,\nCannot be heard, cannot be smelt.\nIt lies behind stars and under hills,\nAnd empty holes it fills.\nIt comes first and follows after,\nEnds life, kills laughter",
+    "answer": "darkness"
+  },
+  "win": "Smeagol yells 'It's cheated precious!!'\nyou have completed Smeagol's riddle challenge...he sits there with disbelief as you steal his ring of shiny keys.\nYou quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussssss*\n\nYou now have a secret shiny set of keys, time to find a way out\nPress ENTER to continue",
+  "lose": "Smeagol starts to smile.\nWhat did you say?...Leave now and never come back!! We told him to go away and away he goes precious!!\nYou quickly exit the room and the door slowly fades away, you hear a faint whisper *presiousssss*\n\nSo sad...You have lost the game of riddles, press ENTER to continue on your journey."
+}

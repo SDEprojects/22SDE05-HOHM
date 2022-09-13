@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.hohm.controller.TextInteractor.description;
-import static com.hohm.controller.TextInteractor.printSeparator;
+import static com.hohm.controller.PrintSeparators.printSeparatorMain;
 
 public class MusicPlayer {
     public static FloatControl gainControl;
@@ -30,7 +30,7 @@ public class MusicPlayer {
         } else {
             System.out.println("Sorry music player might not have that ability.");
         }
-        printSeparator();
+        printSeparatorMain();
         description(currentRoom);
     }
     // Plays the music starting the game.

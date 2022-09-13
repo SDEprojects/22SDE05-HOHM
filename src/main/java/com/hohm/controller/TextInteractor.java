@@ -2,11 +2,8 @@ package com.hohm.controller;
 
 import com.hohm.model.Meme;
 import com.hohm.model.MemeRoom;
-import com.hohm.utility.ClearScreen;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,11 +35,15 @@ public class TextInteractor {
         if (set.iterator().hasNext()) {
             GameLoop.previousRoom = currentRoom;
             player.setRoom(set.iterator().next());
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
         } else if(player.getHasSecretKey() && input.contains("front door")) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             System.out.println("Congrats you were able to let the house burn down without getting mimed..");
             exit(0);
+        } else{
+            PrintSeparators.printSeparatorMain();
+            System.out.println("You can't go that way, try using 'Where am i' for a map of exits.\n" +
+                    "If you are interested in this room's secrets try using 'look room'" );
         }
     }
 
@@ -58,13 +59,13 @@ public class TextInteractor {
 
         String[] currentItems = player.getItems();
         if (input.contains("room")) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             description(currentRoom);
         } else if (input.contains("inventory")) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             System.out.println("Inventory: " + Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""));
         } else if (input.contains(Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", ""))) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             String itemLookUp = Arrays.toString(currentItems).replaceAll("[\\[\\](){}\\\\\"]", "");
             itemPrint(itemLookUp);
         } else {
@@ -92,12 +93,12 @@ public class TextInteractor {
             for (String item : currentRoomItems) {
                 if (input.contains(item) || (set.iterator().hasNext()
                         && currentRoom.getAltGet().get(set.iterator().next()).equals(item))) {
-                    printSeparator();
+                    PrintSeparators.printSeparatorMain();
                     System.out.println(currentRoom.getItems().get(item).get("description"));
                 }
             }
         } catch (NullPointerException e) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             System.out.println("That item may exist in the world, but you can't look at it here.\nTry using 'look room' to check your surroundings.");
         }
     }
@@ -118,10 +119,10 @@ public class TextInteractor {
             inputArr.retainAll(List.of(altName));
 
             if (currentMeme.getRoom().equals(currentRoom.getTitle()) && input.contains(set.iterator().next().getKey()) || inputArr.iterator().hasNext()) {
-                printSeparator();
+                PrintSeparators.printSeparatorMain();
                 System.out.println(currentMeme.getDescription());
             } else {
-                printSeparator();
+                PrintSeparators.printSeparatorMain();
                 System.out.println("There's no one here by that name, must be a dream, try using 'look room' to check your surroundings");
             }
         } catch (NoSuchElementException e) {
@@ -140,14 +141,19 @@ public class TextInteractor {
      */
     public static void get(String input, MemeRoom currentRoom) {
 
-        String[] key = input.split(" ", 2);
-        String[] altGet = currentRoom.getAltGet().keySet().toArray(new String[0]);
-        String keyVal = Arrays.asList(altGet).contains(key[1]) ?
-                currentRoom.getAltGet().get(key[1]) : key[1];
-        boolean itemsBool = currentRoom.getItems().containsKey(keyVal);
-        boolean altItems = currentRoom.getItems().containsKey(keyVal);
-
+        String keyVal = null;
         try {
+            String[] key = input.split(" ", 2);
+            keyVal = key[1];
+
+                String[] altGet = currentRoom.getAltGet().keySet().toArray(new String[0]);
+                keyVal = Arrays.asList(altGet).contains(key[1]) ?
+                        currentRoom.getAltGet().get(key[1]) : key[1];
+                boolean itemsBool = currentRoom.getItems().containsKey(keyVal);
+                boolean altItems = currentRoom.getItems().containsKey(keyVal);
+
+
+
             if (itemsBool || altItems) {
                 String objective = currentRoom.getItems().get(keyVal).get("prereq");
                 boolean objComplete = Boolean.parseBoolean(currentRoom.getObjectives().get(objective).get("complete"));
@@ -158,7 +164,7 @@ public class TextInteractor {
                     player.setItems(items);
                     currentRoom.getObjectives().get("itemFound").put("complete", "true");
                     checkComplete(currentRoom);
-                    printSeparator();
+                    PrintSeparators.printSeparatorMain();
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqMet"));
                     System.out.println("You now have: " +
                             Arrays.toString(player.getItems()).replaceAll("[\\[\\](){}\"]", "").toUpperCase() + "\n");
@@ -168,25 +174,24 @@ public class TextInteractor {
                         currentRoom.getObjectives().get("clueFound").put("complete", "true");
                     }
                     checkComplete(currentRoom);
-                    printSeparator();
+                    PrintSeparators.printSeparatorMain();
                     System.out.println("CLUE FOUND:");
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqMet") + "\n");
                 } else {
                     player.hit(1);
-                    printSeparator();
+                    PrintSeparators.printSeparatorMain();
                     System.out.println(currentRoom.getItems().get(keyVal).get("prereqNotMet"));
                     if (player.getHp() <= 0) {
                         player.setRoom("dead");
                     }
                 }
             } else {
-                printSeparator();
-                System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
+                PrintSeparators.printSeparatorMain();
+                System.out.printf("You are unable to get the %s... whatever that is%nTry using look room to see what's going on in here.%n", keyVal);
             }
         } catch (NullPointerException e) {
-            printSeparator();
-            e.printStackTrace();
-            System.out.printf("You are unable to get the %s... whatever that is%n%n", keyVal);
+            PrintSeparators.printSeparatorMain();
+            System.out.printf("You are unable to get the %s... whatever that is%nTry using look room to see what's going on in here.%n", keyVal);
         }
 
     }
@@ -207,82 +212,47 @@ public class TextInteractor {
                 currentRoom.getObjectives().get("check complete").put("complete", String.valueOf(true));
                 String[] temp = {"[]"};
                 player.setItems(temp);
-                printSeparator();
+                PrintSeparators.printSeparatorMain();
                 System.out.println(currentRoom.getObjectives().get("check complete").get("completed"));
 
             } else if (Arrays.asList(player.getItems()).contains(key[1])) {
-                printSeparator();
+                PrintSeparators.printSeparatorMain();
                 System.out.printf("That's a nice thought to use the %s... won't do anything..%n", key[1]);
             } else {
-                printSeparator();
+                PrintSeparators.printSeparatorMain();
                 System.out.printf("Might be nice to use the %s, but... you don't even have that!%n", key[1]);
             }
         } catch (NullPointerException e) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             System.out.println("You can't use that here...");
         }
     }
 
+    /**
+     * Talk is used to interact with available npc characters in the room.
+     * If the character is located in the room then the player can get a randomly generated phrase from the NPC
+     * If the NPC is smeagol the player can play a riddle game with him to obtain a key
+     * @param input - input obtained from the user
+     * @param currentRoom - the room the player is currently in
+     */
     public static void talk(String input, MemeRoom currentRoom) {
         int random = (int) (Math.random() * 3);
         try {
             Set<Map.Entry<String, Meme>> set = memes.entrySet().stream().filter(a -> a.getValue().getRoom().equals(currentRoom.getTitle())).collect(Collectors.toSet());
             Meme currentMeme = set.iterator().next().getValue();
-            if (input.contains("smeagol")) {
-                if (currentRoom.getTitle().equals("bathroom")) {
-                    RiddlesInTheDark();
-                    printSeparator();
-                }
+            if (input.contains("smeagol") && currentRoom.getTitle().equals("bathroom")) {
+                    RiddleEncounter.riddlesInTheDark();
+                    PrintSeparators.printSeparatorMain();
             }
             if (currentMeme.getRoom().equals(currentRoom.getTitle()) && input.contains(set.iterator().next().getKey())) {
-                printSeparator();
+                PrintSeparators.printSeparatorMain();
                 System.out.println(currentMeme.getDialogue()[random]);
             }
         } catch (NoSuchElementException | IOException e) {
-            printSeparator();
+            PrintSeparators.printSeparatorMain();
             System.out.println("There's no one to talk to here.");
         }
     }
-
-    private static void RiddlesInTheDark() throws IOException {
-        BufferedReader smeagolRiddle = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("You want to play a game of riddles with smeagol.\n");
-        System.out.println("Smeagol: What has roots as nobody sees, Is taller than trees, Up, up, up it goes And yet, never grows");
-        System.out.print(">");
-        String first = smeagolRiddle.readLine().toLowerCase();
-        if (first.contains("mountain")) {
-            printSeparator();
-            System.out.print("Smeagol mumbled something under his breath..\n");
-            System.out.println("Smeagol: Voiceless it cries,\n" + "Wingless flutters,\n" + "Toothless bites,\n" + "Mouthless mutters.");
-            System.out.print(">");
-            String second = smeagolRiddle.readLine().toLowerCase();
-            if (second.contains("wind")) {
-                printSeparator();
-                System.out.println("Smeagol is visibly upset..");
-                System.out.println("It cannot be seen, cannot be felt,\n" + "Cannot be heard, cannot be smelt.\n" + "It lies behind stars and under hills,\n" + "And empty holes it fills.\n" + "It comes first and follows after,\n" + "Ends life, kills laughter");
-                System.out.print(">");
-                String third = smeagolRiddle.readLine().toLowerCase();
-                if (third.contains("darkness")) {
-                    player.setHasSecretKey(true);
-                    printSeparator();
-                    System.out.println("Smeagol yells that you cheated!!");
-                    System.out.println("You have completed smeagol's riddle challenge.. he sits there with disbelief as you steal his ring of keys.");
-                    System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
-                    player.setRoom("hallway");
-                    rooms.remove("bathroom");
-                }
-            }
-        } else {
-            printSeparator();
-            System.out.println("Smeagol starts to smile.");
-            System.out.println("What did you say?.. Leave now and never come back! We told him to go away and away he goes precious!");
-            player.setFailedKey(true);
-            System.out.println("You quickly exit the room and the door slowly fades away, you hear a faint whisper *precioussss*");
-            player.setRoom("hallway");
-            rooms.remove("bathroom");
-        }
-    }
-
 
     /**
      * Description is used to print the appropriate output based on the status of the room.
@@ -336,57 +306,4 @@ public class TextInteractor {
         }
     }
 
-    /**
-     * Print Separator is used to clear the console and display information to the player.
-     * Player should see the following at the top of the screen: Current Room, Inventory, Clues Found, HP
-     */
-    public static void printSeparator() {
-        String printRoom = player.getRoom();
-
-        //Updating room print if case is living, dining, basement, or depths to print out a logical statement for the player
-        switch (printRoom) {
-            case "living":
-            case "dining":
-                printRoom = player.getRoom() + " room";
-                break;
-            case "basement":
-                printRoom = player.getRoom() + " door";
-                break;
-            case "depths":
-                printRoom = "basement " + player.getRoom();
-        }
-
-        ClearScreen.clearConsole();
-        String dash = "= = ".repeat(29);
-        String printSeparator = String.format("Current Room: %s %12sInventory: %s %12sClues Found: %s %12sPlayer HP: %s"
-                , printRoom.toUpperCase()
-                , "", player.getItems()[0].toUpperCase()
-                , "", player.getClues()
-                , "", player.getHp());
-
-        System.out.println(dash);
-        System.out.println(printSeparator);
-        System.out.println(dash + "\n\n");
-
-    }
-
-    /**
-     * commandList will show the player the commands that they can use for the game
-     * Command list should be displayed at the bottom of the screen right before player input is read
-     */
-    public static void commandList() {
-        String dash = "= = ".repeat(29);
-        String availableCommands = " BASIC COMMANDS: Look Room or <Item/npc>  |  Go <Room>  |  Get <Item>  |  Use <Item>  | Save  | Quit | Help";
-        System.out.println("\n\n" + dash);
-        System.out.println(availableCommands);
-        System.out.println(dash);
-    }
-
-    public static void doorCommandList() {
-        String dash = "= = ".repeat(29);
-        String availableCommands = "RETURN TO KITCHEN: type only 'kitchen' ";
-        System.out.println("\n\n" + dash);
-        System.out.println(availableCommands);
-        System.out.println(dash);
-    }
 }
