@@ -73,6 +73,9 @@
       "Precious, precious, precious!\n"
     ],
     "description": "You look into his eyes and see huge pupils\n",
-    "room": "bathroom"
+    "room": "bathroom",
+    "altName": {
+      "npc": "smeagol"
+    }
   }
 }

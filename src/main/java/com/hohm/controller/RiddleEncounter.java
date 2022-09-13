@@ -30,7 +30,7 @@ public class RiddleEncounter {
         System.out.print(">");
         String userAnswer = reader.readLine();
 
-        if (userAnswer.equals("y") || userAnswer.equals("n")) {
+        if (userAnswer.equals("y") || userAnswer.equals("yes")) {
             for (int i = 1; i < 4; i++) {
                 JsonNode questionNode = nodeValueReturn(String.valueOf(i), "riddles.json");
                 PrintSeparators.printSeparatorMain();
@@ -62,9 +62,11 @@ public class RiddleEncounter {
                     reader.readLine();
                     player.setRoom("hallway");
                     rooms.remove("bathroom");
+                    PrintSeparators.printSeparatorMain();
                 }
             }
         } else {
+            PrintSeparators.printSeparatorMain();
             System.out.println("It doesn't think it's smart enough preciousss.....We are the smart ones here.");
         }
 
