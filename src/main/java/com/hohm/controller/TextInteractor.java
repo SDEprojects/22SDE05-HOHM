@@ -242,7 +242,6 @@ public class TextInteractor {
             Meme currentMeme = set.iterator().next().getValue();
             if (input.contains("smeagol") && currentRoom.getTitle().equals("bathroom")) {
                     RiddleEncounter.riddlesInTheDark();
-                    PrintSeparators.printSeparatorMain();
             }
             if (currentMeme.getRoom().equals(currentRoom.getTitle()) && input.contains(set.iterator().next().getKey())) {
                 PrintSeparators.printSeparatorMain();
