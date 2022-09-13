@@ -2,7 +2,6 @@ package com.hohm.controller;
 
 import com.hohm.model.MemeLord;
 import com.hohm.model.MemeRoom;
-import com.hohm.utility.ClearScreen;
 
 import java.io.IOException;
 import java.util.Random;
@@ -42,7 +41,7 @@ public class BossEncounter {
      * @throws InterruptedException
      */
     public static void encounter(MemeRoom currentRoom) throws IOException, InterruptedException {
-        encounterSeparator();
+        PrintSeparators.encounterSeparator();
         System.out.println(currentRoom.getDescription().get("encounterBegin"));
 
         //Roll to determine which player goes first
@@ -98,7 +97,7 @@ public class BossEncounter {
      * @throws InterruptedException
      */
     public static void playerTurn() throws IOException, InterruptedException {
-        encounterSeparator();
+        PrintSeparators.encounterSeparator();
         String attack;
         while (true) {
             System.out.println("YOUR TURN");
@@ -162,7 +161,7 @@ public class BossEncounter {
      * @throws IOException
      */
     public static void bossTurn() throws InterruptedException, IOException {
-        encounterSeparator();
+        PrintSeparators.encounterSeparator();
         System.out.println("MEMELORD'S TURN");
         System.out.println("The MemeLord is rolling to hit: ");
         TimeUnit.SECONDS.sleep(1);
@@ -184,20 +183,6 @@ public class BossEncounter {
             reader.readLine();
         }
     }
-
-    /**
-     * Encounter Separator Creates a Header for the player to know their status during the battle
-     */
-    public static void encounterSeparator(){
-        ClearScreen.clearConsole();
-        String dash = "= = ".repeat(29);
-        String printSeparator = String.format("Player: Noble Cleric%7sAvailable Attacks: Sword, Spell%7sHas Advantage: %s%7sHP: %s",
-                "","",player.getHasAdvantage(),"",player.getHp());
-        System.out.println(dash);
-        System.out.println(printSeparator);
-        System.out.println(dash);
-    }
-
 
 
 }

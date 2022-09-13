@@ -1,6 +1,5 @@
 package com.hohm.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.hohm.model.MemeRoom;
 import com.hohm.utility.JsonParser;
 
@@ -13,8 +12,8 @@ import java.util.Arrays;
 
 import static com.hohm.controller.GameBuilder.player;
 import static com.hohm.controller.GameBuilder.rooms;
-import static com.hohm.controller.TextInteractor.commandList;
-import static com.hohm.controller.TextInteractor.printSeparator;
+import static com.hohm.controller.PrintSeparators.printSeparatorBottom;
+import static com.hohm.controller.PrintSeparators.printSeparatorMain;
 
 /**
  * Authors: Daniel An, Kaitlyn Fernelius, Agustin Duran
@@ -42,7 +41,7 @@ public class GameLoop {
             switch (player.getRoom()) {
                 case "win":
                     String winOut = JsonParser.utilNodeReturn("win text");
-                    printSeparator();
+                    printSeparatorMain();
                     System.out.println(winOut + "\n");
                     System.out.println("Thanks for playing, we hope to meme with you again soon");
                     break label;
@@ -57,7 +56,7 @@ public class GameLoop {
                     break label;
                 case "basement": {
                     TextInteractor.description(currentRoom);
-                    TextInteractor.doorCommandList();
+                    PrintSeparators.basementDoorBottom();
                     System.out.print(">Door Code:");
                     String input = reader.readLine();
                     BasementDoor.openDoor(input);
@@ -78,11 +77,11 @@ public class GameLoop {
                     if(currentRoom!=previousRoom){
                         TextInteractor.description(currentRoom);
                     }
-                    commandList();
+                    printSeparatorBottom();
                     System.out.print(">");
                     String input = reader.readLine();
                     if (!currentRoom.getComplete() && input.equalsIgnoreCase("one does not simply walk into mordor")) {
-                        TextInteractor.printSeparator();
+                        PrintSeparators.printSeparatorMain();
                         System.out.println("How wise.. Good luck. I have also given you an item that will aid you in your quest");
                         currentRoom.setComplete(true);
                         player.setHasAdvantage(true);
@@ -96,7 +95,7 @@ public class GameLoop {
                         TextInteractor.description(currentRoom);
                     }
 
-                    commandList();
+                    printSeparatorBottom();
                     System.out.print(">");
                     String userInput = reader.readLine();
 
