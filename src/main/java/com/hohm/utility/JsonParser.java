@@ -91,7 +91,12 @@ public final class JsonParser {
     public static void itemPrint(String item) throws IOException {
         InputStream file = classLoader.getResourceAsStream("utils.json");
         JsonNode description = parse(file);
-        System.out.println(description.get("items").get(item).textValue());
+        try {
+            System.out.println(description.get("items").get(item).textValue());
+        }catch (NullPointerException e){
+            System.out.println("That item doesn't exist here, try using look room to see what's going on in the room.");
+        }
+
     }
 
     /**
