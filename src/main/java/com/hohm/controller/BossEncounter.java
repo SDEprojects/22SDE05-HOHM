@@ -49,11 +49,11 @@ public class BossEncounter {
         int bossInt = roll(20);
 
         if(playerInt > bossInt){
-            System.out.println("GOOD NEWS EVERYONE...YOU ATTACK FIRST");
+            System.out.println("\nGOOD NEWS EVERYONE...YOU ATTACK FIRST");
         }else{
-            System.out.println("WELP...MEME LORD ATTACKS FIRST");
+            System.out.println("\nSorry but his roll was higher...MEME LORD ATTACKS FIRST");
         }
-        System.out.print(">Press Enter to Begin:");
+        System.out.print(">Press ENTER to Begin:");
         reader.readLine();
 
         //Start game loop for the encounter

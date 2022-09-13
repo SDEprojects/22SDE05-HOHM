@@ -46,7 +46,7 @@ public class GameLoop {
                     System.out.println("Thanks for playing, we hope to meme with you again soon");
                     break label;
                 case "dead":
-                    if(currentRoom.getTitle().equals("depths")){
+                    if(previousRoom.getTitle().equals("depths")){
                         String loseOut = JsonParser.utilNodeReturn("lose text");
                         System.out.println(loseOut);
                     }else{
