@@ -75,7 +75,10 @@ public class GameLoop {
                     }
                     break;
                 case "office": {
-                    TextInteractor.description(currentRoom);
+                    if(currentRoom!=previousRoom){
+                        TextInteractor.description(currentRoom);
+                    }
+                    commandList();
                     System.out.print(">");
                     String input = reader.readLine();
                     if (!currentRoom.getComplete() && input.equalsIgnoreCase("one does not simply walk into mordor")) {

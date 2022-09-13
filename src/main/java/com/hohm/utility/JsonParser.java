@@ -91,7 +91,7 @@ public final class JsonParser {
     public static void itemPrint(String item) throws IOException {
         InputStream file = classLoader.getResourceAsStream("utils.json");
         JsonNode description = parse(file);
-        System.out.println(description.get("items").get(item));
+        System.out.println(description.get("items").get(item).textValue());
     }
 
     /**
