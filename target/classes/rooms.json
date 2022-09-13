@@ -45,7 +45,7 @@
         "type": "misc",
         "description": "The coffee mug has 'World's Greatest Doge' written in bold black font.\nIt seems to be half full of piping hot coffee.\n",
         "prereqMet": "You reach out and grab the mug, you carefully stash it in your bag.\nYou notice that the coffee doesn't spill out but stays perfectly level no matter what way you move it... neat...\n",
-        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread\nYour emotional damage leads you to question your existence ethereal flames.\nYou have taken existential crisis damage, if only you had put out the fire...\n"
+        "prereqNotMet": "The flames seem to get more angry. As you reach out for the mug the dog stands.\nWith anger in his eyes he whispers 'Everything is not okay', and you are filled with an existential dread.\nYour emotional damage leads you to question your existence surrounded by ethereal flames.\nYou have taken existential crisis damage, if only you had put out the fire...\n"
       },
       "fedora": {
         "prereq": "check complete",
