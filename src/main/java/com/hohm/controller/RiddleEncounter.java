@@ -49,6 +49,7 @@ public class RiddleEncounter {
                     reader.readLine();
                     player.setRoom("hallway");
                     rooms.remove("bathroom");
+                    PrintSeparators.printSeparatorMain();
                     break;
                 }
 
