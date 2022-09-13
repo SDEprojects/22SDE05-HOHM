@@ -1,16 +1,21 @@
-package com.hohm;
+package com.hohm.utility;
+
+import com.hohm.model.MemeRoom;
 
 import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.hohm.controller.TextInteractor.description;
+import static com.hohm.controller.PrintSeparators.printSeparatorMain;
+
 public class MusicPlayer {
     public static FloatControl gainControl;
     public static ClassLoader classLoader;
     public static Clip clip;
     //Able to play music with a .wav file using javax
-    public static void musicPlayer(String input) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public static void musicPlayer(String input, MemeRoom currentRoom) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         //controller for the music player
         if (input.contains("start")) {
             play();
@@ -25,6 +30,8 @@ public class MusicPlayer {
         } else {
             System.out.println("Sorry music player might not have that ability.");
         }
+        printSeparatorMain();
+        description(currentRoom);
     }
     // Plays the music starting the game.
     public static void play() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -33,6 +40,13 @@ public class MusicPlayer {
         InputStream musicStream = classLoader.getResourceAsStream("background.wav");
         InputStream bufferedMusic = new BufferedInputStream(musicStream);
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedMusic);
+        try {
+            if(clip.isActive()){
+                clip.stop();
+            }
+        }catch (NullPointerException e){
+            //Do nothing if no clip exists, proceed as usual
+        }
         clip = AudioSystem.getClip();
         clip.open(audioInputStream);
         gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
